@@ -3,8 +3,9 @@
  * paper #FFFFFF · neutral ramp #191F28…#B0B8C1 · surfaces #F2F4F6/#F7F8FA/#F9FAFB · line #E5E8EB
  * display + body: Pretendard Variable (한 벌을 굵기로 나눠 쓰는 소스의 방식 그대로)
  * radius 10px 지배 · shadow 0 4px 12px rgba(15,23,42,.06) · GNB 76px
- * container 는 소스의 1200px 에서 1440px 로 넓혔다 (2026-08-19). 넓힌 폭은 표·카드·지도가
- * 쓰고, 글이 서는 블록은 --measure 로 끊는다 — 그러지 않으면 한 줄이 200자를 넘는다.
+ * container 는 소스의 1200px 에서 1440px 로 넓혔다 (2026-08-19).
+ * **글에는 폭 상한을 두지 않는다.** 문단은 컨테이너 폭까지 가로로 그대로 흐르고,
+ * 단으로 쪼개지도 않는다 — 넓힌 폭을 화면이 실제로 쓰게 하는 것이 이 결정의 목적이다.
  * 글자 크기는 소스의 열 단을 일곱 단으로 줄였다 — 12·14·16·18·22·28·40.
  * studied: yes · DNA-source: local file (user-owned)
  * tone: 가볍게, 중립적으로 (기획서 16장) · audience: 해외 환자 · use: 문의 보내기
@@ -128,10 +129,6 @@
   /* 표·카드·지도는 이 폭을 다 쓰고, 글이 서는 블록만 따로 상한을 둔다 —
      넓힌 폭을 글줄이 그대로 먹으면 한 줄이 200자를 넘는다 (18장) */
   --container: 1440px;
-  /* 글 한 줄의 상한. 45~90자가 읽기 편한 범위다.
-     ch 는 숫자 0 의 폭이라 라틴 문자 기준으로는 1ch 가 실제 평균보다 넓다 —
-     68ch 를 두면 영문이 한 줄에 80자쯤 선다 (한글은 글자가 넓어 그보다 적다) */
-  --measure: 68ch;
   --nav-height: 76px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

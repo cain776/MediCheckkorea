@@ -127,16 +127,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-lg);
+  padding: var(--space-md);
   background: rgba(20, 23, 28, 0.55);
   backdrop-filter: blur(2px);
 }
 
+/* 폭이 1200px 인 이유: 안에 들어가는 웹 판은 지면이 1040px 이고 좌우 여백이 32px 씩
+   붙는다. 스크롤막대까지 치면 1120px 을 넘겨야 제 모습이 나온다 — 980px 이던 동안에는
+   1000px 아래로 내려가 한 단으로 접힌 채, 즉 **좁은 화면용 모습**으로 보이고 있었다.
+   높이도 90vh 에서 94vh 로 올렸다. 세로가 짧으면 목차와 본문이 같이 안 잡힌다. */
 .reader__panel {
   display: flex;
   flex-direction: column;
-  width: min(980px, 100%);
-  height: min(90vh, 100%);
+  width: min(1200px, 100%);
+  height: min(94vh, 100%);
   border-radius: var(--radius-md);
   background: var(--color-paper);
   overflow: hidden;

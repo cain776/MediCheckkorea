@@ -262,7 +262,6 @@
 }
 .cert-tab__head p {
   margin-top: 6px;
-  max-width: 70ch;
   font-size: var(--text-body);
   color: var(--color-ink-3);
   line-height: var(--leading-body);

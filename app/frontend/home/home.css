@@ -120,7 +120,6 @@
 }
 
 .intro__line {
-  max-width: 22ch;
   font-size: clamp(var(--text-2xl), 4.4vw, var(--text-display));
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
@@ -392,7 +391,6 @@
   font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
-  max-width: 18ch;
 }
 
 .bento__feature p {
