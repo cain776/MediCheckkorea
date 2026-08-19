@@ -387,3 +387,67 @@ table.data td:first-child {
   font-weight: var(--weight-bold);
   white-space: nowrap;
 }
+
+/* ── 넓은 화면에서의 글 자리 ──────────────────────────────────── */
+
+/* 절의 머리도 화면 머리와 같은 짜임이다 — 제목 왼쪽, 리드 오른쪽.
+   나머지 자식(표 · 축 · 등급 · 목록)은 전폭을 그대로 쓴다. */
+@media (min-width: 1100px) {
+  .block {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    column-gap: var(--space-3xl);
+    align-items: start;
+  }
+  .block > h2 {
+    grid-column: 1;
+  }
+  .block > .block__lead {
+    grid-column: 2;
+    margin-top: 0;
+  }
+  /* 홑문단도 리드와 같은 오른쪽 단에 선다 — 전폭으로 늘리면 한 줄이 200자를 넘는다 */
+  .block > p {
+    grid-column: 2;
+  }
+  .block > *:not(h2):not(.block__lead):not(p) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 문단 넷을 세로로 쌓으면 오른쪽이 빈다. 단으로 나눠 폭을 쓴다 */
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: var(--space-xl);
+}
+.cols > * + * {
+  margin-top: 0;
+}
+
+/* '아직 정하지 않은 것'도 한 줄씩 쌓지 않는다 */
+.open {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: var(--space-sm) var(--space-xl);
+}
+
+/* 하차 기록 절도 같은 짜임이다 — 제목 왼쪽, 설명 오른쪽, 표는 전폭 */
+@media (min-width: 1100px) {
+  #removals {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    column-gap: var(--space-3xl);
+    align-items: start;
+  }
+  #removals > h2 {
+    grid-column: 1;
+  }
+  #removals > .scope__lead {
+    grid-column: 2;
+    margin-top: 0;
+  }
+  #removals > .table-wrap {
+    grid-column: 1 / -1;
+  }
+}

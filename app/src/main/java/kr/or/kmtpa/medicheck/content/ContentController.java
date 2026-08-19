@@ -37,7 +37,7 @@ public class ContentController {
         List<Map<String, Object>> issues = jdbc.query(
                 """
                 SELECT vol, published_on, title_en, title_ko, summary_en, summary_ko,
-                       body_url, is_sample
+                       body_url, email_url, is_sample
                 FROM newsletter_issue
                 ORDER BY vol DESC
                 """,
@@ -52,6 +52,9 @@ public class ContentController {
                     // 없으면 null 이다. '준비 중'을 글자로 저장하지 않는다 — 상태를 두 곳에
                     // 두면 둘이 어긋난다 (V12 의 answer 와 같은 판단)
                     row.put("bodyUrl", rs.getString("body_url"));
+                    // 같은 호의 이메일 판. 웹 판과 생김새가 다르고 주소도 다르다 —
+                    // 이름으로 유추하지 않고 표에 적힌 값을 그대로 내려보낸다(V16)
+                    row.put("emailUrl", rs.getString("email_url"));
                     row.put("sample", rs.getInt("is_sample") == 1);
                     return row;
                 });

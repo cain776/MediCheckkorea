@@ -25,6 +25,11 @@ export const CONTENT_COPY = {
 
   issueVol: { en: "Vol. {vol}", ko: "제 {vol}호" },
   issueRead: { en: "Read this issue", ko: "이 호 읽기" },
+  // 같은 글의 이메일 판. 「편지로 받으면 이렇게 생겼다」를 그대로 보여 준다
+  issueEmail: { en: "Newsletter format", ko: "뉴스레터 형식" },
+  // 팝업에는 주소가 없다. 남에게 보내고 싶어진 사람에게 줄 것을 남겨 둔다
+  issueOpenNew: { en: "Open in a new tab", ko: "새 창에서 열기" },
+  issueClose: { en: "Close", ko: "닫기" },
   // 본문이 없는 호. 링크를 걸어 두고 404 를 주느니 아직 없다고 말한다 (31장)
   issueComing: { en: "Not written yet", ko: "아직 안 썼어요" },
 
