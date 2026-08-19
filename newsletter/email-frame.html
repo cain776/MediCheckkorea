@@ -3,174 +3,216 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>메디체크 코리아 뉴스레터 — 제 [N]호</title>
+<title>메디체크 코리아 — 협회 컬럼 제 [N]호</title>
 
 <!--
-  메디체크 코리아 — 이메일 뉴스레터 프레임.
+  메디체크 코리아 — 이메일 뉴스레터 틀 (v3).
 
   **본문은 여기 없다.** 이 파일은 틀이고, 내용은 [대괄호] 자리에 채운다.
   한 호를 만들 때는 이 파일을 복사해
-  `app/src/main/resources/static/newsletter/volN.html` 로 둔다 (README 참고).
+  `app/src/main/resources/static/newsletter/volN-email.html` 로 둔다 (README 참고).
+
+  디자인 출처: Claude Design 프로젝트의 `MediCheck Newsletter v3.dc.html`.
+  그 파일은 웹용(flex · grid · style 블록)이라 여기서는 같은 화면을
+  **표 기반 · 인라인 스타일**로 옮겼다.
 
   ── 왜 이렇게 생겼나 ──────────────────────────────────────────────
   · 표(table)로 짜고 스타일을 인라인으로 박는다. Outlook 은 flex·grid 를 모르고,
-    Gmail 은 <style> 을 통째로 지울 때가 있다. 아래 <style> 은 좁은 화면 보정용이고,
-    지워져도 한 칸짜리 세로 배치로 읽히게 인라인이 이미 다 들어 있다.
-  · 폭은 640px. 600px 이 가장 안전한 값이지만 본문이 답답해서 한 단계 넓혔다.
-    이보다 더 넓히면 Outlook 미리보기 창에서 가로로 잘리기 시작한다.
-  · 색은 사이트의 토큰을 그대로 옮겼다. 이메일에서는 CSS 변수를 못 쓰므로 값으로 적는다 —
-    tokens.css 가 바뀌면 여기도 같이 고쳐야 한다.
-        잉크 #191f28 · 본문 #333d4b · 흐린 글 #6b7684 · 선 #e5e8eb · 바탕 #f2f4f6
-  · **파랑(#2563eb)은 확인 배지 자리에만 쓴다(17장).** 제목·단추·링크에 쓰지 않는다.
-    파랑을 배지 밖에 한 번이라도 두면 배지가 '이 사이트 색' 중 하나로 읽힌다.
-  · Pretendard 는 대부분의 메일 앱에서 안 실린다. 시스템 글꼴로 떨어지게 두었다.
-  · 32장이 금지한 낱말은 여기에도 없어야 한다 — best · top · guarantee · safe ·
-    world-class · premium · trusted · 그리고 1층에 쓰는 'certified'.
+    Gmail 은 <style> 을 통째로 지울 때가 있다.
+  · **언어 토글이 없다.** 메일에는 자바스크립트가 없다. 이 틀은 한국어이고,
+    토글이 있던 오른쪽 위 자리는 「웹에서 보기」 링크다 — 그 자리에 눌리지 않는
+    단추를 두느니 실제로 쓰이는 링크를 두는 편이 낫다.
+  · **목차 항목에 링크를 걸지 않는다.** 메일 클라이언트 상당수가 문서 안 앵커로
+    스크롤해 주지 않아, 눌리는 것처럼 보이는데 안 눌리는 상태가 된다.
+  · **폭이 720px 다.** 디자인 값 그대로다. 600~640px 이 가장 안전하고 이보다
+    넓으면 Outlook 미리보기 창에서 잘릴 수 있다 — 좁혀야 하면 카드 표의
+    width 와 max-width 두 곳만 고치면 된다.
+  · 색은 v3 값이다. 잉크 #121212 · 본문 #33322D · 흐린 글 #9A9891 ·
+    선 #EDECE8 · 바탕 #F4F4F2 · 붉은 강조 #BB1919.
+  · 32장이 금지한 낱말은 여기에도 없어야 한다.
+
+  ── 묶음 쓰는 법 ─────────────────────────────────────────────────
+  · 절 하나 = h2 + p 몇 개. 필요한 만큼 복사한다.
+  · 회색 강조 상자 · 붉은 인용줄 · 숫자 세 칸 · 확인 세 줄은 선택이다.
+    안 쓰는 묶음은 통째로 지운다 — 빈 껍데기를 남기지 않는다.
   ─────────────────────────────────────────────────────────────────
 -->
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
 <style>
   /* 좁은 화면 보정. 지워져도 본문은 읽힌다 — 인라인 스타일이 이미 세로로 세워 둔다. */
-  @media only screen and (max-width: 660px) {
-    .frame { width: 100% !important; }
-    .pad { padding-left: 20px !important; padding-right: 20px !important; }
-    .stack { display: block !important; width: 100% !important; }
-    .h1 { font-size: 26px !important; line-height: 1.3 !important; }
+  @media only screen and (max-width: 740px) {
+    .card { width: 100% !important; }
+    .pad { padding-left: 24px !important; padding-right: 24px !important; }
+    .h1 { font-size: 26px !important; }
+    .stat { display: block !important; width: 100% !important; }
   }
-  /* 어두운 모드에서 흰 바탕이 뒤집히는 앱이 있다. 글자색을 같이 뒤집지 않으면 안 보인다. */
   @media (prefers-color-scheme: dark) {
     .paper { background: #ffffff !important; }
   }
 </style>
 </head>
 
-<body style="margin:0; padding:0; background:#f2f4f6;">
+<body style="margin:0; padding:0; background:#f4f4f2;">
 
-<!-- ▼ 수신함 미리보기 (제목 옆에 붙는 한 줄). 비워 두면 본문 첫 줄이 끌려 나온다 -->
+<!-- 수신함 미리보기 -->
 <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
   [수신함에서 제목 옆에 보일 한 줄 — 40자 안쪽]
   &#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;
 </div>
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f2f4f6;">
-<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f4f2;">
+<tr><td align="center" style="padding:40px 20px 96px;">
 
-  <table role="presentation" class="frame paper" width="640" cellpadding="0" cellspacing="0" border="0"
-         style="width:640px; max-width:640px; background:#ffffff; border:1px solid #e5e8eb; border-radius:12px;">
+<table role="presentation" class="card paper" width="720" cellpadding="0" cellspacing="0" border="0"
+       style="width:720px; max-width:720px; background:#ffffff; border:1px solid #e6e5e1;">
 
-    <!-- ── 머리 — 보내는 곳과 몇 호인지 ──────────────────────────── -->
-    <tr><td class="pad" style="padding:22px 32px; border-bottom:1px solid #e5e8eb;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td align="left" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; font-weight:700; color:#191f28;">
-          메디체크 코리아
+  <!-- ── 머리 ──────────────────────────────────────────────────── -->
+  <tr><td class="pad" style="padding:22px 56px; border-bottom:1px solid #eae9e5;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td align="left" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+        <span style="font-size:17px; font-weight:700; letter-spacing:-0.02em; color:#121212;">메디체크 코리아</span>
+        <span style="color:#d9d8d3;">&nbsp;|&nbsp;</span>
+        <span style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:600;">THE ASSOCIATION LETTER</span>
+      </td>
+      <td align="right" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:10.5px; letter-spacing:0.12em; font-weight:700; white-space:nowrap;">
+        <a href="https://medi-checkkorea.vercel.app/newsletter/vol1.html" style="color:#9a9891; text-decoration:none;">웹에서 보기</a>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <tr><td class="pad" style="padding:52px 56px 60px;">
+
+    <!-- ── 호수 ────────────────────────────────────────────────── -->
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td width="16" style="width:16px; height:2px; background:#bb1919; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding-left:10px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.2em; color:#bb1919; font-weight:700; white-space:nowrap;">
+        ISSUE [NN] &middot; [MONTH YYYY]
+      </td>
+    </tr></table>
+
+    <h1 class="h1" style="margin:20px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:34px; font-weight:700; line-height:1.42; letter-spacing:-0.03em; color:#121212; word-break:keep-all;">
+      [이 호의 제목 — 두 줄까지]
+    </h1>
+
+    <p style="margin:24px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17px; line-height:1.8; color:#5c5a54; word-break:keep-all;">
+      [두세 줄 요약. 이 호를 왜 읽어야 하는지가 아니라, 무엇이 들어 있는지를 적는다.]
+    </p>
+
+    <!-- ── 쓴 사람 ──────────────────────────────────────────────
+         메일 앱은 이미지를 기본으로 막는다. 사진이 안 떠도 이름과 직함이 글자로
+         남아야 하므로 사진과 이름은 서로 다른 칸이다. 주소가 절대경로인 이유도
+         같다 — 메일에는 상대경로가 없다. -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:38px; border-top:1px solid #edece8; border-bottom:1px solid #edece8;">
+      <tr><td style="padding:20px 0;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td valign="middle" style="padding-right:16px;">
+            <img src="https://medi-checkkorea.vercel.app/newsletter/authors/[파일명].jpg"
+                 width="54" height="54" alt="[이름] 총장"
+                 style="display:block; width:54px; height:54px; border-radius:27px; object-fit:cover; background:#f2f2f2;" />
+          </td>
+          <td valign="middle" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+            <div style="font-size:15.5px; letter-spacing:-0.01em; color:#121212;">
+              <strong style="font-weight:700;">[이름]</strong><span style="color:#7a7872; font-weight:400;">&nbsp;[직함]</span>
+            </div>
+            <div style="font-size:13px; color:#9a9891; margin-top:4px;">[영문 이름] &middot; 한국의료관광진흥협회</div>
+          </td>
+        </tr></table>
+      </td></tr>
+    </table>
+
+    <!-- ── 목차 ─────────────────────────────────────────────────
+         왼쪽 세로줄은 배경색을 깐 2px 짜리 칸이다. border-left 로 그리면
+         Outlook 이 무시할 때가 있어 칸 자체를 세워 두는 편이 안전하다. -->
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
+      <td width="2" style="width:2px; background:#121212; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding-left:22px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+        <div style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:700; margin-bottom:8px;">컨텐츠</div>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="color:#2b2a26;">
+                    <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">01</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">[소제목 그대로]</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">02</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">[소제목 그대로]</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">03</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">[소제목 그대로]</td></tr>
+        </table>
+      </td>
+    </tr></table>
+
+    <!-- ── 절 하나. 필요한 만큼 이 묶음을 통째로 복사한다 ────────── -->
+    <h2 style="margin:52px 0 0; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">[소제목]</h2>
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">[본문. 문단마다 이 p 를 복사한다. 두 번째 문단부터는 margin 을 15px 로 둔다.]</p>
+    <!-- ▲ 여기까지가 절 하나 -->
+
+    <!-- ── (선택) 회색 강조 상자 — 나란히 놓을 항목 몇 개를 묶을 때 ── -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px; background:#fafaf8; border:1px solid #edece8;">
+      <tr><td class="pad" style="padding:22px 24px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+        <p style="margin:0; font-size:15.5px; line-height:1.82; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">[앞머리.]</strong> [내용. 항목마다 이 p 를 복사하고 두 번째부터 margin-top 16px.]</p>
+      </td></tr>
+    </table>
+
+    <!-- ── (선택) 붉은 인용줄 — 이 호에서 가장 중요한 한 문장에만 ──── -->
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:22px;"><tr>
+      <td width="2" style="width:2px; background:#bb1919; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding:2px 0 2px 20px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17.5px; line-height:1.7; letter-spacing:-0.02em; font-weight:600; color:#121212; word-break:keep-all;">[한 문장.]</td>
+    </tr></table>
+
+    <!-- ── (선택) 숫자 세 칸 — cellspacing 1 에 바탕색을 깔아 칸 사이 선을
+         만든다. grid gap 을 쓰는 웹 판과 결과는 같고 메일에서 안 무너진다 ── -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="1" border="0" style="margin-top:18px; background:#edece8; border:1px solid #edece8;">
+      <tr>
+        <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">[값]</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">[이름]</div>
         </td>
-        <td align="right" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; color:#8b95a1;">
-          제 [N]호 · [YYYY년 M월]
+        <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">[값]</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">[이름]</div>
         </td>
-      </tr></table>
-    </td></tr>
-
-    <!-- ── 표지 — 이 호가 무엇에 관한 것인가 ──────────────────────── -->
-    <tr><td class="pad" style="padding:36px 32px 8px;">
-      <h1 class="h1" style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:30px; line-height:1.28; font-weight:700; color:#191f28; letter-spacing:-0.02em; word-break:keep-all;">
-        [이 호의 제목 — 한 줄]
-      </h1>
-      <p style="margin:14px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.7; color:#4e5968; word-break:keep-all;">
-        [두세 줄 요약. 이 호를 왜 읽어야 하는지가 아니라, 무엇이 들어 있는지를 적는다.]
-      </p>
-    </td></tr>
-
-    <!-- ── 쓴 사람 ───────────────────────────────────────────────
-         메일 앱은 이미지를 기본으로 막는다. 사진이 안 뜨더라도 이름과 직함이
-         글자로 남아야 하므로, 사진은 옆 칸이고 이름은 별도 칸이다.
-         주소가 절대경로인 이유도 같다 — 메일에는 상대경로가 없다.
-         사진은 app/src/main/resources/static/newsletter/authors/ 에 둔다. -->
-    <tr><td class="pad" style="padding:22px 32px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td valign="middle" style="padding-right:14px;">
-          <img src="https://medi-checkkorea.vercel.app/newsletter/authors/[파일명].jpg"
-               width="64" height="64" alt="[쓴 사람 이름과 직함]"
-               style="display:block; width:64px; height:64px; border-radius:32px; border:1px solid #e5e8eb; object-fit:cover; background:#f2f4f6;" />
+        <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">[값]</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">[이름]</div>
         </td>
-        <td valign="middle" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-          <div style="font-size:15px; font-weight:700; color:#191f28;">[이름] <span style="font-weight:400; color:#6b7684;">[직함]</span></div>
-          <div style="margin-top:3px; font-size:13px; color:#8b95a1;">[영문 이름] · 한국의료관광진흥협회</div>
-        </td>
-      </tr></table>
-    </td></tr>
+      </tr>
+    </table>
 
-    <!-- ── 목차 ──────────────────────────────────────────────────
-         왼쪽 세로줄은 배경색을 깐 3px 짜리 칸이다. border-left 로 그리면
-         Outlook 이 무시할 때가 있어 칸 자체를 세워 두는 편이 안전하다.
-         **항목에 링크를 걸지 않는다** — 메일 클라이언트 상당수가 문서 안 앵커로
-         스크롤해 주지 않아서, 눌리는 것처럼 보이는데 안 눌리는 상태가 된다. -->
-    <tr><td class="pad" style="padding:24px 32px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td width="3" style="width:3px; background:#191f28; font-size:0; line-height:0;">&nbsp;</td>
-        <td style="padding-left:16px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-          <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; color:#8b95a1; text-transform:uppercase;">컨텐츠</div>
-          <div style="margin-top:8px; font-size:14px; line-height:1.9; color:#333d4b;">
-            [소제목 그대로 한 줄씩]<br />
-            [소제목]<br />
-            [소제목]
-          </div>
-        </td>
-      </tr></table>
-    </td></tr>
+    <!-- ── (선택) 확인 줄 — 번호가 붙는 항목들 ────────────────────── -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:22px; border-top:1px solid #edece8;">
+      <tr>
+        <td width="44" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">[하나]</td>
+        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8; word-break:keep-all;">[내용.]</td>
+      </tr>
+    </table>
 
-    <!-- ── 본문 한 마디 — 필요한 만큼 이 <tr> 을 복사해서 쓴다 ────── -->
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        [소제목]
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        [본문. 문단마다 이 &lt;p&gt; 를 복사한다.]
-      </p>
-    </td></tr>
-    <!-- ▲ 여기까지가 본문 한 마디 -->
+    <!-- ── 사이트로 ─────────────────────────────────────────────── -->
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
+      <td style="background:#121212;">
+        <a href="https://medi-checkkorea.vercel.app/find-a-hospital" style="display:inline-block; padding:14px 24px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; font-weight:700; letter-spacing:-0.01em; color:#ffffff; text-decoration:none;">[단추 문구]</a>
+      </td>
+    </tr></table>
 
-    <!-- ── 확인한 것 (선택) — 파랑이 나타나는 유일한 자리다(17장) ── -->
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-             style="background:#eff6ff; border-radius:10px;">
-        <tr><td style="padding:16px 18px;">
-          <div style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#1d4ed8;">
-            [무엇을 근거로 확인했는지 — 예: 서울시 의료관광 협력기관]
-          </div>
-          <div style="margin-top:6px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; line-height:1.65; color:#333d4b;">
-            [확인한 내용과 <b>확인한 날짜</b>. 날짜 없이 '확인했다'고만 쓰지 않는다(3장).]
-          </div>
-        </td></tr>
-      </table>
-    </td></tr>
+    <!-- ── 참고 ─────────────────────────────────────────────────
+         이 글은 수치를 열두 개 넘게 인용한다. 출처를 안 적으면 본문이 스스로
+         내건 「검증할 수 없는 문장은 쓰지 않는다」와 어긋난다. -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:44px; border-top:1px solid #edece8;">
+      <tr><td style="padding-top:18px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; line-height:1.85; color:#9a9891;">
+        <div style="font-size:9.5px; letter-spacing:0.2em; color:#121212; font-weight:700; margin-bottom:8px;">참고</div>
+        [이 호가 인용한 수치의 출처. 한 줄씩 적는다.]
+      </td></tr>
+    </table>
 
-    <!-- ── 사이트로 보내는 자리 — 단추는 잉크다. 파랑을 쓰지 않는다 ── -->
-    <tr><td class="pad" align="left" style="padding:28px 32px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td style="background:#14171c; border-radius:10px;">
-          <a href="[링크]" style="display:inline-block; padding:13px 22px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; font-weight:700; color:#ffffff; text-decoration:none;">
-            [단추 문구 — 예: 기관 찾아보기]
-          </a>
-        </td>
-      </tr></table>
-    </td></tr>
+  </td></tr>
 
-    <!-- ── 꼬리 — 누가 왜 보냈는지, 그만 받는 법 ──────────────────── -->
-    <tr><td class="pad" style="padding:32px; padding-top:36px;">
-      <div style="border-top:1px solid #e5e8eb; padding-top:18px;">
-        <p style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; line-height:1.7; color:#6b7684;">
-          메디체크 코리아는 한국의료관광진흥협회가 운영합니다.<br />
-          이 편지는 [받는 이유 — 예: 뉴스레터를 신청하셔서] 보내 드렸어요.
-        </p>
-        <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; color:#8b95a1;">
-          <a href="[수신거부 링크]" style="color:#6b7684;">더 받지 않기</a>
-          &nbsp;·&nbsp;
-          <a href="[사이트 주소]" style="color:#6b7684;">사이트에서 보기</a>
-        </p>
-      </div>
-    </td></tr>
+  <!-- ── 꼬리 ──────────────────────────────────────────────────── -->
+  <tr><td class="pad" style="padding:22px 56px 26px; border-top:1px solid #eae9e5;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td align="left" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12.5px; color:#9a9891;">
+        &copy; [YYYY] 한국의료관광진흥협회 &middot; 협회 컬럼<br />
+        <span style="font-size:11.5px;">[받는 이유 — 예: 뉴스레터를 신청하셔서]</span>
+      </td>
+      <td align="right" valign="top" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.18em; color:#bebcb5; font-weight:700; white-space:nowrap;">ISSUE [NN]</td>
+    </tr></table>
+  </td></tr>
 
-  </table>
+</table>
 
 </td></tr>
 </table>

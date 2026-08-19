@@ -91,7 +91,7 @@ find app/src/main/java app/frontend -type f \( -name '*.java' -o -name '*.js' -o
 | `--text-display` | 40px | 첫 화면 한 줄. **이것 하나만 크다** |
 | 굵기 | `--weight-normal` 400 · `--weight-bold` 700 | 500 · 600 · 800 은 쓰지 않는다 |
 | 줄간격 | `--leading-tight` 1.25 · `--leading-snug` 1.5 · `--leading-body` 1.75 | 제목 · UI · 본문 |
-| 글줄 폭 | `--measure` 68ch | 컨테이너는 1440px 이지만 **글이 서는 블록은 여기서 끊는다** — 문단이 넓은 폭을 그대로 먹으면 한 줄이 200자를 넘는다 |
+| 글줄 폭 | **상한을 두지 않는다** | 컨테이너(1440px)까지 문단이 가로로 그대로 흐른다. `max-width` 로 접거나 여러 단으로 쪼개지 않는다 — 넓힌 폭을 화면이 실제로 쓰게 하는 것이 그 결정의 목적이다 |
 
 값은 [app/frontend/tokens.css](app/frontend/tokens.css) 에만 있고, 화면 CSS 는 **토큰 이름으로만** 부른다.
 `font-size: 15px` 처럼 숫자를 직접 적지 않는다 — 지금 CSS 에는 그런 줄이 하나도 없다.
