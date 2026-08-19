@@ -552,10 +552,17 @@
       try { localStorage.setItem(KEY, lang); } catch (e) { /* 사생활 보호 모드 */ }
     }
 
-    try {
-      var saved = localStorage.getItem(KEY);
-      if (saved === "ko" || saved === "en") { apply(saved); }
-    } catch (e) { /* 읽을 수 없으면 기본값(한국어)으로 둔다 */ }
+    // 주소로 온 언어가 가장 세다. 편지의 EN 단추가 이 경로로 들어온다 —
+    // 눌러서 왔는데 저장돼 있던 한국어로 되돌아가면 단추가 고장 난 것으로 읽힌다.
+    var asked = new URLSearchParams(location.search).get("lang");
+    if (asked === "ko" || asked === "en") {
+      apply(asked);
+    } else {
+      try {
+        var saved = localStorage.getItem(KEY);
+        if (saved === "ko" || saved === "en") { apply(saved); }
+      } catch (e) { /* 읽을 수 없으면 기본값(한국어)으로 둔다 */ }
+    }
 
     Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (button) {
       button.addEventListener("click", function () { apply(button.value); });

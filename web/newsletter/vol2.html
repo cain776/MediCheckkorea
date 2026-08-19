@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>메디체크 코리아 — 협회 컬럼 제 2호</title>
+<meta name="description" content="2024년 암 치료로 한국에 온 외국인 환자는 7,147명. 전체 시장이 두 배 커지는 동안 이 영역만 줄었습니다. 이유는 의료 수준이 아니라 거리였습니다." />
+
+<!--
+  메디체크 코리아 협회 컬럼 — 제 2호 (2026년 8월). **웹 판.**
+
+  디자인은 1호(vol1.html)와 같다. 스타일 블록을 1호에서 그대로 떠 왔다 —
+  손으로 옮겨 적으면 호마다 조금씩 갈리고, 그때는 같은 편지가 호마다 다르게 읽힌다.
+  **1호의 스타일을 고치면 이 파일에도 같이 반영해야 한다.**
+
+  이 판은 웹 전용이다. 편지로 부칠 때는 표 기반인 vol2-email.html 을 쓴다.
+  두 파일의 본문은 같은 글이어야 한다.
+
+  현황 문단의 숫자(100 / 0 / 0)는 2026-08-19 에 /api/home 과 /api/hospitals 에서
+  직접 읽어 1호와 같은지 확인한 값이다. 「지난 편지와 같습니다」는 그래서 쓸 수 있었다.
+  **다음 호에서도 반드시 다시 읽는다.** 편지에 박힌 숫자는 늙는다.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  :root {
+    --ink: #121212;
+    --accent: #bb1919;
+    --accent-dark: #7e0f0f;
+    --body: #333333;
+    --lead: #444444;
+    --muted: #555555;
+    --muted-2: #666666;
+    --line: #cfcfcf;
+    --line-soft: #dcdcdc;
+    --line-softer: #e4e4e4;
+    --serif: "Noto Serif KR", serif;
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    padding: 36px 32px 88px;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--ink); color: #fff; }
+
+  .sheet { max-width: 1040px; margin: 0 auto; }
+
+  /* ── 언어 ────────────────────────────────────────────────────────
+     자바스크립트가 하는 일은 html 의 data-lang 을 바꾸는 것뿐이다.
+     보이고 감추는 판단은 CSS 가 한다 — 스크립트가 실패해도 한국어 판이 그대로
+     읽힌다. 글자를 스크립트로 갈아 끼우면 그때는 빈 화면이 된다. */
+  [data-lang="ko"] [lang="en"],
+  [data-lang="en"] [lang="ko"] { display: none; }
+
+  /* ── 머리 띠 ──────────────────────────────────────────────────── */
+  .rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 8px 2px;
+  }
+  .rail__issue {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .lang { display: flex; flex-shrink: 0; }
+  .lang button {
+    font-family: inherit;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    padding: 7px 14px;
+    border: 1px solid var(--ink);
+    background: #fff;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .lang button + button { border-left: none; }
+  [data-lang="ko"] .lang button[value="ko"],
+  [data-lang="en"] .lang button[value="en"] { background: var(--ink); color: #fff; }
+
+  /* ── 제호 ────────────────────────────────────────────────────── */
+  .masthead { text-align: center; padding: 32px 0 26px; }
+  .masthead h1 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .masthead__kicker {
+    font-size: 10px;
+    letter-spacing: 0.34em;
+    color: var(--muted-2);
+    margin-top: 12px;
+  }
+  .rule-thick { height: 3px; background: var(--ink); }
+  .rule-thin { height: 1px; background: var(--ink); margin-top: 2px; }
+
+  /* ── 지면 ────────────────────────────────────────────────────── */
+  .paper { display: grid; grid-template-columns: 300px 1fr; align-items: start; }
+
+  .aside { position: sticky; top: 24px; padding: 42px 34px 0 2px; }
+  .aside__photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: grayscale(1);
+    background: #f2f2f2;
+  }
+  .byline { margin-top: 18px; }
+  .byline__label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .byline__name {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 8px;
+    line-height: 1.3;
+  }
+  .byline__role { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+
+  .aside__divider { height: 1px; background: var(--line-soft); margin: 26px 0 20px; }
+  .toc__label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .toc { display: flex; flex-direction: column; }
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 11px 2px;
+    border-bottom: 1px solid var(--line-softer);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc__n {
+    font-family: var(--serif);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .toc__t { font-size: 14px; letter-spacing: -0.01em; line-height: 1.5; }
+
+  .main { border-left: 1px solid var(--line); padding: 44px 8px 0 46px; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .main h2 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 38px;
+    line-height: 1.36;
+    letter-spacing: -0.015em;
+    margin: 16px 0 0;
+    /* 영문 제목은 고정 줄바꿈을 두지 않는다 — 열 폭보다 긴 자리에 박아 두면
+       한 줄이 넘쳐 세 줄이 된다. 줄 수는 폭이 정하고, 나누는 자리는 여기서
+       고르게 잡는다. 한국어는 쉼표 자리에 손으로 끊은 것이 더 잘 읽혀 그대로 둔다. */
+    text-wrap: balance;
+  }
+  .lead {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--lead);
+    margin: 24px 0 0;
+    text-wrap: pretty;
+  }
+  .rule-short { width: 44px; height: 3px; background: var(--ink); margin-top: 32px; }
+
+  .sec { margin-top: 42px; scroll-margin-top: 24px; }
+  .sec:first-of-type { margin-top: 44px; }
+  .sec__head { display: flex; align-items: baseline; gap: 12px; }
+  .sec__n {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .sec h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.45;
+  }
+  .sec p {
+    font-size: 16.5px;
+    line-height: 1.85;
+    color: var(--body);
+    margin: 16px 0 0;
+    text-wrap: pretty;
+  }
+  .sec p:first-of-type { margin-top: 18px; }
+  .sec strong { color: var(--ink); }
+
+  /* 출처. 이 글은 열두 개가 넘는 수치를 인용한다 — 어디서 왔는지 적지 않으면
+     본문이 스스로 내건 「검증할 수 없는 문장은 쓰지 않는다」와 어긋난다. */
+  .refs {
+    margin-top: 56px;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 18px;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: var(--muted);
+  }
+  .refs__label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .colophon {
+    margin-top: 72px;
+    border-top: 2px solid var(--ink);
+    padding: 14px 2px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .colophon__meta { font-size: 12.5px; color: var(--muted); }
+  .colophon a { color: var(--muted); }
+  .colophon a:hover { color: var(--accent-dark); }
+  .colophon__issue {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── 좁은 화면 ───────────────────────────────────────────────────
+     원 디자인은 1040px 두 단이다. 좁은 화면에서 300px 단을 그대로 두면
+     본문이 손가락 두 개 폭이 된다. 한 단으로 세우고 사진은 작게 올린다.
+
+     기준이 1000px 인 이유: 900px 쯤에서 두 단을 유지하면 본문 열이 490px 로
+     좁아져 제목이 세 줄로 접힌다. 사이드바를 조금 더 일찍 내려 보내는 편이
+     제목 크기를 그 구간에서만 줄이는 것보다 낫다 — 글자 크기가 폭에 따라
+     들쭉날쭉하면 같은 글이 화면마다 다른 무게로 읽힌다. */
+  @media (max-width: 1000px) {
+    body { padding: 24px 20px 64px; }
+    .paper { grid-template-columns: 1fr; }
+    .aside { position: static; padding: 30px 0 0; }
+    .aside__photo { width: 128px; }
+    .main { border-left: none; padding: 34px 0 0; }
+    .masthead h1 { font-size: 34px; }
+    .main h2 { font-size: 28px; }
+    .lead { font-size: 16.5px; }
+  }
+  @media (max-width: 420px) {
+    .masthead h1 { font-size: 27px; }
+    .main h2 { font-size: 24px; }
+    .sec h3 { font-size: 20px; }
+    .colophon { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+
+<body>
+<div class="sheet">
+
+  <div class="rail">
+    <span class="rail__issue">NO. 02 &middot; AUGUST 2026</span>
+    <div class="lang">
+      <button type="button" value="ko">한국어</button>
+      <button type="button" value="en">ENGLISH</button>
+    </div>
+  </div>
+
+  <div class="masthead">
+    <h1><span lang="ko">메디체크 코리아</span><span lang="en">MediCheck Korea</span></h1>
+    <div class="masthead__kicker">THE ASSOCIATION LETTER</div>
+  </div>
+
+  <div class="rule-thick"></div>
+  <div class="rule-thin"></div>
+
+  <div class="paper">
+    <aside class="aside">
+      <img class="aside__photo" src="authors/esther-yoon.jpg" alt="윤여진 총장" width="256" height="256" />
+      <div class="byline">
+        <div class="byline__label">WRITTEN BY</div>
+        <div class="byline__name"><span lang="ko">윤여진</span><span lang="en">Esther Yoon</span></div>
+        <div class="byline__role">
+          <span lang="ko">총장 &middot; 한국의료관광진흥협회</span><span lang="en">Secretary General, KMTPA</span>
+        </div>
+      </div>
+
+      <div class="aside__divider"></div>
+      <div class="toc__label">IN THIS ISSUE</div>
+      <nav class="toc">
+        <a href="#sec-1"><span class="toc__n">01</span><span class="toc__t"><span lang="ko">의료는 로컬 비즈니스입니다</span><span lang="en">Medicine Is a Local Business</span></span></a>
+        <a href="#sec-2"><span class="toc__n">02</span><span class="toc__t"><span lang="ko">걸프 국가라는 시험대</span><span lang="en">The Gulf Test</span></span></a>
+        <a href="#sec-3"><span class="toc__n">03</span><span class="toc__t"><span lang="ko">역량보다 인식이 결정합니다</span><span lang="en">Perception Decides More Than Capability</span></span></a>
+        <a href="#sec-4"><span class="toc__n">04</span><span class="toc__t"><span lang="ko">이동이 실제로 성립하는 조건</span><span lang="en">Where Travelling for Treatment Does Work</span></span></a>
+        <a href="#sec-5"><span class="toc__n">05</span><span class="toc__t"><span lang="ko">세 질문에 하나를 덧붙입니다</span><span lang="en">One Addition to the Three Questions</span></span></a>
+        <a href="#sec-6"><span class="toc__n">06</span><span class="toc__t"><span lang="ko">2026년 8월 현황</span><span lang="en">Status, August 2026</span></span></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="eyebrow"><span lang="ko">협회 컬럼</span><span lang="en">A LETTER FROM THE ASSOCIATION</span></div>
+
+      <h2>
+        <span lang="ko">우리가 설명하지 않고 남겨 둔 숫자</span>
+        <span lang="en">The Number We Left Unexplained</span>
+      </h2>
+
+      <p class="lead">
+        <span lang="ko">지난 편지는 설명하지 않은 숫자 하나로 끝났습니다. 2024년 외국인 환자 117만 명 중 암 치료를 위해 온 사람은 7,147명, 2019년보다 적었습니다. 전체 시장은 두 배 넘게 커졌는데 이 영역만 줄었습니다. 그 이유를 찾았습니다. 한국 의료의 수준 문제가 아니라 거리의 문제였습니다. 이번 편지는 멀리서 이 글을 읽는 분에게 그것이 무슨 뜻인지에 대한 이야기입니다.</span>
+        <span lang="en">Last letter ended with a number we did not explain. In 2024, while 1.17 million international patients came to Korea, only 7,147 came for cancer treatment &mdash; fewer than in 2019. The whole market more than doubled; that one segment shrank. We have since found the explanation, and it is not about Korean medicine. It is about distance. This letter is about what that means for anyone reading from far away.</span>
+      </p>
+
+      <div class="rule-short"></div>
+
+      <section class="sec" id="sec-1">
+        <div class="sec__head">
+          <span class="sec__n">01</span>
+          <h3><span lang="ko">의료는 로컬 비즈니스입니다</span><span lang="en">Medicine Is a Local Business</span></h3>
+        </div>
+        <p>
+          <span lang="ko">가까운 곳에서 치료받으려는 선호는 우리가 짐작하는 것보다 강합니다. 돈과 품질을 모두 이길 만큼 강합니다.</span>
+          <span lang="en">The preference for treatment close to home is stronger than most people assume &mdash; strong enough to override both money and quality.</span>
+        </p>
+        <p>
+          <span lang="ko">월마트는 직원에게 타 주(州) 우수 병원의 수술을 전액 지원하는 복리후생을 제공했습니다. 이용률은 예상을 크게 밑돌았습니다(월스트리트 저널). 본인 부담이 없는 더 나은 치료를 위해서도 주 경계를 넘지 않은 것입니다.</span>
+          <span lang="en">Walmart once offered employees discounted surgery at top-tier hospitals in other US states, fully subsidised. Uptake fell far below projections, as the Wall Street Journal reported. Employees would not cross state lines for better care that cost them nothing.</span>
+        </p>
+        <p>
+          <span lang="ko">국경을 넘는 경우도 같습니다. 미국 CDC 조사에 따르면 비용 때문에 해외 치료를 택하는 미국인들은 멕시코&middot;캐나다&middot;코스타리카로 갑니다. 대양을 건너지 않습니다. <strong>가격과 품질이 비슷하면 언제나 거리가 이깁니다.</strong></span>
+          <span lang="en">Across borders the pattern holds. US CDC research shows Americans who seek affordable care abroad go to Mexico, Canada, or Costa Rica. Not across an ocean. <strong>When price and quality are comparable, proximity wins.</strong></span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-2">
+        <div class="sec__head">
+          <span class="sec__n">02</span>
+          <h3><span lang="ko">걸프 국가라는 시험대</span><span lang="en">The Gulf Test</span></h3>
+        </div>
+        <p>
+          <span lang="ko">이 규칙을 가장 깨끗하게 시험할 수 있는 곳은, 비용이 전혀 변수가 아닌 곳입니다.</span>
+          <span lang="en">The cleanest test of this rule is the one place where cost is not a factor at all.</span>
+        </p>
+        <p>
+          <span lang="ko">여러 걸프 국가는 중증질환의 해외 치료를 전액 지원합니다. 의료비&middot;항공료&middot;동반자 숙박비&middot;통역비까지. 지구상 어디든 갈 수 있는 환자들입니다. 그들은 어디로 갈까요. 쿠웨이트 정부 통계 기준 <strong>영국 28%, 미국 24%, 독일 23%.</strong> 사우디아라비아도 같은 3개국입니다.</span>
+          <span lang="en">Several Gulf states fund overseas treatment for serious illness in full &mdash; medical bills, flights, companion lodging, interpretation. These patients can go anywhere on earth. Where do they go? Kuwaiti government figures: <strong>the UK 28%, the US 24%, Germany 23%.</strong> Saudi Arabia names the same three.</span>
+        </p>
+        <p>
+          <span lang="ko">여기서 두 가지가 보입니다. 예산 제약이 없는 환자들에게도 지역성은 작동해서 가까운 영국과 독일이 1위와 3위를 차지했다는 것. 그리고 가장 먼 미국이 여전히 24%라는 것 &mdash; 거리는 극복될 수 있지만 수십 년간 쌓인 기관 평판과 협력 네트워크로만 가능하다는 뜻입니다. 그것이 예외가 되기 위한 값입니다.</span>
+          <span lang="en">Two things are visible here. The UK and Germany rank first and third because they are close &mdash; locality holds even for patients with unlimited budgets. And the United States, the most distant of the three, still takes 24%: distance can be overcome, but only by decades of institutional reputation and referral networks. That is the price of the exception.</span>
+        </p>
+        <p>
+          <span lang="ko">아시아의 성공 사례도 같은 규칙을 따릅니다. 싱가포르 연 65만 명, 말레이시아 108만 명이지만 싱가포르의 절반 이상, 말레이시아의 60% 이상이 인접국 인도네시아 환자입니다. <strong>원거리 유치의 성과처럼 보이는 숫자도 실은 근접성입니다.</strong></span>
+          <span lang="en">Even Asia&rsquo;s celebrated hubs obey the rule. Singapore attracts roughly 650,000 medical travellers a year, Malaysia 1.08 million &mdash; but over half of Singapore&rsquo;s and more than 60% of Malaysia&rsquo;s come from neighbouring Indonesia. <strong>What reads as long-haul success is proximity in disguise.</strong></span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-3">
+        <div class="sec__head">
+          <span class="sec__n">03</span>
+          <h3><span lang="ko">역량보다 인식이 결정합니다</span><span lang="en">Perception Decides More Than Capability</span></h3>
+        </div>
+        <p>
+          <span lang="ko">한국의 최대 유입국 두 곳이 선택을 실제로 무엇이 결정하는지 보여 줍니다.</span>
+          <span lang="en">Korea&rsquo;s two largest source countries show what actually drives the choice.</span>
+        </p>
+        <p>
+          <span lang="ko">일본은 한국 방문 환자 1위 국가입니다. 그리고 그중 <strong>69.7%가 피부과, 14.0%가 성형외과</strong>입니다. 한일 간 결정적인 의료 격차가 없고 일본은 건강보험 구조상 부담도 낮아 치료를 위해 이동할 이유가 적습니다. 한국은 미용의 가성비 좋은 선택지이지 치료 목적지가 아닙니다.</span>
+          <span lang="en">Japanese patients are Korea&rsquo;s single largest group &mdash; and <strong>69.7% of them see dermatology, 14.0% plastic surgery.</strong> There is no decisive clinical gap between the two countries, and Japan&rsquo;s insurance system keeps costs low, so there is little reason to travel for treatment. Korea is a good-value option for aesthetics, not a treatment destination.</span>
+        </p>
+        <p>
+          <span lang="ko">중국 환자는 전체의 22.3%를 차지하며 검진과 미용에는 기꺼이 한국을 택합니다. 그러나 암 치료에는 미국&middot;독일&middot;일본으로 갑니다. 한국의 종양 치료 역량을 측정해 보고 미달이라 판단해서가 아니라, &lsquo;의료 선진국&rsquo;이라는 이름표가 그쪽에 붙어 있기 때문입니다.</span>
+          <span lang="en">Chinese patients account for 22.3% of all arrivals and readily choose Korea for screening and cosmetic work. For cancer, they go to the US, Germany, or Japan. Not because Korean oncology has been measured and found wanting, but because the label &ldquo;advanced medicine&rdquo; sits elsewhere in their minds.</span>
+        </p>
+        <p>
+          <span lang="ko">불편한 지점이 여기입니다. 환자들은 검증된 역량이 아니라 인식으로 선택합니다. 평판, 소개, 광고로요. 어떤 병원이 당신에게 믿음직해 보일 때 기억할 만한 사실입니다. <strong>지금 반응하고 있는 것이 기록인지 인상인지 물어보십시오.</strong></span>
+          <span lang="en">This is the uncomfortable part. Patients do not choose on verified capability. They choose on perception &mdash; reputation, referral, advertising. Which is worth remembering when a hospital looks reassuring to you: <strong>ask whether you are responding to a record or to an impression.</strong></span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-4">
+        <div class="sec__head">
+          <span class="sec__n">04</span>
+          <h3><span lang="ko">이동이 실제로 성립하는 조건</span><span lang="en">Where Travelling for Treatment Does Work</span></h3>
+        </div>
+        <p>
+          <span lang="ko">데이터는 한국행 치료 목적 이동이 실제로 성립하는 영역도 보여 줍니다. 그리고 그것은 규칙을 깨는 것이 아니라 확인해 줍니다.</span>
+          <span lang="en">The data does show where treatment-driven travel to Korea works &mdash; and it confirms the same rule rather than breaking it.</span>
+        </p>
+        <p>
+          <span lang="ko">몽골&middot;중앙아시아&middot;극동 러시아 환자들은 실제 치료를 위해 옵니다. 몽골은 내과통합(25.0%)과 검진센터(11.5%)가 최상위이고, 한국관광공사 조사에서 잠재 의료관광객의 62%가 한국을 선호했습니다. 중앙아시아는 내과통합 28.0%, 검진센터 19.3%입니다. 카자흐스탄은 2024년 외국인 암 환자 수 1위, 뇌혈관&middot;심장질환 3위, 중증난치질환 4위였고 전 분야에서 전년 대비 15~38% 증가했습니다.</span>
+          <span lang="en">Patients from Mongolia, Central Asia, and the Russian Far East come disproportionately for actual treatment. Among Mongolian patients, internal medicine (25.0%) and screening centres (11.5%) rank highest, and a Korea Tourism Organization survey found 62% of prospective Mongolian medical travellers preferred Korea. Central Asia shows internal medicine at 28.0% and screening at 19.3%. Kazakhstan ranked first among all nationalities for foreign cancer patients in 2024, third for cerebrovascular and cardiac disease, fourth for severe intractable conditions &mdash; growing 15&ndash;38% year on year in every category.</span>
+        </p>
+        <p>
+          <span lang="ko">이 지역들의 공통점은 두 조건이 동시에 성립한다는 것입니다. <strong>자국 역량의 실질적 공백, 그리고 닿을 수 있는 거리.</strong> 국경을 넘는 일이 합리적이 되는 조합입니다.</span>
+          <span lang="en">What these regions share is two conditions at once: <strong>a real capability gap at home, and Korea within reachable distance.</strong> That combination is what makes crossing a border rational.</span>
+        </p>
+        <p>
+          <span lang="ko">그러므로 스스로에게 물어야 할 질문은 &lsquo;한국 의료가 좋은가&rsquo;가 아닙니다. 내 나라 시스템에 정말로 없는 것이 있는가, 그리고 한국은 사후관리 문제가 감당 가능할 만큼 가까운가. 둘 다 참이라면 당신은 이 선택을 실제로 성공시키는 환자들과 같은 위치에 있습니다. 첫 번째만 참이라면, 정직한 답은 거리가 가져가는 비용이 품질 이득보다 크다는 것이고, <strong>그렇지 않다고 말하는 사람은 무언가를 팔고 있는 것입니다.</strong></span>
+          <span lang="en">So the question to ask yourself is not &ldquo;is Korean medicine good.&rdquo; It is: does my home system genuinely lack what I need, and is Korea close enough that the follow-up problem stays manageable? If both are true, you are in the same position as the patients who actually make this work. If only the first is true, the honest answer is that distance will cost you more than the quality gain returns &mdash; and <strong>anyone telling you otherwise is selling something.</strong></span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-5">
+        <div class="sec__head">
+          <span class="sec__n">05</span>
+          <h3><span lang="ko">세 질문에 하나를 덧붙입니다</span><span lang="en">One Addition to the Three Questions</span></h3>
+        </div>
+        <p>
+          <span lang="ko">첫 편지에서 어떤 병원을 고르든 확인할 세 가지를 말씀드렸습니다. 외국인 환자를 받도록 등록되어 있다는 근거, 이후 문제가 생겼을 때의 연락처, 안내자가 수수료를 받는지 여부.</span>
+          <span lang="en">Our first letter set out three things to confirm before choosing any hospital: the evidence it is registered to treat international patients, who you contact if something goes wrong afterwards, and whether the person guiding you is paid a commission.</span>
+        </p>
+        <p>
+          <span lang="ko">먼 거리를 이동하는 치료 환자에게는 <strong>두 번째 질문의 무게가 달라집니다.</strong> 미용의 결과는 몇 주 안에 드러나지만 중증질환은 진단&middot;치료&middot;경과 관찰로 길게 이어지고, 그 시간의 대부분을 당신은 자국에서 보냅니다. 한국의 제도상 주치의와의 원격진료는 허용되지 않는 곳에서요. 그러니 더 단단한 형태로 물으십시오. 사후관리가 있는지가 아니라, <strong>구체적으로 누가, 어떤 경로로, 어떤 언어로, 그리고 6개월 뒤에는 어떻게 되는지.</strong> 답이 준비된 병원은 당신 같은 환자를 생각해 본 곳입니다. 없는 곳은 생각해 보지 않은 곳입니다.</span>
+          <span lang="en">For a treatment patient travelling a long distance, <strong>the second question changes weight.</strong> A cosmetic result shows within weeks. Serious illness unfolds across diagnosis, therapy, and monitoring &mdash; and most of that time you will be in your own country, where Korea&rsquo;s rules do not permit remote consultation with your treating physician. So ask it in a harder form: not whether follow-up exists, but <strong>who specifically, through what channel, in what language, and what happens at month six.</strong> A hospital that has an answer has thought about patients like you. One that does not, has not.</span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-6">
+        <div class="sec__head">
+          <span class="sec__n">06</span>
+          <h3><span lang="ko">2026년 8월 현황</span><span lang="en">Status, August 2026</span></h3>
+        </div>
+        <p>
+          <span lang="ko">등재 100곳, 전부 서울시 &lsquo;의료관광 협력기관&rsquo; 목록 근거. 보건복지부 등록 근거 0곳. 등재 해제 0곳. <strong>지난 편지와 같습니다 &mdash; 변한 것이 없으면 없다고 적습니다.</strong></span>
+          <span lang="en">Listed: 100 institutions, all sourced from the Seoul Metropolitan Government&rsquo;s Medical Tourism Partner Institution list. Listed on the basis of Ministry of Health and Welfare registration: 0. Delisted: 0. <strong>Unchanged from last letter &mdash; and when nothing has changed, we say so.</strong></span>
+        </p>
+      </section>
+
+      <div class="refs">
+        <div class="refs__label"><span lang="ko">근거 자료</span><span lang="en">SOURCES</span></div>
+        <span lang="ko">
+          보건복지부 &middot; 한국보건산업진흥원, 2024년 외국인환자 유치실적 통계.<br />
+          한국관광공사 조사. 쿠웨이트 &middot; 사우디아라비아 정부 통계. 미국 CDC. 월스트리트 저널.
+        </span>
+        <span lang="en">
+          Ministry of Health and Welfare &amp; Korea Health Industry Development Institute, 2024 International Patient Statistics.<br />
+          Korea Tourism Organization; Kuwaiti and Saudi government statistics; US CDC; The Wall Street Journal.
+        </span>
+      </div>
+
+      <footer class="colophon">
+        <span class="colophon__meta">
+          <span lang="ko">&copy; 2026 메디체크 코리아 &middot; 협회 컬럼 &middot; <a href="/content">지난 호 보기</a></span>
+          <span lang="en">&copy; 2026 MediCheck Korea &middot; The Association Letter &middot; <a href="/content">Past issues</a></span>
+        </span>
+        <span class="colophon__issue">ISSUE 02</span>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+  // 하는 일은 html 의 data-lang 을 바꾸는 것뿐이다. 보이고 감추는 판단은 CSS 가 한다 —
+  // 이 스크립트가 실패해도 한국어 판이 그대로 읽힌다. 고른 언어는 1호와 같은 열쇠로
+  // 기억한다 — 호를 옮겨 다녀도 읽던 언어가 유지되어야 한다.
+  (function () {
+    var root = document.documentElement;
+    var KEY = "medicheck-letter-lang";
+
+    function apply(lang) {
+      root.setAttribute("data-lang", lang);
+      root.setAttribute("lang", lang);
+      try { localStorage.setItem(KEY, lang); } catch (e) { /* 사생활 보호 모드 */ }
+    }
+
+    // 주소로 온 언어가 가장 세다. 편지의 EN 단추가 이 경로로 들어온다 —
+    // 눌러서 왔는데 저장돼 있던 한국어로 되돌아가면 단추가 고장 난 것으로 읽힌다.
+    var asked = new URLSearchParams(location.search).get("lang");
+    if (asked === "ko" || asked === "en") {
+      apply(asked);
+    } else {
+      try {
+        var saved = localStorage.getItem(KEY);
+        if (saved === "ko" || saved === "en") { apply(saved); }
+      } catch (e) { /* 읽을 수 없으면 기본값(한국어)으로 둔다 */ }
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (button) {
+      button.addEventListener("click", function () { apply(button.value); });
+    });
+  })();
+</script>
+</body>
+</html>

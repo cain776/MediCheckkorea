@@ -118,6 +118,12 @@ export function Home() {
 
       <div className="container">
         <section className="hero" id="find">
+          {/* 통계 줄이 제목 위에 온다. 숫자를 먼저 보여 주고 그 숫자가 무엇인지를
+              제목이 받는다 — 숫자가 작으면 서버가 이미 빼고 준다 (30장) */}
+          <p className="stat-pill">
+            <i aria-hidden="true" />
+            {stat}
+          </p>
           <h1 className="hero__title">{t("heroTitle")}</h1>
           <p className="hero__lead">{t("heroLead")}</p>
 
@@ -135,29 +141,33 @@ export function Home() {
             </button>
           </form>
 
-          <p className="stat-line">{stat}</p>
-
-          {/* 아이콘은 분류를 가리키는 그림이지 기관을 꾸미는 것이 아니다.
-              기관에는 여전히 어떤 색도 붙지 않는다 (17장) */}
-          <div className="tiles">
-            {/* 전체 보기가 맨 앞. 고른 것이 없을 때 돌아올 자리를 먼저 보여 준다 */}
-            <Link to="/find-a-hospital" className="tile tile--all">
-              <i aria-hidden="true">{AllMark}</i>
-              <span>{t("seeAll")}</span>
-            </Link>
-            {data.specialties.map((name) => (
-              <Link
-                key={name}
-                to={`/find-a-hospital?specialty=${encodeURIComponent(name)}`}
-                className="tile"
-              >
-                <i aria-hidden="true">{SPECIALTY_ICONS[name] ?? SPECIALTY_ICONS.Other}</i>
-                <span>{label("SPECIALTY", name)}</span>
-              </Link>
-            ))}
-          </div>
         </section>
+      </div>
 
+      {/* 아이콘은 분류를 가리키는 그림이지 기관을 꾸미는 것이 아니다.
+          기관에는 여전히 어떤 색도 붙지 않는다 (17장).
+          띠는 컨테이너 밖으로 나가 전폭으로 선다 — 위아래 실선이 화면을 가른다 */}
+      <div className="rail">
+        <div className="rail__inner">
+          {/* 전체 보기가 맨 앞. 고른 것이 없을 때 돌아올 자리를 먼저 보여 준다 */}
+          <Link to="/find-a-hospital" className="tile tile--all">
+            <i aria-hidden="true">{AllMark}</i>
+            <span>{t("seeAll")}</span>
+          </Link>
+          {data.specialties.map((name) => (
+            <Link
+              key={name}
+              to={`/find-a-hospital?specialty=${encodeURIComponent(name)}`}
+              className="tile"
+            >
+              <i aria-hidden="true">{SPECIALTY_ICONS[name] ?? SPECIALTY_ICONS.Other}</i>
+              <span>{label("SPECIALTY", name)}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="container">
         <section className="bento">
           {/* 20장이 캠페인 배너를 금지하며 "그 자리에 인증이 무엇인지 설명하는 카드를
               둔다"고 했다. 레퍼런스에서 파랑이 넓게 깔리던 자리가 그대로 여기다. */}
@@ -175,39 +185,49 @@ export function Home() {
             </div>
           </div>
 
-          <Link to={MENU[0].path} className="bento__card">
-            <div>
-              <h3>{t("findAHospital")}</h3>
-              <p>{t("cardFindLead")}</p>
-            </div>
-            <span className="bento__more">{t("open")} →</span>
-          </Link>
+          {/* 카드 넷을 흩어 놓는 대신 번호가 붙은 한 장부로 세운다 — 01부터 04까지
+              읽는 차례가 정해져 있고, 마지막 줄(정렬 기준)은 링크가 아니라 밝히는 문장이다 */}
+          <div className="ledger">
+            <Link to={MENU[0].path} className="ledger__row">
+              <span className="ledger__no">01</span>
+              <span className="ledger__body">
+                <b>{t("findAHospital")}</b>
+                <span>{t("cardFindLead")}</span>
+              </span>
+              <span className="ledger__more">{t("open")} →</span>
+            </Link>
 
-          <Link to={MENU[2].path} className="bento__card">
-            <div>
-              <h3>{t("patientJourney")}</h3>
-              <p>{t("cardJourneyLead")}</p>
-            </div>
-            <span className="bento__more">{t("open")} →</span>
-          </Link>
+            <Link to={MENU[3].path} className="ledger__row">
+              <span className="ledger__no">02</span>
+              <span className="ledger__body">
+                <b>{t("patientJourney")}</b>
+                <span>{t("cardJourneyLead")}</span>
+              </span>
+              <span className="ledger__more">{t("open")} →</span>
+            </Link>
 
-          <Link to="/about-certification?tab=grounds#removals" className="bento__card">
-            <div>
-              <h3>
-                {t("cardRemovalsTitle")} · {data.removalCount}
-              </h3>
-              <p>{t("cardRemovalsLead")}</p>
-            </div>
-            <span className="bento__more">{t("open")} →</span>
-          </Link>
+            <Link to="/about-certification?tab=grounds#removals" className="ledger__row">
+              <span className="ledger__no">03</span>
+              <span className="ledger__body">
+                <b>
+                  {t("cardRemovalsTitle")} · {data.removalCount}
+                </b>
+                <span>{t("cardRemovalsLead")}</span>
+              </span>
+              <span className="ledger__more">{t("open")} →</span>
+            </Link>
 
-          {/* 4장 — 정렬 기준을 공개한다. 화면에 적어 두는 것이 그 공개다. */}
-          <div className="bento__card">
-            <div>
-              <h3>{t("cardOrderTitle")}</h3>
-              <p>{t("cardOrderLead")}</p>
+            {/* 4장 — 정렬 기준을 공개한다. 화면에 적어 두는 것이 그 공개다.
+                누를 곳이 아니므로 링크로 만들지 않는다 */}
+            <div className="ledger__row ledger__row--note">
+              <span className="ledger__no">04</span>
+              <span className="ledger__body">
+                <b>{t("cardOrderTitle")}</b>
+                <span>{t("cardOrderLead")}</span>
+              </span>
             </div>
           </div>
+
         </section>
       </div>
     </div>

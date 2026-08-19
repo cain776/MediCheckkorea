@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MediCheck Korea — The Association Letter, Issue 02</title>
+
+<!--
+  MediCheck Korea — The Association Letter, Issue 02 (August 2026). **이메일 판.**
+
+  **이 판은 영문 전용이고 언어 선택이 없다.** 편지는 영문으로 나가고, 두 언어 판은
+  웹에 있다(/newsletter/vol2.html — ?lang= 을 읽어 원하는 언어로 연다).
+  메일에는 자바스크립트가 없어 토글을 두면 시늉만 하게 된다.
+
+  디자인 출처: Claude Design 의 `MediCheck Newsletter v3.dc.html`. 웹용(flex·grid)이라
+  여기서는 표 기반·인라인 스타일로 옮겼다. 틀은 newsletter/email-frame.html.
+
+  목차에 링크를 걸지 않았다 — 메일 클라이언트 상당수가 문서 안 앵커로 스크롤해 주지
+  않아, 눌리는 것처럼 보이는데 안 눌리는 상태가 된다.
+
+  본문은 vol2.html(웹 판)의 영문과 **같은 글이어야 한다.** 한쪽만 고치면 읽는 곳마다
+  달라진다. 현황 숫자(100 / 0 / 0)는 2026-08-19 에 /api/home 과 /api/hospitals 에서
+  직접 읽었다. 편지에 박힌 숫자는 늙는다.
+-->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  /* 좁은 화면 보정. 지워져도 본문은 읽힌다 — 인라인 스타일이 이미 세로로 세워 둔다. */
+  @media only screen and (max-width: 740px) {
+    .card { width: 100% !important; }
+    .pad { padding-left: 24px !important; padding-right: 24px !important; }
+    .h1 { font-size: 26px !important; }
+    .stat { display: block !important; width: 100% !important; }
+  }
+  @media (prefers-color-scheme: dark) {
+    .paper { background: #ffffff !important; }
+  }
+</style>
+</head>
+
+<body style="margin:0; padding:0; background:#f4f4f2;">
+
+<!-- 수신함 미리보기 -->
+<div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+  A number we left unexplained, and what it says about distance
+  &#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f4f2;">
+<tr><td align="center" style="padding:40px 20px 96px;">
+
+<table role="presentation" class="card paper" width="720" cellpadding="0" cellspacing="0" border="0"
+       style="width:720px; max-width:720px; background:#ffffff; border:1px solid #e6e5e1;">
+
+  <!-- ── 머리 ──────────────────────────────────────────────────── -->
+  <tr><td class="pad" style="padding:22px 56px; border-bottom:1px solid #eae9e5; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+    <span style="font-size:17px; font-weight:700; letter-spacing:-0.02em; color:#121212;">MediCheck Korea</span>
+    <span style="color:#d9d8d3;">&nbsp;|&nbsp;</span>
+    <span style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:600;">THE ASSOCIATION LETTER</span>
+  </td></tr>
+
+  <tr><td class="pad" style="padding:52px 56px 60px;">
+
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td width="16" style="width:16px; height:2px; background:#bb1919; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding-left:10px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.2em; color:#bb1919; font-weight:700; white-space:nowrap;">ISSUE 02 &middot; AUGUST 2026</td>
+    </tr></table>
+
+    <h1 class="h1" style="margin:20px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:34px; font-weight:700; line-height:1.42; letter-spacing:-0.03em; color:#121212;">The Number We Left Unexplained</h1>
+
+    <p style="margin:24px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17px; line-height:1.8; color:#5c5a54;">Last letter ended with a number we did not explain. In 2024, while 1.17 million international patients came to Korea, only 7,147 came for cancer treatment &mdash; fewer than in 2019. The whole market more than doubled; that one segment shrank. We have since found the explanation, and it is not about Korean medicine. It is about distance. This letter is about what that means for anyone reading from far away.</p>
+
+    <!-- ── 쓴 사람 ──────────────────────────────────────────────
+         메일 앱은 이미지를 기본으로 막는다. 사진이 안 떠도 이름과 직함이 글자로
+         남아야 하므로 사진과 이름은 서로 다른 칸이다. 주소가 절대경로인 이유도
+         같다 — 메일에는 상대경로가 없다. -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:38px; border-top:1px solid #edece8; border-bottom:1px solid #edece8;">
+      <tr><td style="padding:20px 0;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td valign="middle" style="padding-right:16px;">
+            <img src="https://medi-checkkorea.vercel.app/newsletter/authors/esther-yoon.jpg" width="54" height="54" alt="Esther Yoon"
+                 style="display:block; width:54px; height:54px; border-radius:27px; object-fit:cover; background:#f2f2f2;" />
+          </td>
+          <td valign="middle" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+            <div style="font-size:15.5px; letter-spacing:-0.01em; color:#121212;"><strong style="font-weight:700;">Esther Yoon</strong><span style="color:#7a7872; font-weight:400;">&nbsp;Secretary General</span></div>
+            <div style="font-size:13px; color:#9a9891; margin-top:4px;">Korea Medical Tourism Promotion Association</div>
+          </td>
+        </tr></table>
+      </td></tr>
+    </table>
+
+    <!-- ── 목차 ─────────────────────────────────────────────────
+         왼쪽 세로줄은 배경색을 깐 2px 짜리 칸이다. border-left 로 그리면
+         Outlook 이 무시할 때가 있어 칸 자체를 세워 두는 편이 안전하다. -->
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
+      <td width="2" style="width:2px; background:#121212; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding-left:22px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+        <div style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:700; margin-bottom:8px;">IN THIS ISSUE</div>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">01</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Medicine Is a Local Business</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">02</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">The Gulf Test</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">03</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Perception Decides More Than Capability</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">04</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Where Travelling for Treatment Does Work</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">05</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">One Addition to the Three Questions</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">06</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Status, August 2026</td></tr>
+        </table>
+      </td>
+    </tr></table>
+
+    <h2 style="margin:52px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Medicine Is a Local Business</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">The preference for treatment close to home is stronger than most people assume &mdash; strong enough to override both money and quality.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Walmart once offered employees discounted surgery at top-tier hospitals in other US states, fully subsidised. Uptake fell far below projections, as the Wall Street Journal reported. Employees would not cross state lines for better care that cost them nothing.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Across borders the pattern holds. US CDC research shows Americans who seek affordable care abroad go to Mexico, Canada, or Costa Rica. Not across an ocean.</p>
+
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:22px;"><tr>
+      <td width="2" style="width:2px; background:#bb1919; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding:2px 0 2px 20px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17.5px; line-height:1.7; letter-spacing:-0.02em; font-weight:600; color:#121212;">When price and quality are comparable, proximity wins.</td>
+    </tr></table>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">The Gulf Test</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">The cleanest test of this rule is the one place where cost is not a factor at all. Several Gulf states fund overseas treatment for serious illness in full &mdash; medical bills, flights, companion lodging, interpretation. These patients can go anywhere on earth.</p>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px; background:#fafaf8; border:1px solid #edece8;">
+      <tr><td class="pad" style="padding:22px 24px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+        <p style="margin:0; font-size:15.5px; line-height:1.82; color:#33322d;"><strong style="font-weight:700;">Where do they go?</strong> Kuwaiti government figures: the UK 28%, the US 24%, Germany 23%. Saudi Arabia names the same three.</p>
+        <p style="margin:16px 0 0; font-size:15.5px; line-height:1.82; color:#33322d;"><strong style="font-weight:700;">Even Asia&rsquo;s celebrated hubs obey the rule.</strong> Singapore attracts roughly 650,000 medical travellers a year, Malaysia 1.08 million &mdash; but over half of Singapore&rsquo;s and more than 60% of Malaysia&rsquo;s come from neighbouring Indonesia.</p>
+      </td></tr>
+    </table>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Two things are visible here. The UK and Germany rank first and third because they are close &mdash; locality holds even for patients with unlimited budgets. And the United States, the most distant of the three, still takes 24%: distance can be overcome, but only by decades of institutional reputation and referral networks. That is the price of the exception. <strong style="font-weight:700;">What reads as long-haul success is proximity in disguise.</strong></p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Perception Decides More Than Capability</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Korea&rsquo;s two largest source countries show what actually drives the choice.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Japanese patients are Korea&rsquo;s single largest group &mdash; and <strong style="font-weight:700;">69.7% of them see dermatology, 14.0% plastic surgery.</strong> There is no decisive clinical gap between the two countries, and Japan&rsquo;s insurance system keeps costs low, so there is little reason to travel for treatment. Korea is a good-value option for aesthetics, not a treatment destination.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Chinese patients account for 22.3% of all arrivals and readily choose Korea for screening and cosmetic work. For cancer, they go to the US, Germany, or Japan. Not because Korean oncology has been measured and found wanting, but because the label &ldquo;advanced medicine&rdquo; sits elsewhere in their minds.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">This is the uncomfortable part. Patients do not choose on verified capability. They choose on perception &mdash; reputation, referral, advertising. Which is worth remembering when a hospital looks reassuring to you: <strong style="font-weight:700;">ask whether you are responding to a record or to an impression.</strong></p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Where Travelling for Treatment Does Work</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">The data does show where treatment-driven travel to Korea works &mdash; and it confirms the same rule rather than breaking it.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Patients from Mongolia, Central Asia, and the Russian Far East come disproportionately for actual treatment. Among Mongolian patients, internal medicine (25.0%) and screening centres (11.5%) rank highest, and a Korea Tourism Organization survey found 62% of prospective Mongolian medical travellers preferred Korea. Central Asia shows internal medicine at 28.0% and screening at 19.3%. Kazakhstan ranked first among all nationalities for foreign cancer patients in 2024, third for cerebrovascular and cardiac disease, fourth for severe intractable conditions &mdash; growing 15&ndash;38% year on year in every category.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">What these regions share is two conditions at once: <strong style="font-weight:700;">a real capability gap at home, and Korea within reachable distance.</strong> That combination is what makes crossing a border rational.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">So the question to ask yourself is not &ldquo;is Korean medicine good.&rdquo; It is: does my home system genuinely lack what I need, and is Korea close enough that the follow-up problem stays manageable? If both are true, you are in the same position as the patients who actually make this work. If only the first is true, the honest answer is that distance will cost you more than the quality gain returns &mdash; and <strong style="font-weight:700;">anyone telling you otherwise is selling something.</strong></p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">One Addition to the Three Questions</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Our first letter set out three things to confirm before choosing any hospital: the evidence it is registered to treat international patients, who you contact if something goes wrong afterwards, and whether the person guiding you is paid a commission.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">For a treatment patient travelling a long distance, <strong style="font-weight:700;">the second question changes weight.</strong> A cosmetic result shows within weeks. Serious illness unfolds across diagnosis, therapy, and monitoring &mdash; and most of that time you will be in your own country, where Korea&rsquo;s rules do not permit remote consultation with your treating physician. So ask it in a harder form: not whether follow-up exists, but <strong style="font-weight:700;">who specifically, through what channel, in what language, and what happens at month six.</strong> A hospital that has an answer has thought about patients like you. One that does not, has not.</p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Status, August 2026</h2>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="1" border="0" style="margin-top:18px; background:#edece8; border:1px solid #edece8;">
+      <tr>
+        <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">100</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">Listed institutions</div>
+        </td>
+        <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">0</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">Listed via MOHW registration</div>
+        </td>
+        <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">0</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">Delisted</div>
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Listed: 100 institutions, all sourced from the Seoul Metropolitan Government&rsquo;s Medical Tourism Partner Institution list. Listed on the basis of Ministry of Health and Welfare registration: 0. Delisted: 0. <strong style="font-weight:700;">Unchanged from last letter &mdash; and when nothing has changed, we say so.</strong></p>
+
+    <!-- ── 사이트로 ─────────────────────────────────────────────── -->
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
+      <td style="background:#121212;">
+        <a href="https://medi-checkkorea.vercel.app/find-a-hospital" style="display:inline-block; padding:14px 24px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; font-weight:700; letter-spacing:-0.01em; color:#ffffff; text-decoration:none;">Browse institutions with their records</a>
+      </td>
+    </tr></table>
+
+    <!-- ── 참고 ─────────────────────────────────────────────────
+         이 편지는 수치를 여럿 인용한다. 출처를 안 적으면 본문이 스스로 내건
+         「검증할 수 없는 문장은 쓰지 않는다」와 어긋난다. -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:44px; border-top:1px solid #edece8;">
+      <tr><td style="padding-top:18px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; line-height:1.85; color:#9a9891;">
+        <div style="font-size:9.5px; letter-spacing:0.2em; color:#121212; font-weight:700; margin-bottom:8px;">SOURCES</div>
+        Ministry of Health and Welfare &amp; Korea Health Industry Development Institute, 2024 International Patient Statistics; Korea Tourism Organization; Kuwaiti and Saudi government statistics; US CDC; The Wall Street Journal.
+      </td></tr>
+    </table>
+
+  </td></tr>
+
+  <!-- ── 꼬리 ──────────────────────────────────────────────────── -->
+  <tr><td class="pad" style="padding:22px 56px 26px; border-top:1px solid #eae9e5;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td align="left" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12.5px; color:#9a9891;">
+        &copy; 2026 Korea Medical Tourism Promotion Association<br />
+        <span style="font-size:11.5px;">This is issue 02. We are not taking subscriptions yet, so for now it can only be read on the site.</span>
+      </td>
+      <td align="right" valign="top" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.18em; color:#bebcb5; font-weight:700; white-space:nowrap;">ISSUE 02</td>
+    </tr></table>
+  </td></tr>
+
+</table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

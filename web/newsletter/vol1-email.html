@@ -1,29 +1,26 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>메디체크 코리아 — 협회 컬럼 제 1호</title>
+<title>MediCheck Korea — The Association Letter, Issue 01</title>
 
 <!--
-  메디체크 코리아 협회 컬럼 — 제 1호 (2026년 8월). **이메일 판.**
+  MediCheck Korea — The Association Letter, Issue 01 (August 2026). **이메일 판.**
 
-  디자인 출처: Claude Design 프로젝트 「협회 뉴스레터 디자인 요청」의
-  `MediCheck Newsletter v3.dc.html`. 그 파일은 웹용(flex · grid · style 블록)이라
-  여기서는 같은 화면을 **표 기반 · 인라인 스타일**로 다시 세웠다.
+  **이 판은 영문 전용이고 언어 선택이 없다.** 편지는 영문으로 나가고, 두 언어 판은
+  웹에 있다(/newsletter/vol1.html — ?lang= 을 읽어 원하는 언어로 연다).
+  메일에는 자바스크립트가 없어 토글을 두면 시늉만 하게 된다.
 
-  ── 디자인과 다르게 간 것 셋. 전부 이메일이라 어쩔 수 없는 것이다 ──────
-  1. **언어 토글이 없다.** 메일에는 자바스크립트가 없다. 이 판은 한국어이고,
-     토글이 있던 오른쪽 위 자리는 「웹에서 보기」 링크로 바꿨다 —
-     그 자리에 눌리지 않는 단추를 두느니 실제로 쓰이는 링크를 두는 편이 낫다.
-  2. **목차 항목에 링크를 걸지 않았다.** 메일 클라이언트 상당수가 문서 안 앵커로
-     스크롤해 주지 않는다. 눌리는 것처럼 보이는데 안 눌리는 상태가 된다.
-  3. **폭이 720px 다.** 디자인 값 그대로다. 600~640px 이 가장 안전하고 이보다
-     넓으면 Outlook 미리보기 창에서 잘릴 수 있다 — 좁혀야 하면 카드 표의
-     width 와 max-width 두 곳만 고치면 된다.
+  디자인 출처: Claude Design 의 `MediCheck Newsletter v3.dc.html`. 웹용(flex·grid)이라
+  여기서는 표 기반·인라인 스타일로 옮겼다. 틀은 newsletter/email-frame.html.
 
-  본문은 vol1.html(웹 판)과 **같은 글이어야 한다.** 한쪽만 고치면 읽는 곳마다 달라진다.
-  수치의 출처는 newsletter/sources/2026-08-k-medical-tourism.md 에 있다.
+  목차에 링크를 걸지 않았다 — 메일 클라이언트 상당수가 문서 안 앵커로 스크롤해 주지
+  않아, 눌리는 것처럼 보이는데 안 눌리는 상태가 된다.
+
+  본문은 vol1.html(웹 판)의 영문과 **같은 글이어야 한다.** 한쪽만 고치면 읽는 곳마다
+  달라진다. 현황 숫자(100 / 0 / 0)는 2026-08-19 에 /api/home 과 /api/hospitals 에서
+  직접 읽었다. 편지에 박힌 숫자는 늙는다.
 -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
@@ -46,7 +43,7 @@
 
 <!-- 수신함 미리보기 -->
 <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
-  시장의 숫자와, 병원을 고르는 데 필요한 정보는 다릅니다
+  Market numbers and the information you need to choose are not the same thing
   &#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;
 </div>
 
@@ -57,39 +54,22 @@
        style="width:720px; max-width:720px; background:#ffffff; border:1px solid #e6e5e1;">
 
   <!-- ── 머리 ──────────────────────────────────────────────────── -->
-  <tr><td class="pad" style="padding:22px 56px; border-bottom:1px solid #eae9e5;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-      <td align="left" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-        <span style="font-size:17px; font-weight:700; letter-spacing:-0.02em; color:#121212;">메디체크 코리아</span>
-        <span style="color:#d9d8d3;">&nbsp;|&nbsp;</span>
-        <span style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:600;">THE ASSOCIATION LETTER</span>
-      </td>
-      <td align="right" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:10.5px; letter-spacing:0.12em; font-weight:700; white-space:nowrap;">
-        <a href="https://medi-checkkorea.vercel.app/newsletter/vol1.html" style="color:#9a9891; text-decoration:none;">웹에서 보기</a>
-      </td>
-    </tr></table>
+  <tr><td class="pad" style="padding:22px 56px; border-bottom:1px solid #eae9e5; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+    <span style="font-size:17px; font-weight:700; letter-spacing:-0.02em; color:#121212;">MediCheck Korea</span>
+    <span style="color:#d9d8d3;">&nbsp;|&nbsp;</span>
+    <span style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:600;">THE ASSOCIATION LETTER</span>
   </td></tr>
 
   <tr><td class="pad" style="padding:52px 56px 60px;">
 
-    <!-- ── 호수 ────────────────────────────────────────────────── -->
     <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
       <td width="16" style="width:16px; height:2px; background:#bb1919; font-size:0; line-height:0;">&nbsp;</td>
-      <td style="padding-left:10px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.2em; color:#bb1919; font-weight:700; white-space:nowrap;">
-        ISSUE 01 &middot; AUGUST 2026
-      </td>
+      <td style="padding-left:10px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.2em; color:#bb1919; font-weight:700; white-space:nowrap;">ISSUE 01 &middot; AUGUST 2026</td>
     </tr></table>
 
-    <h1 class="h1" style="margin:20px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:34px; font-weight:700; line-height:1.42; letter-spacing:-0.03em; color:#121212; word-break:keep-all;">
-      117만 명이라는 숫자가,<br />당신의 선택에 관해 말해 주지 않는 것
-    </h1>
+    <h1 class="h1" style="margin:20px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:34px; font-weight:700; line-height:1.42; letter-spacing:-0.03em; color:#121212;">What &ldquo;1.17 Million&rdquo; Doesn&rsquo;t Tell You About Your Choice</h1>
 
-    <p style="margin:24px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17px; line-height:1.8; color:#5c5a54; word-break:keep-all;">
-      2024년 한국을 찾은 외국인 환자는 117만 명이었습니다. 그리고 이듬해인 2025년에는 201만 명으로,
-      또 한 번 두 배 가까이 늘었습니다. 그러나 이 숫자들은 한국 의료 &lsquo;시장&rsquo;이 커졌다는
-      뜻이지, 당신이 고를 &lsquo;병원&rsquo;에 관한 정보는 아닙니다. 이 글은 그 사이의 빈칸을
-      무엇으로 메울 수 있는지에 대한 이야기입니다.
-    </p>
+    <p style="margin:24px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17px; line-height:1.8; color:#5c5a54;">In 2024, 1.17 million foreign patients came to Korea. The following year, 2025, the number nearly doubled again, to 2.01 million. But these figures mean Korea&rsquo;s healthcare &ldquo;market&rdquo; has grown &mdash; they are not information about the &ldquo;hospital&rdquo; you will choose. This piece is about what can fill the gap in between.</p>
 
     <!-- ── 쓴 사람 ──────────────────────────────────────────────
          메일 앱은 이미지를 기본으로 막는다. 사진이 안 떠도 이름과 직함이 글자로
@@ -99,15 +79,12 @@
       <tr><td style="padding:20px 0;">
         <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
           <td valign="middle" style="padding-right:16px;">
-            <img src="https://medi-checkkorea.vercel.app/newsletter/authors/esther-yoon.jpg"
-                 width="54" height="54" alt="윤여진 총장"
+            <img src="https://medi-checkkorea.vercel.app/newsletter/authors/esther-yoon.jpg" width="54" height="54" alt="Esther Yoon"
                  style="display:block; width:54px; height:54px; border-radius:27px; object-fit:cover; background:#f2f2f2;" />
           </td>
           <td valign="middle" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-            <div style="font-size:15.5px; letter-spacing:-0.01em; color:#121212;">
-              <strong style="font-weight:700;">윤여진</strong><span style="color:#7a7872; font-weight:400;">&nbsp;총장</span>
-            </div>
-            <div style="font-size:13px; color:#9a9891; margin-top:4px;">Esther Yoon &middot; 한국의료관광진흥협회</div>
+            <div style="font-size:15.5px; letter-spacing:-0.01em; color:#121212;"><strong style="font-weight:700;">Esther Yoon</strong><span style="color:#7a7872; font-weight:400;">&nbsp;Secretary General</span></div>
+            <div style="font-size:13px; color:#9a9891; margin-top:4px;">Korea Medical Tourism Promotion Association</div>
           </td>
         </tr></table>
       </td></tr>
@@ -119,131 +96,135 @@
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
       <td width="2" style="width:2px; background:#121212; font-size:0; line-height:0;">&nbsp;</td>
       <td style="padding-left:22px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-        <div style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:700; margin-bottom:8px;">컨텐츠</div>
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="color:#2b2a26;">
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">01</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">시장의 숫자와 선택의 정보는 다릅니다</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">02</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">평균이 가리는 구조</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">03</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">낮은 점수는 기술이 아니라 과정에서 나옵니다</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">04</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">기록은 이미 있습니다. 닿기 어려울 뿐입니다</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">05</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">그래서 메디체크는 한 가지만 합니다</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">06</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">2026년 8월 18일 기준 현황</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">07</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">하지 않는 것도 기록해 둡니다</td></tr>
-          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">08</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">어디에서 병원을 찾든, 이 세 가지는 확인하시기 바랍니다</td></tr>
+        <div style="font-size:9.5px; letter-spacing:0.2em; color:#9a9891; font-weight:700; margin-bottom:8px;">IN THIS ISSUE</div>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">01</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Market Numbers Are Not Decision Information</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">02</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">The Structure the Average Hides</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">03</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">The Low Scores Come from the Process, Not the Medicine</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">04</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">The Records Already Exist. They Are Just Hard to Reach</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">05</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">So MediCheck Does Exactly One Thing</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">06</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Status as of August 18, 2026</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">07</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">We Also Record What We Don&rsquo;t Do</td></tr>
+          <tr><td style="padding:6px 13px 6px 0; font-size:10.5px; font-weight:700; color:#bebcb5; letter-spacing:0.04em; vertical-align:top;">08</td><td style="padding:6px 0; font-size:15px; line-height:1.5; letter-spacing:-0.015em; color:#2b2a26;">Wherever You Look for a Hospital, Check These Three Things</td></tr>
         </table>
       </td>
     </tr></table>
 
-    <!-- ── 01 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:52px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">시장의 숫자와 선택의 정보는 다릅니다</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">보건복지부와 한국보건산업진흥원의 유치실적 분석에 따르면, 2024년 외국인 환자 117만 명은 전년 대비 93.2% 증가한 수치이며, 팬데믹 직전인 2019년(49만 7천 명)의 두 배를 넘는 규모입니다. 진료비 총액도 같은 기간 4,091억 원에서 1조 2,401억 원으로 세 배 가까이 늘었습니다. 유치사업이 본격화된 2009년 이래 누적 환자는 500만 명을 넘어섰고, 2024년 한 해에만 202개국에서 환자가 왔습니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">회복 속도도 이례적입니다. 같은 해 방한 외래관광객이 팬데믹 이전 수준을 겨우 회복하는 동안, 일본&middot;중국&middot;대만발 외국인 환자는 2019년 대비 2~3배 수준으로 늘었습니다. 관광보다 의료가 먼저, 더 빠르게 돌아온 것입니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">여기까지가 언론이 전하는 이야기입니다. 그러나 병원을 골라야 하는 사람에게 이 숫자는 아무것도 알려 주지 않습니다. 많은 사람이 왔다는 사실과, 그들이 안전하게 치료받고 돌아갔다는 사실은 별개의 명제이기 때문입니다.</p>
+    <h2 style="margin:52px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Market Numbers Are Not Decision Information</h2>
 
-    <!-- ── 02 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">평균이 가리는 구조</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">117만 명은 고르게 분포하지 않습니다.</p>
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">According to the attraction-performance analysis by the Ministry of Health and Welfare and the Korea Health Industry Development Institute, the 1.17 million foreign patients of 2024 represent a 93.2% increase over the previous year and more than double the 497,000 of 2019, just before the pandemic. Total treatment revenue nearly tripled over the same period, from 409.1 billion won to 1.2401 trillion won. Cumulative patients since the attraction program took off in 2009 have passed 5 million, and in 2024 alone, patients came from 202 countries.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">The speed of the recovery is also unusual. In the same year, while inbound tourism barely returned to pre-pandemic levels, foreign patients from Japan, China, and Taiwan grew to two to three times their 2019 levels. Medicine came back before tourism, and faster.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">That is as far as the press coverage goes. But to someone who has to choose a hospital, these numbers say nothing. That many people came, and that they were treated safely and went home, are separate propositions.</p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">The Structure the Average Hides</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">The 1.17 million are not evenly distributed.</p>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px; background:#fafaf8; border:1px solid #edece8;">
       <tr><td class="pad" style="padding:22px 24px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-        <p style="margin:0; font-size:15.5px; line-height:1.82; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">진료과가 쏠려 있습니다.</strong> 환자 수 기준으로 피부과가 전체의 56.6%(70.5만 명), 성형외과가 11.4%로 두 과가 68.0%를 차지합니다. 진료비 기준으로 보면 비중은 더 올라가 77.3%가 됩니다 &mdash; 두 과가 환자 한 사람당 더 큰 금액을 만든다는 뜻입니다. 전년 대비 증가율이 가장 높았던 국가가 대만(550.6%)&middot;일본(135.0%)&middot;중국(132.4%)인데, 이 급증을 이끈 것도 피부과였습니다.</p>
-        <p style="margin:16px 0 0; font-size:15.5px; line-height:1.82; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">지역이 쏠려 있습니다.</strong> 환자의 85.4%(100만 명)가 서울에서 진료를 받았습니다. 서울 집중도는 2019년 64.4%에서 오히려 21%p 상승했습니다.</p>
-        <p style="margin:16px 0 0; font-size:15.5px; line-height:1.82; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">의료기관 유형도 쏠려 있습니다.</strong> 외국인 환자의 82.0%가 의원급 의료기관을 이용했습니다. 종합병원(6.0%)과 상급종합병원(5.1%)을 합쳐도 11%가 되지 않습니다. 117만 명의 실체는 대형병원의 중증 치료가 아니라, 서울의 의원급에서 이루어지는 경증&middot;미용 시술에 가깝습니다.</p>
+        <p style="margin:0; font-size:15.5px; line-height:1.82; color:#33322d;"><strong>Specialties are concentrated.</strong> By patient count, dermatology accounted for 56.6% of the total (705,000 patients) and plastic surgery 11.4% &mdash; 68.0% between them. By revenue the share rises to 77.3%, meaning those two specialties generate more per patient. The countries with the highest year-over-year growth were Taiwan (550.6%), Japan (135.0%), and China (132.4%) &mdash; and dermatology drove those surges as well.</p>
+        <p style="margin:16px 0 0; font-size:15.5px; line-height:1.82; color:#33322d;"><strong>Geography is concentrated.</strong> 85.4% of patients (1 million) were treated in Seoul. Seoul&rsquo;s share actually rose 21 percentage points from 64.4% in 2019.</p>
+        <p style="margin:16px 0 0; font-size:15.5px; line-height:1.82; color:#33322d;"><strong>So is the type of institution.</strong> 82.0% of foreign patients used clinic-level facilities. General hospitals (6.0%) and tertiary hospitals (5.1%) together account for less than 11%. The reality of the 1.17 million is closer to minor and cosmetic procedures at Seoul clinics than to severe-care treatment at large hospitals.</p>
       </td></tr>
     </table>
 
-    <p style="margin:18px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">반대 방향의 지표도 있습니다. 2024년 한국을 찾은 외국인 암 환자는 7,147명으로, 2019년(약 1만 1천 명) 수준을 회복하지 못했습니다. 시장 전체가 두 배 이상 성장하는 동안 중증 진료 영역만 축소된 것입니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">정리하면 이렇습니다. 당신이 피부 시술을 받으러 온다면 117만 명은 당신과 같은 사람들의 숫자에 가깝습니다. 그러나 수술이나 중증 치료를 위해 온다면, 당신이 속한 시장은 그보다 훨씬 작고, 오히려 줄어들고 있는 시장입니다. 오려는 이유가 무엇인지에 따라 같은 숫자가 전혀 다른 의미가 됩니다.</p>
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">There is also an indicator pointing the other way. 7,147 foreign cancer patients came to Korea in 2024, still short of the 2019 level of roughly 11,000. While the market as a whole more than doubled, the severe-care segment alone shrank.</p>
 
-    <!-- ── 03 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">낮은 점수는 기술이 아니라 과정에서 나옵니다</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">한국 의료를 선택한 이유를 묻는 조사에서 의료기술&middot;장비와 의료기관의 인지도는 상위를 차지합니다. 반면 &lsquo;이용 편의성&rsquo;을 꼽은 응답은 12.7%, &lsquo;외국인 환자 서비스 인프라&rsquo;는 3.8%에 그쳤습니다. 진료의 질은 인정받지만, 진료를 둘러싼 과정은 그렇지 못하다는 뜻입니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">귀국 이후는 더 취약합니다. 39.5%가 진료 후 회복 관리를, 31.2%가 의료진과의 연락을 어려움으로 꼽았습니다. 한국은 환자와 의사 간 원격진료를 아직 허용하지 않아, 귀국 후의 진료 연속성을 뒷받침할 제도적 통로 자체가 좁습니다. 시술은 며칠이면 끝나지만 회복은 몇 주, 부작용은 몇 달 뒤에 나타날 수 있습니다. 그 시간의 대부분을 환자는 한국 밖에서 보냅니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">업계의 진단도 같은 지점을 가리킵니다. 경쟁의 축이 가격과 시술 속도에서 신뢰와 사후관리로 이동했다는 것입니다. 싸고 빠르다는 말로는 더 이상 설명되지 않는 영역이 생긴 것입니다.</p>
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">To sum up: if you are coming for a skin procedure, 1.17 million is roughly the number of people like you. But if you are coming for surgery or serious treatment, the market you belong to is far smaller &mdash; and shrinking. <strong>Depending on why you are coming, the same number means something entirely different.</strong></p>
 
-    <!-- ── 04 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">기록은 이미 있습니다. 닿기 어려울 뿐입니다</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">한 가지 덜 알려진 사실이 있습니다. 117만 명이라는 통계 자체가 &lsquo;기록&rsquo;에서 나온다는 점입니다. 이 수치는 「의료 해외진출 및 외국인환자 유치 지원에 관한 법률」에 따라 등록된 유치기관 &mdash; 의료기관 약 3,500곳과 유치사업자 약 2,100곳 &mdash; 이 제출한 실적 보고를 집계한 것입니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">즉 어느 병원이 외국인 환자를 받도록 등록되어 있는지, 어느 업체가 유치사업자로 등록되어 있는지는 공적 기록으로 존재합니다. 문제는 그 기록이 흩어져 있고, 외국어로 접근하기 어렵고, 환자가 병원의 홍보 문구와 공적 기록을 구분할 방법이 마땅치 않다는 데 있습니다. 정보가 없는 것이 아니라, 정보와 환자 사이의 거리가 먼 것입니다.</p>
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">The Low Scores Come from the Process, Not the Medicine</h2>
 
-    <!-- ── 05 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">그래서 메디체크는 한 가지만 합니다</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">메디체크는 그 거리를 좁히는 일을 합니다. 병원을 평가하는 것이 아니라, 두 가지를 기록합니다. 그 병원이 어느 공개 기록에 근거해 등재되었는지, 그리고 우리가 그 기록을 확인한 날짜가 언제인지. 이용자는 원문 기록을 직접 열어 우리의 기재가 맞는지 검증할 수 있습니다.</p>
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">In surveys asking why patients chose Korean healthcare, medical technology and equipment and institutional reputation rank at the top. By contrast, only 12.7% cited &ldquo;ease of use,&rdquo; and just 3.8% cited &ldquo;service infrastructure for foreign patients.&rdquo; The quality of care is recognized; the process around it is not.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">After returning home, things are more fragile still. 39.5% cited post-treatment recovery care as a difficulty, and 31.2% cited staying in contact with their medical team. Korea does not yet allow physician-patient telemedicine, so the institutional channel for continuity of care after going home is narrow. A procedure takes days, but recovery takes weeks, and side effects can appear months later. Most of that time, the patient is outside Korea.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Industry diagnoses point to the same spot: the axis of competition has moved from price and speed to <strong>trust and aftercare</strong>. A domain has emerged that &ldquo;cheap and fast&rdquo; no longer explains.</p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">The Records Already Exist. They Are Just Hard to Reach</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Here is a less-known fact: the 1.17 million statistic itself comes from records. It is compiled from performance reports submitted by institutions registered under the Act on Support for Overseas Expansion of Healthcare and Attraction of International Patients &mdash; roughly 3,500 medical institutions and 2,100 facilitator agencies.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">In other words, which hospitals are registered to receive foreign patients, and which agencies are registered facilitators, exists as public record. The problem is that those records are scattered, hard to reach in foreign languages, and patients have no good way to tell a hospital&rsquo;s marketing copy from the public record. <strong>The information is not missing &mdash; the distance between the information and the patient is long.</strong></p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">So MediCheck Does Exactly One Thing</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">MediCheck&rsquo;s job is to close that distance. We do not rate hospitals; we record two things: <strong>which public record a hospital&rsquo;s listing is based on</strong>, and <strong>the date we verified that record.</strong> Users can open the original record themselves and check that our entry is correct.</p>
 
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:22px;"><tr>
       <td width="2" style="width:2px; background:#bb1919; font-size:0; line-height:0;">&nbsp;</td>
-      <td style="padding:2px 0 2px 20px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17.5px; line-height:1.7; letter-spacing:-0.02em; font-weight:600; color:#121212; word-break:keep-all;">
-        원칙은 하나입니다. 검증할 수 없는 문장은 쓰지 않는다.
-      </td>
+      <td style="padding:2px 0 2px 20px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:17.5px; line-height:1.7; letter-spacing:-0.02em; font-weight:600; color:#121212;">There is one principle: we do not write a sentence we cannot verify.</td>
     </tr></table>
 
-    <p style="margin:18px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">이 목록이 &lsquo;좋은 병원&rsquo; 목록이 아니라 &lsquo;기록이 이렇게 되어 있다&rsquo;는 목록인 이유입니다.</p>
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">That is why this is not a list of &ldquo;good hospitals&rdquo; but a list of &ldquo;what the record says.&rdquo;</p>
 
-    <!-- ── 06 ───────────────────────────────────────────────────
-         숫자 세 칸. cellspacing 1 에 바탕색을 깔아 칸 사이 선을 만든다 —
-         grid gap 을 쓰는 웹 판과 보이는 결과는 같고 메일에서도 무너지지 않는다. -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">2026년 8월 18일 기준 현황</h2>
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Status as of August 18, 2026</h2>
+
     <table role="presentation" width="100%" cellpadding="0" cellspacing="1" border="0" style="margin-top:18px; background:#edece8; border:1px solid #edece8;">
       <tr>
         <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
           <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">100</div>
-          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">등재 기관</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">Listed institutions</div>
         </td>
         <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
           <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">0</div>
-          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">보건복지부 등록 근거 등재</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">Listed via MOHW registration</div>
         </td>
         <td class="stat" width="33.33%" style="background:#ffffff; padding:18px 16px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
           <div style="font-size:28px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:#121212;">0</div>
-          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">등재 해제</div>
+          <div style="font-size:12px; color:#8a8880; margin-top:8px; line-height:1.45;">Delisted</div>
         </td>
       </tr>
     </table>
-    <p style="margin:18px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">등재 기관 100곳 전부 서울시 &lsquo;의료관광 협력기관&rsquo; 목록을 근거로 합니다. 보건복지부 등록을 근거로 등재된 기관은 아직 0곳입니다. 근거 체계는 둘인데 현재는 한쪽만 채워져 있다는 뜻이며, 이 불균형 역시 그대로 기재합니다. 등재가 해제된 기관은 0곳입니다.</p>
 
-    <!-- ── 07 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">하지 않는 것도 기록해 둡니다</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">정렬을 팔지 않습니다.</strong> 목록의 정렬 기준은 이름순과 갱신일순 둘뿐이며, 특정 기관을 수동으로 상위에 노출하는 경로는 만들지 않았습니다. 광고비를 받고 순서를 바꾸는 순간, 이 목록은 우리가 비판한 &lsquo;홍보 문구&rsquo;와 같은 것이 되기 때문입니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">등급을 매기지 않습니다.</strong> 등급 제도는 검토 단계의 안이며, 현재 어느 기관에도 등급이 부여되어 있지 않습니다. 검증 가능한 기준이 마련되기 전에 등급부터 붙이는 것은 순서가 뒤바뀐 일이라고 생각합니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;"><strong style="font-weight:700;">문의에 대신 답하지 않습니다.</strong> 이용자의 문의는 병원이 직접 읽고 직접 답합니다. 메디체크는 전달 시점과 응답 시점만 기록합니다. 답변 내용에 개입하는 순간 답변의 품질을 우리가 보증하는 구조가 되는데, 그것은 우리가 책임질 수 있는 영역이 아니기 때문입니다.</p>
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">There are 100 listed institutions. All 100 are based on the Seoul Metropolitan Government&rsquo;s list of &ldquo;medical tourism partner institutions.&rdquo; <strong>Institutions listed on the basis of Ministry of Health and Welfare registration: still 0.</strong> Of the two evidence systems, only one is populated so far &mdash; and we record that imbalance as it is. Institutions delisted: 0.</p>
 
-    <!-- ── 08 ───────────────────────────────────────────────────── -->
-    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212; word-break:keep-all;">어디에서 병원을 찾든, 이 세 가지는 확인하시기 바랍니다</h2>
-    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">우리 목록을 쓰지 않으셔도 좋습니다. 다만 어떤 경로로 병원을 찾든, 결정 전에 세 가지는 확인하시길 권합니다.</p>
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">We Also Record What We Don&rsquo;t Do</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;"><strong>We do not sell ranking.</strong> The list sorts two ways only &mdash; by name and by date of last update &mdash; and we built no path for manually placing an institution at the top. The moment we take advertising money to reorder the list, it becomes the same &ldquo;marketing copy&rdquo; we criticized.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;"><strong>We do not assign grades.</strong> A grading system is a proposal under review, and no institution currently carries a grade. Attaching grades before verifiable criteria exist would be doing things in the wrong order.</p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;"><strong>We do not answer inquiries on hospitals&rsquo; behalf.</strong> A user&rsquo;s inquiry is read and answered by the hospital directly. MediCheck records only when it was forwarded and when the response came. The moment we intervene in the content of an answer, the structure makes us the guarantor of its quality &mdash; and that is not an area we can take responsibility for.</p>
+
+    <h2 style="margin:44px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.025em; line-height:1.45; color:#121212;">Wherever You Look for a Hospital, Check These Three Things</h2>
+
+    <p style="margin:16px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">You do not have to use our list. But whatever route you take to find a hospital, we recommend checking three things before you decide.</p>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:22px; border-top:1px solid #edece8;">
       <tr>
-        <td width="44" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">하나</td>
-        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8; word-break:keep-all;">이 병원이 외국인 환자를 유치할 수 있도록 등록되어 있다는 근거는 무엇이며, 그 기록을 내가 직접 열람할 수 있는가.</td>
+        <td width="70" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">ONE</td>
+        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8;">What is the evidence that this hospital is registered to receive foreign patients, and can I open that record myself?</td>
       </tr>
       <tr>
-        <td width="44" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">둘</td>
-        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8; word-break:keep-all;">시술 후 문제가 생기면 누구에게, 어떤 경로로 연락하는가. 특히 귀국한 뒤에는.</td>
+        <td width="70" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">TWO</td>
+        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8;">If something goes wrong after the procedure, whom do I contact, and through what channel &mdash; especially after I have returned home?</td>
       </tr>
       <tr>
-        <td width="44" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">셋</td>
-        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8; word-break:keep-all;">나를 안내하는 사람은 누구이며, 병원으로부터 수수료를 받는가.</td>
+        <td width="70" style="padding:18px 18px 18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#bb1919; letter-spacing:0.06em; vertical-align:top; border-bottom:1px solid #edece8;">THREE</td>
+        <td style="padding:18px 2px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.75; color:#33322d; letter-spacing:-0.01em; border-bottom:1px solid #edece8;">Who is the person guiding me, and do they receive a commission from the hospital?</td>
       </tr>
     </table>
 
-    <p style="margin:20px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">세 번째 질문이 낯설 수 있습니다. 그러나 한국은 외국인 환자 유치 수수료의 상한을 법으로 정해 두고 있습니다(의원 30% &middot; 병원 20% &middot; 상급종합병원 15%). 유치사업자 등록 제도가 있고 수수료 상한이 법에 있다는 것은, 이것이 물어도 되는 질문이 아니라 물어야 하는 질문이라는 뜻입니다.</p>
-    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d; word-break:keep-all;">이 세 질문에 대한 답을 한 화면에서 확인할 수 있게 만드는 것. 메디체크가 하는 일은 그것이 전부입니다.</p>
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">The third question may feel unfamiliar. But Korea caps referral commissions for foreign patients by law (clinics 30% &middot; hospitals 20% &middot; tertiary hospitals 15%). That a facilitator registration system exists and that commission caps are written into law means this is not a question you may ask &mdash; it is a <strong>question you should ask.</strong></p>
+
+    <p style="margin:15px 0 0; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:16px; line-height:1.88; color:#33322d;">Making the answers to these three questions visible on a single screen &mdash; that is all MediCheck does.</p>
 
     <!-- ── 사이트로 ─────────────────────────────────────────────── -->
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
       <td style="background:#121212;">
-        <a href="https://medi-checkkorea.vercel.app/find-a-hospital" style="display:inline-block; padding:14px 24px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; font-weight:700; letter-spacing:-0.01em; color:#ffffff; text-decoration:none;">기록과 함께 기관 찾아보기</a>
+        <a href="https://medi-checkkorea.vercel.app/find-a-hospital" style="display:inline-block; padding:14px 24px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; font-weight:700; letter-spacing:-0.01em; color:#ffffff; text-decoration:none;">Browse institutions with their records</a>
       </td>
     </tr></table>
 
     <!-- ── 참고 ─────────────────────────────────────────────────
-         이 글은 수치를 열두 개 넘게 인용한다. 출처를 안 적으면 본문이 스스로
-         내건 「검증할 수 없는 문장은 쓰지 않는다」와 어긋난다. -->
+         이 편지는 수치를 여럿 인용한다. 출처를 안 적으면 본문이 스스로 내건
+         「검증할 수 없는 문장은 쓰지 않는다」와 어긋난다. -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:44px; border-top:1px solid #edece8;">
       <tr><td style="padding-top:18px; font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; line-height:1.85; color:#9a9891;">
-        <div style="font-size:9.5px; letter-spacing:0.2em; color:#121212; font-weight:700; margin-bottom:8px;">참고</div>
-        환자 수 &middot; 진료비 &middot; 지역 및 진료과 비중 &middot; 의료기관 종별 &middot; 인식도 조사: 보건복지부 &middot; 한국보건산업진흥원 외국인환자 유치실적 발표 및 인식도 조사.<br />
-        시장 진단과 경쟁축 이동: 이관영 &middot; 장수청 &middot; 최규완, 「K-의료관광의 현황과 질적 성장 전략」, 야놀자리서치.<br />
-        수수료 상한 &middot; 유치기관 등록: 「의료 해외진출 및 외국인환자 유치 지원에 관한 법률」.
+        <div style="font-size:9.5px; letter-spacing:0.2em; color:#121212; font-weight:700; margin-bottom:8px;">SOURCES</div>
+        Patient counts, revenue, regional and specialty shares, institution types and the perception survey: Ministry of Health and Welfare &middot; Korea Health Industry Development Institute.<br />Market diagnosis and the shift in the axis of competition: Lee Kwan-young, Jang Soo-cheong, Choi Kyu-wan, Yanolja Research.<br />Commission caps: Act on Support for Overseas Expansion of Healthcare and Attraction of International Patients.
       </td></tr>
     </table>
 
@@ -253,8 +234,8 @@
   <tr><td class="pad" style="padding:22px 56px 26px; border-top:1px solid #eae9e5;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
       <td align="left" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12.5px; color:#9a9891;">
-        &copy; 2026 한국의료관광진흥협회 &middot; 협회 컬럼<br />
-        <span style="font-size:11.5px;">이 편지는 제 1호예요. 아직 구독 신청을 받고 있지 않아서, 지금은 사이트에서만 읽을 수 있어요.</span>
+        &copy; 2026 Korea Medical Tourism Promotion Association<br />
+        <span style="font-size:11.5px;">This is issue 01. We are not taking subscriptions yet, so for now it can only be read on the site.</span>
       </td>
       <td align="right" valign="top" style="font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:9.5px; letter-spacing:0.18em; color:#bebcb5; font-weight:700; white-space:nowrap;">ISSUE 01</td>
     </tr></table>
