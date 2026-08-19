@@ -1,290 +1,557 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>메디체크 코리아 뉴스레터 — 제 1호</title>
+<title>메디체크 코리아 — 협회 컬럼 제 1호</title>
+<meta name="description" content="2024년 117만 명, 2025년 201만 명. 시장은 계속 커지는데 병원을 고르는 문제는 그대로입니다." />
 
 <!--
-  메디체크 코리아 뉴스레터 — 제 1호 (2026년 8월).
+  메디체크 코리아 협회 컬럼 — 제 1호 (2026년 8월). **웹 판.**
 
-  틀은 newsletter/email-frame.html 이다. 이 파일은 그것을 채운 것이고,
-  손댈 때도 틀의 규칙을 그대로 지킨다 — 표 기반 · 인라인 스타일 · 640px ·
-  파랑은 확인 자리에만(17장) · 32장 금지 낱말 없음.
+  디자인 출처: Claude Design 프로젝트 「협회 뉴스레터 디자인 요청」의
+  `MediCheck Newsletter v2.dc.html`. 그 파일은 Claude Design 런타임(support.js)의
+  sc-if · sc-for · 이중중괄호 문법으로 쓰여 있어 그대로는 브라우저에서 안 돈다.
+  여기서는 같은 화면을 순수 HTML/CSS 와 짧은 스크립트로 다시 세웠다.
 
-  본문이 쓴 수치의 출처는 newsletter/sources/2026-08-k-medical-tourism.md 에 있다.
-  **원문을 옮겨 적지 않았다.** 야놀자리서치의 저작물이라 수치와 논지만 인용하고
-  문장은 새로 썼다.
+  ── 이 파일과 vol1-email.html 의 차이 ───────────────────────────────
+  이 판은 **웹 전용**이다. CSS Grid · sticky 사이드바 · 웹폰트 · 언어 토글은
+  메일 앱에서 하나도 안 된다. 편지로 부칠 때는 표 기반인 vol1-email.html 을 쓴다.
+  **두 파일의 본문은 같은 글이어야 한다** — 한쪽만 고치면 읽는 곳마다 달라진다.
 
-  사이트 숫자(100곳 · 2026-08-18 · 서울시 근거 100곳 · 보건복지부 근거 0곳)는
-  2026-08-19 에 /api/home 과 /api/hospitals 에서 직접 읽은 값이다.
-  **다음 호를 쓸 때 이 값들이 그대로인지 다시 읽는다.** 편지에 박힌 숫자는 늙는다.
+  본문 수치의 출처는 newsletter/sources/2026-08-k-medical-tourism.md 에 있다.
+  사이트 숫자(100곳 · 2026-08-18 · 서울시 근거 100곳 · 복지부 근거 0곳)는
+  그날 /api/home 과 /api/hospitals 에서 직접 읽은 값이다. 편지에 박힌 숫자는 늙는다.
+  ────────────────────────────────────────────────────────────────
 -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
 <style>
-  @media only screen and (max-width: 660px) {
-    .frame { width: 100% !important; }
-    .pad { padding-left: 20px !important; padding-right: 20px !important; }
-    .h1 { font-size: 26px !important; line-height: 1.3 !important; }
+  :root {
+    --ink: #121212;
+    --accent: #bb1919;
+    --accent-dark: #7e0f0f;
+    --body: #333333;
+    --lead: #444444;
+    --muted: #555555;
+    --muted-2: #666666;
+    --line: #cfcfcf;
+    --line-soft: #dcdcdc;
+    --line-softer: #e4e4e4;
+    --serif: "Noto Serif KR", serif;
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    .paper { background: #ffffff !important; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    padding: 36px 32px 88px;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--ink); color: #fff; }
+
+  .sheet { max-width: 1040px; margin: 0 auto; }
+
+  /* ── 언어 ────────────────────────────────────────────────────────
+     자바스크립트가 하는 일은 html 의 data-lang 을 바꾸는 것뿐이다.
+     보이고 감추는 판단은 CSS 가 한다 — 스크립트가 실패해도 한국어 판이 그대로
+     읽힌다. 글자를 스크립트로 갈아 끼우면 그때는 빈 화면이 된다. */
+  [data-lang="ko"] [lang="en"],
+  [data-lang="en"] [lang="ko"] { display: none; }
+
+  /* ── 머리 띠 ──────────────────────────────────────────────────── */
+  .rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 8px 2px;
+  }
+  .rail__issue {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .lang { display: flex; flex-shrink: 0; }
+  .lang button {
+    font-family: inherit;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    padding: 7px 14px;
+    border: 1px solid var(--ink);
+    background: #fff;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .lang button + button { border-left: none; }
+  [data-lang="ko"] .lang button[value="ko"],
+  [data-lang="en"] .lang button[value="en"] { background: var(--ink); color: #fff; }
+
+  /* ── 제호 ────────────────────────────────────────────────────── */
+  .masthead { text-align: center; padding: 32px 0 26px; }
+  .masthead h1 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .masthead__kicker {
+    font-size: 10px;
+    letter-spacing: 0.34em;
+    color: var(--muted-2);
+    margin-top: 12px;
+  }
+  .rule-thick { height: 3px; background: var(--ink); }
+  .rule-thin { height: 1px; background: var(--ink); margin-top: 2px; }
+
+  /* ── 지면 ────────────────────────────────────────────────────── */
+  .paper { display: grid; grid-template-columns: 300px 1fr; align-items: start; }
+
+  .aside { position: sticky; top: 24px; padding: 42px 34px 0 2px; }
+  .aside__photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: grayscale(1);
+    background: #f2f2f2;
+  }
+  .byline { margin-top: 18px; }
+  .byline__label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .byline__name {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 8px;
+    line-height: 1.3;
+  }
+  .byline__role { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+
+  .aside__divider { height: 1px; background: var(--line-soft); margin: 26px 0 20px; }
+  .toc__label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .toc { display: flex; flex-direction: column; }
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 11px 2px;
+    border-bottom: 1px solid var(--line-softer);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc__n {
+    font-family: var(--serif);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .toc__t { font-size: 14px; letter-spacing: -0.01em; line-height: 1.5; }
+
+  .main { border-left: 1px solid var(--line); padding: 44px 8px 0 46px; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .main h2 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 38px;
+    line-height: 1.36;
+    letter-spacing: -0.015em;
+    margin: 16px 0 0;
+  }
+  .lead {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--lead);
+    margin: 24px 0 0;
+    text-wrap: pretty;
+  }
+  .rule-short { width: 44px; height: 3px; background: var(--ink); margin-top: 32px; }
+
+  .sec { margin-top: 42px; scroll-margin-top: 24px; }
+  .sec:first-of-type { margin-top: 44px; }
+  .sec__head { display: flex; align-items: baseline; gap: 12px; }
+  .sec__n {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .sec h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.45;
+  }
+  .sec p {
+    font-size: 16.5px;
+    line-height: 1.85;
+    color: var(--body);
+    margin: 16px 0 0;
+    text-wrap: pretty;
+  }
+  .sec p:first-of-type { margin-top: 18px; }
+  .sec strong { color: var(--ink); }
+
+  /* 출처. 이 글은 열두 개가 넘는 수치를 인용한다 — 어디서 왔는지 적지 않으면
+     본문이 스스로 내건 「검증할 수 없는 문장은 쓰지 않는다」와 어긋난다. */
+  .refs {
+    margin-top: 56px;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 18px;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: var(--muted);
+  }
+  .refs__label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .colophon {
+    margin-top: 72px;
+    border-top: 2px solid var(--ink);
+    padding: 14px 2px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .colophon__meta { font-size: 12.5px; color: var(--muted); }
+  .colophon a { color: var(--muted); }
+  .colophon a:hover { color: var(--accent-dark); }
+  .colophon__issue {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── 좁은 화면 ───────────────────────────────────────────────────
+     원 디자인은 1040px 두 단이다. 좁은 화면에서 300px 단을 그대로 두면
+     본문이 손가락 두 개 폭이 된다. 한 단으로 세우고 사진은 작게 올린다. */
+  @media (max-width: 860px) {
+    body { padding: 24px 20px 64px; }
+    .paper { grid-template-columns: 1fr; }
+    .aside { position: static; padding: 30px 0 0; }
+    .aside__photo { width: 128px; }
+    .main { border-left: none; padding: 34px 0 0; }
+    .masthead h1 { font-size: 34px; }
+    .main h2 { font-size: 28px; }
+    .lead { font-size: 16.5px; }
+  }
+  @media (max-width: 420px) {
+    .masthead h1 { font-size: 27px; }
+    .main h2 { font-size: 24px; }
+    .sec h3 { font-size: 20px; }
+    .colophon { flex-direction: column; gap: 8px; }
   }
 </style>
 </head>
 
-<body style="margin:0; padding:0; background:#f2f4f6;">
+<body>
+<div class="sheet">
 
-<div style="display:none; max-height:0; overflow:hidden; opacity:0;">
-  시장의 숫자와, 병원을 고르는 데 필요한 정보는 다릅니다
-  &#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;
+  <div class="rail">
+    <span class="rail__issue">NO. 01 &middot; AUGUST 2026</span>
+    <div class="lang">
+      <button type="button" value="ko">한국어</button>
+      <button type="button" value="en">ENGLISH</button>
+    </div>
+  </div>
+
+  <div class="masthead">
+    <h1><span lang="ko">메디체크 코리아</span><span lang="en">MediCheck Korea</span></h1>
+    <div class="masthead__kicker">THE ASSOCIATION LETTER</div>
+  </div>
+
+  <div class="rule-thick"></div>
+  <div class="rule-thin"></div>
+
+  <div class="paper">
+    <aside class="aside">
+      <img class="aside__photo" src="authors/esther-yoon.jpg" alt="윤여진 총장" width="256" height="256" />
+      <div class="byline">
+        <div class="byline__label">WRITTEN BY</div>
+        <div class="byline__name"><span lang="ko">윤여진</span><span lang="en">Esther Yoon</span></div>
+        <div class="byline__role">
+          <span lang="ko">총장 &middot; 한국의료관광진흥협회</span><span lang="en">Secretary General, KMTPA</span>
+        </div>
+      </div>
+
+      <div class="aside__divider"></div>
+      <div class="toc__label">IN THIS ISSUE</div>
+      <nav class="toc">
+        <a href="#sec-1"><span class="toc__n">01</span><span class="toc__t"><span lang="ko">시장의 숫자와 선택의 정보는 다릅니다</span><span lang="en">Market Numbers Are Not Decision Information</span></span></a>
+        <a href="#sec-2"><span class="toc__n">02</span><span class="toc__t"><span lang="ko">평균이 가리는 구조</span><span lang="en">The Structure the Average Hides</span></span></a>
+        <a href="#sec-3"><span class="toc__n">03</span><span class="toc__t"><span lang="ko">낮은 점수는 기술이 아니라 과정에서 나옵니다</span><span lang="en">The Low Scores Come from the Process, Not the Medicine</span></span></a>
+        <a href="#sec-4"><span class="toc__n">04</span><span class="toc__t"><span lang="ko">기록은 이미 있습니다. 닿기 어려울 뿐입니다</span><span lang="en">The Records Already Exist. They Are Just Hard to Reach</span></span></a>
+        <a href="#sec-5"><span class="toc__n">05</span><span class="toc__t"><span lang="ko">그래서 메디체크는 한 가지만 합니다</span><span lang="en">So MediCheck Does Exactly One Thing</span></span></a>
+        <a href="#sec-6"><span class="toc__n">06</span><span class="toc__t"><span lang="ko">2026년 8월 18일 기준 현황</span><span lang="en">Status as of August 18, 2026</span></span></a>
+        <a href="#sec-7"><span class="toc__n">07</span><span class="toc__t"><span lang="ko">하지 않는 것도 기록해 둡니다</span><span lang="en">We Also Record What We Don&rsquo;t Do</span></span></a>
+        <a href="#sec-8"><span class="toc__n">08</span><span class="toc__t"><span lang="ko">어디에서 병원을 찾든, 이 세 가지는 확인하시기 바랍니다</span><span lang="en">Wherever You Look for a Hospital, Check These Three Things</span></span></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="eyebrow"><span lang="ko">협회 컬럼</span><span lang="en">A LETTER FROM THE ASSOCIATION</span></div>
+
+      <h2>
+        <span lang="ko">117만 명이라는 숫자가,<br />당신의 선택에 관해 말해 주지 않는 것</span>
+        <span lang="en">What &ldquo;1.17 Million&rdquo; Doesn&rsquo;t Tell You<br />About Your Choice</span>
+      </h2>
+
+      <p class="lead">
+        <span lang="ko">2024년 한국을 찾은 외국인 환자는 117만 명이었습니다. 그리고 이듬해인 2025년에는 201만 명으로, 또 한 번 두 배 가까이 늘었습니다. 그러나 이 숫자들은 한국 의료 &lsquo;시장&rsquo;이 커졌다는 뜻이지, 당신이 고를 &lsquo;병원&rsquo;에 관한 정보는 아닙니다. 이 글은 그 사이의 빈칸을 무엇으로 메울 수 있는지에 대한 이야기입니다.</span>
+        <span lang="en">In 2024, 1.17 million foreign patients came to Korea. The following year, 2025, the number nearly doubled again, to 2.01 million. But these figures mean Korea&rsquo;s healthcare &ldquo;market&rdquo; has grown &mdash; they are not information about the &ldquo;hospital&rdquo; you will choose. This piece is about what can fill the gap in between.</span>
+      </p>
+
+      <div class="rule-short"></div>
+
+      <section class="sec" id="sec-1">
+        <div class="sec__head">
+          <span class="sec__n">01</span>
+          <h3><span lang="ko">시장의 숫자와 선택의 정보는 다릅니다</span><span lang="en">Market Numbers Are Not Decision Information</span></h3>
+        </div>
+        <p>
+          <span lang="ko">보건복지부와 한국보건산업진흥원의 유치실적 분석에 따르면, 2024년 외국인 환자 117만 명은 전년 대비 93.2% 증가한 수치이며, 팬데믹 직전인 2019년(49만 7천 명)의 두 배를 넘는 규모입니다. 진료비 총액도 같은 기간 4,091억 원에서 1조 2,401억 원으로 세 배 가까이 늘었습니다. 유치사업이 본격화된 2009년 이래 누적 환자는 500만 명을 넘어섰고, 2024년 한 해에만 202개국에서 환자가 왔습니다.</span>
+          <span lang="en">According to the attraction-performance analysis by the Ministry of Health and Welfare and the Korea Health Industry Development Institute, the 1.17 million foreign patients of 2024 represent a 93.2% increase over the previous year and more than double the 497,000 of 2019, just before the pandemic. Total treatment revenue nearly tripled over the same period, from 409.1 billion won to 1.2401 trillion won. Cumulative patients since the attraction program took off in 2009 have passed 5 million, and in 2024 alone, patients came from 202 countries.</span>
+        </p>
+        <p>
+          <span lang="ko">회복 속도도 이례적입니다. 같은 해 방한 외래관광객이 팬데믹 이전 수준을 겨우 회복하는 동안, 일본&middot;중국&middot;대만발 외국인 환자는 2019년 대비 2~3배 수준으로 늘었습니다. 관광보다 의료가 먼저, 더 빠르게 돌아온 것입니다.</span>
+          <span lang="en">The speed of the recovery is also unusual. In the same year, while inbound tourism barely returned to pre-pandemic levels, foreign patients from Japan, China, and Taiwan grew to two to three times their 2019 levels. Medicine came back before tourism, and faster.</span>
+        </p>
+        <p>
+          <span lang="ko">여기까지가 언론이 전하는 이야기입니다. 그러나 병원을 골라야 하는 사람에게 이 숫자는 아무것도 알려 주지 않습니다. 많은 사람이 왔다는 사실과, 그들이 안전하게 치료받고 돌아갔다는 사실은 별개의 명제이기 때문입니다.</span>
+          <span lang="en">That is as far as the press coverage goes. But to someone who has to choose a hospital, these numbers say nothing. That many people came, and that they were treated safely and went home, are separate propositions.</span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-2">
+        <div class="sec__head">
+          <span class="sec__n">02</span>
+          <h3><span lang="ko">평균이 가리는 구조</span><span lang="en">The Structure the Average Hides</span></h3>
+        </div>
+        <p>
+          <span lang="ko">117만 명은 고르게 분포하지 않습니다.</span>
+          <span lang="en">The 1.17 million are not evenly distributed.</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>진료과가 쏠려 있습니다.</strong> 환자 수 기준으로 피부과가 전체의 56.6%(70.5만 명), 성형외과가 11.4%로 두 과가 68.0%를 차지합니다. 진료비 기준으로 보면 비중은 더 올라가 77.3%가 됩니다 &mdash; 두 과가 환자 한 사람당 더 큰 금액을 만든다는 뜻입니다. 전년 대비 증가율이 가장 높았던 국가가 대만(550.6%)&middot;일본(135.0%)&middot;중국(132.4%)인데, 이 급증을 이끈 것도 피부과였습니다.</span>
+          <span lang="en"><strong>Specialties are concentrated.</strong> By patient count, dermatology accounted for 56.6% of the total (705,000 patients) and plastic surgery 11.4% &mdash; 68.0% between them. By revenue the share rises to 77.3%, meaning those two specialties generate more per patient. The countries with the highest year-over-year growth were Taiwan (550.6%), Japan (135.0%), and China (132.4%) &mdash; and dermatology drove those surges as well.</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>지역이 쏠려 있습니다.</strong> 환자의 85.4%(100만 명)가 서울에서 진료를 받았습니다. 서울 집중도는 2019년 64.4%에서 오히려 21%p 상승했습니다.</span>
+          <span lang="en"><strong>Geography is concentrated.</strong> 85.4% of patients (1 million) were treated in Seoul. Seoul&rsquo;s share actually rose 21 percentage points from 64.4% in 2019.</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>의료기관 유형도 쏠려 있습니다.</strong> 외국인 환자의 82.0%가 의원급 의료기관을 이용했습니다. 종합병원(6.0%)과 상급종합병원(5.1%)을 합쳐도 11%가 되지 않습니다. 117만 명의 실체는 대형병원의 중증 치료가 아니라, 서울의 의원급에서 이루어지는 경증&middot;미용 시술에 가깝습니다.</span>
+          <span lang="en"><strong>So is the type of institution.</strong> 82.0% of foreign patients used clinic-level facilities. General hospitals (6.0%) and tertiary hospitals (5.1%) together account for less than 11%. The reality of the 1.17 million is closer to minor and cosmetic procedures at Seoul clinics than to severe-care treatment at large hospitals.</span>
+        </p>
+        <p>
+          <span lang="ko">반대 방향의 지표도 있습니다. 2024년 한국을 찾은 외국인 암 환자는 7,147명으로, 2019년(약 1만 1천 명) 수준을 회복하지 못했습니다. 시장 전체가 두 배 이상 성장하는 동안 중증 진료 영역만 축소된 것입니다.</span>
+          <span lang="en">There is also an indicator pointing the other way. 7,147 foreign cancer patients came to Korea in 2024, still short of the 2019 level of roughly 11,000. While the market as a whole more than doubled, the severe-care segment alone shrank.</span>
+        </p>
+        <p>
+          <span lang="ko">정리하면 이렇습니다. 당신이 피부 시술을 받으러 온다면 117만 명은 당신과 같은 사람들의 숫자에 가깝습니다. 그러나 수술이나 중증 치료를 위해 온다면, 당신이 속한 시장은 그보다 훨씬 작고, 오히려 줄어들고 있는 시장입니다. <strong>오려는 이유가 무엇인지에 따라 같은 숫자가 전혀 다른 의미가 됩니다.</strong></span>
+          <span lang="en">To sum up: if you are coming for a skin procedure, 1.17 million is roughly the number of people like you. But if you are coming for surgery or serious treatment, the market you belong to is far smaller &mdash; and shrinking. <strong>Depending on why you are coming, the same number means something entirely different.</strong></span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-3">
+        <div class="sec__head">
+          <span class="sec__n">03</span>
+          <h3><span lang="ko">낮은 점수는 기술이 아니라 과정에서 나옵니다</span><span lang="en">The Low Scores Come from the Process, Not the Medicine</span></h3>
+        </div>
+        <p>
+          <span lang="ko">한국 의료를 선택한 이유를 묻는 조사에서 의료기술&middot;장비와 의료기관의 인지도는 상위를 차지합니다. 반면 &lsquo;이용 편의성&rsquo;을 꼽은 응답은 12.7%, &lsquo;외국인 환자 서비스 인프라&rsquo;는 3.8%에 그쳤습니다. 진료의 질은 인정받지만, 진료를 둘러싼 과정은 그렇지 못하다는 뜻입니다.</span>
+          <span lang="en">In surveys asking why patients chose Korean healthcare, medical technology and equipment and institutional reputation rank at the top. By contrast, only 12.7% cited &ldquo;ease of use,&rdquo; and just 3.8% cited &ldquo;service infrastructure for foreign patients.&rdquo; The quality of care is recognized; the process around it is not.</span>
+        </p>
+        <p>
+          <span lang="ko">귀국 이후는 더 취약합니다. 39.5%가 진료 후 회복 관리를, 31.2%가 의료진과의 연락을 어려움으로 꼽았습니다. 한국은 환자와 의사 간 원격진료를 아직 허용하지 않아, 귀국 후의 진료 연속성을 뒷받침할 제도적 통로 자체가 좁습니다. 시술은 며칠이면 끝나지만 회복은 몇 주, 부작용은 몇 달 뒤에 나타날 수 있습니다. 그 시간의 대부분을 환자는 한국 밖에서 보냅니다.</span>
+          <span lang="en">After returning home, things are more fragile still. 39.5% cited post-treatment recovery care as a difficulty, and 31.2% cited staying in contact with their medical team. Korea does not yet allow physician-patient telemedicine, so the institutional channel for continuity of care after going home is narrow. A procedure takes days, but recovery takes weeks, and side effects can appear months later. Most of that time, the patient is outside Korea.</span>
+        </p>
+        <p>
+          <span lang="ko">업계의 진단도 같은 지점을 가리킵니다. 경쟁의 축이 가격과 시술 속도에서 <strong>신뢰와 사후관리</strong>로 이동했다는 것입니다. 싸고 빠르다는 말로는 더 이상 설명되지 않는 영역이 생긴 것입니다.</span>
+          <span lang="en">Industry diagnoses point to the same spot: the axis of competition has moved from price and speed to <strong>trust and aftercare</strong>. A domain has emerged that &ldquo;cheap and fast&rdquo; no longer explains.</span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-4">
+        <div class="sec__head">
+          <span class="sec__n">04</span>
+          <h3><span lang="ko">기록은 이미 있습니다. 닿기 어려울 뿐입니다</span><span lang="en">The Records Already Exist. They Are Just Hard to Reach</span></h3>
+        </div>
+        <p>
+          <span lang="ko">한 가지 덜 알려진 사실이 있습니다. 117만 명이라는 통계 자체가 &lsquo;기록&rsquo;에서 나온다는 점입니다. 이 수치는 「의료 해외진출 및 외국인환자 유치 지원에 관한 법률」에 따라 등록된 유치기관 &mdash; 의료기관 약 3,500곳과 유치사업자 약 2,100곳 &mdash; 이 제출한 실적 보고를 집계한 것입니다.</span>
+          <span lang="en">Here is a less-known fact: the 1.17 million statistic itself comes from records. It is compiled from performance reports submitted by institutions registered under the Act on Support for Overseas Expansion of Healthcare and Attraction of International Patients &mdash; roughly 3,500 medical institutions and 2,100 facilitator agencies.</span>
+        </p>
+        <p>
+          <span lang="ko">즉 어느 병원이 외국인 환자를 받도록 등록되어 있는지, 어느 업체가 유치사업자로 등록되어 있는지는 공적 기록으로 존재합니다. 문제는 그 기록이 흩어져 있고, 외국어로 접근하기 어렵고, 환자가 병원의 홍보 문구와 공적 기록을 구분할 방법이 마땅치 않다는 데 있습니다. <strong>정보가 없는 것이 아니라, 정보와 환자 사이의 거리가 먼 것입니다.</strong></span>
+          <span lang="en">In other words, which hospitals are registered to receive foreign patients, and which agencies are registered facilitators, exists as public record. The problem is that those records are scattered, hard to reach in foreign languages, and patients have no good way to tell a hospital&rsquo;s marketing copy from the public record. <strong>The information is not missing &mdash; the distance between the information and the patient is long.</strong></span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-5">
+        <div class="sec__head">
+          <span class="sec__n">05</span>
+          <h3><span lang="ko">그래서 메디체크는 한 가지만 합니다</span><span lang="en">So MediCheck Does Exactly One Thing</span></h3>
+        </div>
+        <p>
+          <span lang="ko">메디체크는 그 거리를 좁히는 일을 합니다. 병원을 평가하는 것이 아니라, 두 가지를 기록합니다. <strong>그 병원이 어느 공개 기록에 근거해 등재되었는지</strong>, 그리고 <strong>우리가 그 기록을 확인한 날짜가 언제인지.</strong> 이용자는 원문 기록을 직접 열어 우리의 기재가 맞는지 검증할 수 있습니다.</span>
+          <span lang="en">MediCheck&rsquo;s job is to close that distance. We do not rate hospitals; we record two things: <strong>which public record a hospital&rsquo;s listing is based on</strong>, and <strong>the date we verified that record.</strong> Users can open the original record themselves and check that our entry is correct.</span>
+        </p>
+        <p>
+          <span lang="ko">원칙은 하나입니다. 검증할 수 없는 문장은 쓰지 않는다. 이 목록이 &lsquo;좋은 병원&rsquo; 목록이 아니라 &lsquo;기록이 이렇게 되어 있다&rsquo;는 목록인 이유입니다.</span>
+          <span lang="en">There is one principle: we do not write a sentence we cannot verify. That is why this is not a list of &ldquo;good hospitals&rdquo; but a list of &ldquo;what the record says.&rdquo;</span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-6">
+        <div class="sec__head">
+          <span class="sec__n">06</span>
+          <h3><span lang="ko">2026년 8월 18일 기준 현황</span><span lang="en">Status as of August 18, 2026</span></h3>
+        </div>
+        <p>
+          <span lang="ko">등재 기관은 100곳입니다. 100곳 전부 서울시 &lsquo;의료관광 협력기관&rsquo; 목록을 근거로 합니다. <strong>보건복지부 등록을 근거로 등재된 기관은 아직 0곳입니다.</strong> 근거 체계는 둘인데 현재는 한쪽만 채워져 있다는 뜻이며, 이 불균형 역시 그대로 기재합니다. 등재가 해제된 기관은 0곳입니다.</span>
+          <span lang="en">There are 100 listed institutions. All 100 are based on the Seoul Metropolitan Government&rsquo;s list of &ldquo;medical tourism partner institutions.&rdquo; <strong>Institutions listed on the basis of Ministry of Health and Welfare registration: still 0.</strong> Of the two evidence systems, only one is populated so far &mdash; and we record that imbalance as it is. Institutions delisted: 0.</span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-7">
+        <div class="sec__head">
+          <span class="sec__n">07</span>
+          <h3><span lang="ko">하지 않는 것도 기록해 둡니다</span><span lang="en">We Also Record What We Don&rsquo;t Do</span></h3>
+        </div>
+        <p>
+          <span lang="ko"><strong>정렬을 팔지 않습니다.</strong> 목록의 정렬 기준은 이름순과 갱신일순 둘뿐이며, 특정 기관을 수동으로 상위에 노출하는 경로는 만들지 않았습니다. 광고비를 받고 순서를 바꾸는 순간, 이 목록은 우리가 비판한 &lsquo;홍보 문구&rsquo;와 같은 것이 되기 때문입니다.</span>
+          <span lang="en"><strong>We do not sell ranking.</strong> The list sorts two ways only &mdash; by name and by date of last update &mdash; and we built no path for manually placing an institution at the top. The moment we take advertising money to reorder the list, it becomes the same &ldquo;marketing copy&rdquo; we criticized.</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>등급을 매기지 않습니다.</strong> 등급 제도는 검토 단계의 안이며, 현재 어느 기관에도 등급이 부여되어 있지 않습니다. 검증 가능한 기준이 마련되기 전에 등급부터 붙이는 것은 순서가 뒤바뀐 일이라고 생각합니다.</span>
+          <span lang="en"><strong>We do not assign grades.</strong> A grading system is a proposal under review, and no institution currently carries a grade. Attaching grades before verifiable criteria exist would be doing things in the wrong order.</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>문의에 대신 답하지 않습니다.</strong> 이용자의 문의는 병원이 직접 읽고 직접 답합니다. 메디체크는 전달 시점과 응답 시점만 기록합니다. 답변 내용에 개입하는 순간 답변의 품질을 우리가 보증하는 구조가 되는데, 그것은 우리가 책임질 수 있는 영역이 아니기 때문입니다.</span>
+          <span lang="en"><strong>We do not answer inquiries on hospitals&rsquo; behalf.</strong> A user&rsquo;s inquiry is read and answered by the hospital directly. MediCheck records only when it was forwarded and when the response came. The moment we intervene in the content of an answer, the structure makes us the guarantor of its quality &mdash; and that is not an area we can take responsibility for.</span>
+        </p>
+      </section>
+
+      <section class="sec" id="sec-8">
+        <div class="sec__head">
+          <span class="sec__n">08</span>
+          <h3><span lang="ko">어디에서 병원을 찾든, 이 세 가지는 확인하시기 바랍니다</span><span lang="en">Wherever You Look for a Hospital, Check These Three Things</span></h3>
+        </div>
+        <p>
+          <span lang="ko">우리 목록을 쓰지 않으셔도 좋습니다. 다만 어떤 경로로 병원을 찾든, 결정 전에 세 가지는 확인하시길 권합니다.</span>
+          <span lang="en">You do not have to use our list. But whatever route you take to find a hospital, we recommend checking three things before you decide.</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>하나.</strong> 이 병원이 외국인 환자를 유치할 수 있도록 등록되어 있다는 근거는 무엇이며, 그 기록을 내가 직접 열람할 수 있는가.</span>
+          <span lang="en"><strong>One.</strong> What is the evidence that this hospital is registered to receive foreign patients, and can I open that record myself?</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>둘.</strong> 시술 후 문제가 생기면 누구에게, 어떤 경로로 연락하는가. 특히 귀국한 뒤에는.</span>
+          <span lang="en"><strong>Two.</strong> If something goes wrong after the procedure, whom do I contact, and through what channel &mdash; especially after I have returned home?</span>
+        </p>
+        <p>
+          <span lang="ko"><strong>셋.</strong> 나를 안내하는 사람은 누구이며, 병원으로부터 수수료를 받는가.</span>
+          <span lang="en"><strong>Three.</strong> Who is the person guiding me, and do they receive a commission from the hospital?</span>
+        </p>
+        <p>
+          <span lang="ko">세 번째 질문이 낯설 수 있습니다. 그러나 한국은 외국인 환자 유치 수수료의 상한을 법으로 정해 두고 있습니다(의원 30% &middot; 병원 20% &middot; 상급종합병원 15%). 유치사업자 등록 제도가 있고 수수료 상한이 법에 있다는 것은, 이것이 물어도 되는 질문이 아니라 <strong>물어야 하는 질문</strong>이라는 뜻입니다.</span>
+          <span lang="en">The third question may feel unfamiliar. But Korea caps referral commissions for foreign patients by law (clinics 30% &middot; hospitals 20% &middot; tertiary hospitals 15%). That a facilitator registration system exists and that commission caps are written into law means this is not a question you may ask &mdash; it is a <strong>question you should ask.</strong></span>
+        </p>
+        <p>
+          <span lang="ko">이 세 질문에 대한 답을 한 화면에서 확인할 수 있게 만드는 것. 메디체크가 하는 일은 그것이 전부입니다.</span>
+          <span lang="en">Making the answers to these three questions visible on a single screen &mdash; that is all MediCheck does.</span>
+        </p>
+      </section>
+
+      <div class="refs">
+        <div class="refs__label"><span lang="ko">참고</span><span lang="en">SOURCES</span></div>
+        <span lang="ko">
+          환자 수 &middot; 진료비 &middot; 지역 및 진료과 비중 &middot; 의료기관 종별 &middot; 인식도 조사: 보건복지부 &middot; 한국보건산업진흥원 외국인환자 유치실적 발표 및 인식도 조사.<br />
+          시장 진단과 경쟁축 이동: 이관영 &middot; 장수청 &middot; 최규완, 「K-의료관광의 현황과 질적 성장 전략」, 야놀자리서치.<br />
+          수수료 상한 &middot; 유치기관 등록: 「의료 해외진출 및 외국인환자 유치 지원에 관한 법률」.
+        </span>
+        <span lang="en">
+          Patient counts, revenue, regional and specialty shares, institution types, perception survey: Ministry of Health and Welfare &middot; Korea Health Industry Development Institute, international patient statistics and perception survey.<br />
+          Market diagnosis and the shift in the axis of competition: Lee Kwan-young, Jang Soo-cheong, Choi Kyu-wan, &ldquo;The State of K-Medical Tourism and Strategies for Qualitative Growth,&rdquo; Yanolja Research.<br />
+          Commission caps and facilitator registration: Act on Support for Overseas Expansion of Healthcare and Attraction of International Patients.
+        </span>
+      </div>
+
+      <footer class="colophon">
+        <span class="colophon__meta">
+          <span lang="ko">&copy; 2026 메디체크 코리아 &middot; 협회 컬럼 &middot; <a href="/content">지난 호 보기</a></span>
+          <span lang="en">&copy; 2026 MediCheck Korea &middot; The Association Letter &middot; <a href="/content">Past issues</a></span>
+        </span>
+        <span class="colophon__issue">ISSUE 01</span>
+      </footer>
+    </main>
+  </div>
 </div>
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f2f4f6;">
-<tr><td align="center" style="padding:24px 12px;">
+<script>
+  // 하는 일은 html 의 data-lang 을 바꾸는 것뿐이다. 보이고 감추는 판단은 CSS 가 한다 —
+  // 이 스크립트가 실패해도 한국어 판이 그대로 읽힌다.
+  // 고른 언어는 기억해 둔다. 목차를 눌러 이동한 뒤 돌아왔을 때 영어가 한국어로
+  // 되돌아가면, 읽던 사람은 자기가 뭘 잘못 눌렀다고 생각하게 된다.
+  (function () {
+    var root = document.documentElement;
+    var KEY = "medicheck-letter-lang";
 
-  <table role="presentation" class="frame paper" width="640" cellpadding="0" cellspacing="0" border="0"
-         style="width:640px; max-width:640px; background:#ffffff; border:1px solid #e5e8eb; border-radius:12px;">
+    function apply(lang) {
+      root.setAttribute("data-lang", lang);
+      root.setAttribute("lang", lang);
+      try { localStorage.setItem(KEY, lang); } catch (e) { /* 사생활 보호 모드 */ }
+    }
 
-    <!-- ── 머리 ──────────────────────────────────────────────────── -->
-    <tr><td class="pad" style="padding:22px 32px; border-bottom:1px solid #e5e8eb;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td align="left" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; font-weight:700; color:#191f28;">
-          메디체크 코리아
-        </td>
-        <td align="right" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; color:#8b95a1;">
-          제 1호 · 2026년 8월
-        </td>
-      </tr></table>
-    </td></tr>
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved === "ko" || saved === "en") { apply(saved); }
+    } catch (e) { /* 읽을 수 없으면 기본값(한국어)으로 둔다 */ }
 
-    <!-- ── 표지 ──────────────────────────────────────────────────── -->
-    <tr><td class="pad" style="padding:36px 32px 8px;">
-      <h1 class="h1" style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:30px; line-height:1.28; font-weight:700; color:#191f28; letter-spacing:-0.02em; word-break:keep-all;">
-        117만 명이라는 숫자가,<br />당신의 선택에 관해 말해 주지 않는 것
-      </h1>
-      <p style="margin:14px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.7; color:#4e5968; word-break:keep-all;">
-        2024년 한국을 찾은 외국인 환자는 117만 명이었습니다. 그리고 이듬해인 2025년에는
-        201만 명으로, 또 한 번 두 배 가까이 늘었습니다. 그러나 이 숫자들은 한국 의료
-        &lsquo;시장&rsquo;이 커졌다는 뜻이지, 당신이 고를 &lsquo;병원&rsquo;에 관한 정보는
-        아닙니다. 이 글은 그 사이의 빈칸을 무엇으로 메울 수 있는지에 대한 이야기입니다.
-      </p>
-    </td></tr>
-
-    <!-- ── 쓴 사람 ───────────────────────────────────────────────
-         메일 앱은 이미지를 기본으로 막는다. 사진이 안 뜨더라도 이름과 직함이
-         글자로 남아야 하므로, 사진은 옆 칸이고 이름은 별도 칸이다.
-         주소가 절대경로인 이유도 같다 — 메일에는 상대경로가 없다. -->
-    <tr><td class="pad" style="padding:22px 32px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td valign="middle" style="padding-right:14px;">
-          <img src="https://medi-checkkorea.vercel.app/newsletter/authors/esther-yoon.jpg"
-               width="64" height="64" alt="윤여진 총장"
-               style="display:block; width:64px; height:64px; border-radius:32px; border:1px solid #e5e8eb; object-fit:cover; background:#f2f4f6;" />
-        </td>
-        <td valign="middle" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-          <div style="font-size:15px; font-weight:700; color:#191f28;">윤여진 <span style="font-weight:400; color:#6b7684;">총장</span></div>
-          <div style="margin-top:3px; font-size:13px; color:#8b95a1;">Esther Yoon · 한국의료관광진흥협회</div>
-        </td>
-      </tr></table>
-    </td></tr>
-
-    <!-- ── 목차 ──────────────────────────────────────────────────
-         왼쪽 세로줄은 배경색을 깐 3px 짜리 칸이다. border-left 로 그리면
-         Outlook 이 무시할 때가 있어 칸 자체를 세워 두는 편이 안전하다.
-         항목에 링크를 걸지 않았다 — 메일 클라이언트 상당수가 문서 안 앵커로
-         스크롤해 주지 않아서, 눌리는 것처럼 보이는데 안 눌리는 상태가 된다. -->
-    <tr><td class="pad" style="padding:24px 32px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td width="3" style="width:3px; background:#191f28; font-size:0; line-height:0;">&nbsp;</td>
-        <td style="padding-left:16px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
-          <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; color:#8b95a1; text-transform:uppercase;">컨텐츠</div>
-          <div style="margin-top:8px; font-size:14px; line-height:1.9; color:#333d4b;">
-            시장의 숫자와 선택의 정보는 다릅니다<br />
-            평균이 가리는 구조<br />
-            낮은 점수는 기술이 아니라 과정에서 나옵니다<br />
-            기록은 이미 있습니다. 닿기 어려울 뿐입니다<br />
-            그래서 메디체크는 한 가지만 합니다<br />
-            2026년 8월 18일 기준 현황<br />
-            하지 않는 것도 기록해 둡니다<br />
-            어디에서 병원을 찾든, 이 세 가지는 확인하시기 바랍니다
-          </div>
-        </td>
-      </tr></table>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        시장의 숫자와 선택의 정보는 다릅니다
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        보건복지부와 한국보건산업진흥원의 유치실적 분석에 따르면, 2024년 외국인 환자 117만 명은 전년 대비 93.2% 증가한 수치이며, 팬데믹 직전인 2019년(49만 7천 명)의 두 배를 넘는 규모입니다. 진료비 총액도 같은 기간 4,091억 원에서 1조 2,401억 원으로 세 배 가까이 늘었습니다. 유치사업이 본격화된 2009년 이래 누적 환자는 500만 명을 넘어섰고, 2024년 한 해에만 202개국에서 환자가 왔습니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        회복 속도도 이례적입니다. 같은 해 방한 외래관광객이 팬데믹 이전 수준을 겨우 회복하는 동안, 일본·중국·대만발 외국인 환자는 2019년 대비 2~3배 수준으로 늘었습니다. 관광보다 의료가 먼저, 더 빠르게 돌아온 것입니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        여기까지가 언론이 전하는 이야기입니다. 그러나 병원을 골라야 하는 사람에게 이 숫자는 아무것도 알려 주지 않습니다. 많은 사람이 왔다는 사실과, 그들이 안전하게 치료받고 돌아갔다는 사실은 별개의 명제이기 때문입니다.
-      </p>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        평균이 가리는 구조
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        117만 명은 고르게 분포하지 않습니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>진료과가 쏠려 있습니다.</b> 환자 수 기준으로 피부과가 전체의 56.6%(70.5만 명), 성형외과가 11.4%로 두 과가 <b>68.0%</b>를 차지합니다. 진료비 기준으로 보면 비중은 더 올라가 <b>77.3%</b>가 됩니다 — 두 과가 환자 한 사람당 더 큰 금액을 만든다는 뜻입니다. 전년 대비 증가율이 가장 높았던 국가가 대만(550.6%)·일본(135.0%)·중국(132.4%)인데, 이 급증을 이끈 것도 피부과였습니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>지역이 쏠려 있습니다.</b> 환자의 85.4%(100만 명)가 서울에서 진료를 받았습니다. 서울 집중도는 2019년 64.4%에서 오히려 21%p 상승했습니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>의료기관 유형도 쏠려 있습니다.</b> 외국인 환자의 82.0%가 의원급 의료기관을 이용했습니다. 종합병원(6.0%)과 상급종합병원(5.1%)을 합쳐도 11%가 되지 않습니다. 117만 명의 실체는 대형병원의 중증 치료가 아니라, 서울의 의원급에서 이루어지는 경증·미용 시술에 가깝습니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        반대 방향의 지표도 있습니다. 2024년 한국을 찾은 외국인 암 환자는 7,147명으로, 2019년(약 1만 1천 명) 수준을 회복하지 못했습니다. 시장 전체가 두 배 이상 성장하는 동안 중증 진료 영역만 축소된 것입니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        정리하면 이렇습니다. 당신이 피부 시술을 받으러 온다면 117만 명은 당신과 같은 사람들의 숫자에 가깝습니다. 그러나 수술이나 중증 치료를 위해 온다면, 당신이 속한 시장은 그보다 훨씬 작고, 오히려 줄어들고 있는 시장입니다. <b>오려는 이유가 무엇인지에 따라 같은 숫자가 전혀 다른 의미가 됩니다.</b>
-      </p>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        낮은 점수는 기술이 아니라 과정에서 나옵니다
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        한국 의료를 선택한 이유를 묻는 조사에서 의료기술·장비와 의료기관의 인지도는 상위를 차지합니다. 반면 &lsquo;이용 편의성&rsquo;을 꼽은 응답은 <b>12.7%</b>, &lsquo;외국인 환자 서비스 인프라&rsquo;는 <b>3.8%</b>에 그쳤습니다. 진료의 질은 인정받지만, 진료를 둘러싼 과정은 그렇지 못하다는 뜻입니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        귀국 이후는 더 취약합니다. <b>39.5%</b>가 진료 후 회복 관리를, <b>31.2%</b>가 의료진과의 연락을 어려움으로 꼽았습니다. 한국은 환자와 의사 간 원격진료를 아직 허용하지 않아, 귀국 후의 진료 연속성을 뒷받침할 제도적 통로 자체가 좁습니다. 시술은 며칠이면 끝나지만 회복은 몇 주, 부작용은 몇 달 뒤에 나타날 수 있습니다. 그 시간의 대부분을 환자는 한국 밖에서 보냅니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        업계의 진단도 같은 지점을 가리킵니다. 경쟁의 축이 가격과 시술 속도에서 <b>신뢰와 사후관리</b>로 이동했다는 것입니다. 싸고 빠르다는 말로는 더 이상 설명되지 않는 영역이 생긴 것입니다.
-      </p>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        기록은 이미 있습니다. 닿기 어려울 뿐입니다
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        한 가지 덜 알려진 사실이 있습니다. 117만 명이라는 통계 자체가 &lsquo;기록&rsquo;에서 나온다는 점입니다. 이 수치는 「의료 해외진출 및 외국인환자 유치 지원에 관한 법률」에 따라 등록된 유치기관 — 의료기관 약 3,500곳과 유치사업자 약 2,100곳 — 이 제출한 실적 보고를 집계한 것입니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        즉 어느 병원이 외국인 환자를 받도록 등록되어 있는지, 어느 업체가 유치사업자로 등록되어 있는지는 공적 기록으로 존재합니다. 문제는 그 기록이 흩어져 있고, 외국어로 접근하기 어렵고, 환자가 병원의 홍보 문구와 공적 기록을 구분할 방법이 마땅치 않다는 데 있습니다. <b>정보가 없는 것이 아니라, 정보와 환자 사이의 거리가 먼 것입니다.</b>
-      </p>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        그래서 메디체크는 한 가지만 합니다
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        메디체크는 그 거리를 좁히는 일을 합니다. 병원을 평가하는 것이 아니라, 두 가지를 기록합니다. <b>그 병원이 어느 공개 기록에 근거해 등재되었는지</b>, 그리고 <b>우리가 그 기록을 확인한 날짜가 언제인지.</b> 이용자는 원문 기록을 직접 열어 우리의 기재가 맞는지 검증할 수 있습니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        원칙은 하나입니다. 검증할 수 없는 문장은 쓰지 않는다. 이 목록이 &lsquo;좋은 병원&rsquo; 목록이 아니라 &lsquo;기록이 이렇게 되어 있다&rsquo;는 목록인 이유입니다.
-      </p>
-    </td></tr>
-
-    <!-- ── 현황 — 파랑이 나타나는 유일한 자리(17장) ─────────────── -->
-    <tr><td class="pad" style="padding:24px 32px 0;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-             style="background:#eff6ff; border-radius:10px;">
-        <tr><td style="padding:16px 18px;">
-          <div style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; font-weight:700; color:#1d4ed8;">
-            2026년 8월 18일 기준 현황
-          </div>
-          <div style="margin-top:6px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; line-height:1.7; color:#333d4b; word-break:keep-all;">
-            등재 기관은 <b>100곳</b>입니다. 100곳 전부 서울시 &lsquo;의료관광 협력기관&rsquo;
-            목록을 근거로 합니다. <b>보건복지부 등록을 근거로 등재된 기관은 아직 0곳입니다.</b>
-            근거 체계는 둘인데 현재는 한쪽만 채워져 있다는 뜻이며, 이 불균형 역시 그대로
-            기재합니다. 등재가 해제된 기관은 0곳입니다.
-          </div>
-        </td></tr>
-      </table>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        하지 않는 것도 기록해 둡니다
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>정렬을 팔지 않습니다.</b> 목록의 정렬 기준은 이름순과 갱신일순 둘뿐이며, 특정 기관을 수동으로 상위에 노출하는 경로는 만들지 않았습니다. 광고비를 받고 순서를 바꾸는 순간, 이 목록은 우리가 비판한 &lsquo;홍보 문구&rsquo;와 같은 것이 되기 때문입니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>등급을 매기지 않습니다.</b> 등급 제도는 검토 단계의 안이며, 현재 어느 기관에도 등급이 부여되어 있지 않습니다. 검증 가능한 기준이 마련되기 전에 등급부터 붙이는 것은 순서가 뒤바뀐 일이라고 생각합니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>문의에 대신 답하지 않습니다.</b> 이용자의 문의는 병원이 직접 읽고 직접 답합니다. 메디체크는 전달 시점과 응답 시점만 기록합니다. 답변 내용에 개입하는 순간 답변의 품질을 우리가 보증하는 구조가 되는데, 그것은 우리가 책임질 수 있는 영역이 아니기 때문입니다.
-      </p>
-    </td></tr>
-
-    <tr><td class="pad" style="padding:28px 32px 0;">
-      <h2 style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:18px; line-height:1.4; font-weight:700; color:#191f28; word-break:keep-all;">
-        어디에서 병원을 찾든, 이 세 가지는 확인하시기 바랍니다
-      </h2>
-      <p style="margin:10px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        우리 목록을 쓰지 않으셔도 좋습니다. 다만 어떤 경로로 병원을 찾든, 결정 전에 세 가지는 확인하시길 권합니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        <b>하나.</b> 이 병원이 외국인 환자를 유치할 수 있도록 등록되어 있다는 근거는 무엇이며, 그 기록을 내가 직접 열람할 수 있는가.<br /><b>둘.</b> 시술 후 문제가 생기면 누구에게, 어떤 경로로 연락하는가. 특히 귀국한 뒤에는.<br /><b>셋.</b> 나를 안내하는 사람은 누구이며, 병원으로부터 수수료를 받는가.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        세 번째 질문이 낯설 수 있습니다. 그러나 한국은 외국인 환자 유치 수수료의 상한을 법으로 정해 두고 있습니다(의원 30% · 병원 20% · 상급종합병원 15%). 유치사업자 등록 제도가 있고 수수료 상한이 법에 있다는 것은, 이것이 물어도 되는 질문이 아니라 <b>물어야 하는 질문</b>이라는 뜻입니다.
-      </p>
-      <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.75; color:#333d4b; word-break:keep-all;">
-        이 세 질문에 대한 답을 한 화면에서 확인할 수 있게 만드는 것. 메디체크가 하는 일은 그것이 전부입니다.
-      </p>
-    </td></tr>
-
-    <!-- ── 사이트로 ──────────────────────────────────────────────── -->
-    <tr><td class="pad" align="left" style="padding:28px 32px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td style="background:#14171c; border-radius:10px;">
-          <a href="https://medi-checkkorea.vercel.app/find-a-hospital" style="display:inline-block; padding:13px 22px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:14px; font-weight:700; color:#ffffff; text-decoration:none;">
-            기록과 함께 기관 찾아보기
-          </a>
-        </td>
-      </tr></table>
-    </td></tr>
-
-    <!-- ── 참고 ──────────────────────────────────────────────────── -->
-    <tr><td class="pad" style="padding:26px 32px 0;">
-      <div style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; line-height:1.7; color:#8b95a1;">
-        <b style="color:#6b7684;">참고</b><br />
-        환자 수 · 진료비 · 지역 및 진료과 비중 · 인식도 조사: 한국보건산업진흥원 통계 및
-        외국인환자 인식도 조사(2024).<br />
-        시장 진단과 경쟁축 이동: 이관영 · 장수청 · 최규완, 「K-의료관광의 현황과 질적
-        성장 전략」, 야놀자리서치.<br />
-        수수료 상한: 「의료 해외진출 및 외국인환자 유치 지원에 관한 법률」.
-      </div>
-    </td></tr>
-
-    <!-- ── 꼬리 ──────────────────────────────────────────────────── -->
-    <tr><td class="pad" style="padding:32px; padding-top:26px;">
-      <div style="border-top:1px solid #e5e8eb; padding-top:18px;">
-        <p style="margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; line-height:1.7; color:#6b7684;">
-          메디체크 코리아는 한국의료관광진흥협회가 운영합니다.<br />
-          이 편지는 제 1호예요. 아직 구독 신청을 받고 있지 않아서, 지금은 사이트에서만
-          읽을 수 있어요.
-        </p>
-        <p style="margin:12px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:12px; color:#8b95a1;">
-          <a href="https://medi-checkkorea.vercel.app/content" style="color:#6b7684;">지난 호 보기</a>
-          &nbsp;·&nbsp;
-          <a href="https://medi-checkkorea.vercel.app/" style="color:#6b7684;">사이트에서 보기</a>
-        </p>
-      </div>
-    </td></tr>
-
-  </table>
-
-</td></tr>
-</table>
-
+    Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (button) {
+      button.addEventListener("click", function () { apply(button.value); });
+    });
+  })();
+</script>
 </body>
 </html>

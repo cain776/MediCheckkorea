@@ -1,0 +1,64 @@
+/*
+ * 가격 확인 — 정찰가 설명 화면.
+ *
+ * app.css 맨 위의 @import 차례가 원본의 차례다 (규칙 2).
+ * 글자 크기·굵기·줄간격은 토큰 밖의 값을 쓰지 않는다 (규칙 3).
+ */
+
+/* ── 할 일 · 하지 않을 일 ─────────────────────────────────────── */
+
+/* 둘을 나란히 놓는 것이 이 화면의 뼈대다. 위아래로 쌓으면 아래쪽(하지 않을 일)이
+   덧붙임처럼 읽히는데, 가격에서는 그쪽이 더 중요하다. */
+.price__pair {
+  margin-top: var(--space-md);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+.price__col {
+  padding: var(--space-lg);
+  border: var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+/* '하지 않을 일'만 다른 바탕. 파랑은 배지 몫이라 쓰지 않는다 (17장) */
+.price__col--not {
+  background: var(--color-surface-3);
+}
+.price__col h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+}
+.price__list {
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-sm);
+}
+.price__list li {
+  padding-left: 16px;
+  position: relative;
+  font-size: var(--text-body);
+  color: var(--color-ink-3);
+  line-height: var(--leading-body);
+}
+.price__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-muted-3);
+}
+.price__col--not .price__list li::before {
+  background: var(--color-error);
+}
+
+@media (max-width: 760px) {
+  .price__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

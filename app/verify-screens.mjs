@@ -33,6 +33,7 @@ const SCREENS = (id) => [
   { name: "content", path: "/content" },
   { name: "patient-journey", path: "/patient-journey" },
   { name: "online-consultation", path: "/online-consultation" },
+  { name: "check-the-price", path: "/check-the-price" },
   { name: "send-an-inquiry", path: "/send-an-inquiry" },
 ];
 

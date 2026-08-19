@@ -17,6 +17,7 @@
 | About certification | `/about-certification` | `certification` | `/api/certification` |
 | Patient journey | `/patient-journey` | `journey` | `/api/journey` |
 | Online consultation | `/online-consultation` | `consultation` | `/api/consultations` |
+| Check the price | `/check-the-price` | `price` | `/api/prices` |
 | Send an inquiry | `/send-an-inquiry` | `inquiry` | `/api/inquiries` |
 
 - **메뉴 이름은 영문이 원본이다** (기획서 [14장](docs/03-단계와-수익.html#s14)). 한국어는 번역이고 라벨 표(`label`, `/api/labels`)로만 들어간다 — 경로·패키지·클래스 이름에 한국어를 쓰지 않는다.

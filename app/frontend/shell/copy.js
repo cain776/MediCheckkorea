@@ -16,6 +16,7 @@ import { HOME_COPY } from "../home/copy.js";
 import { HOSPITAL_COPY } from "../hospital/copy.js";
 import { INQUIRY_COPY } from "../inquiry/copy.js";
 import { JOURNEY_COPY } from "../journey/copy.js";
+import { PRICE_COPY } from "../price/copy.js";
 
 /**
  * 화면마다 흩어진 문안을 한 덩어리로 모은다. 화면은 지금까지처럼 t("key") 하나만 쓴다 —
@@ -80,6 +81,7 @@ export const COPY = ledger(
   HOSPITAL_COPY,
   INQUIRY_COPY,
   JOURNEY_COPY,
+  PRICE_COPY,
 );
 
 

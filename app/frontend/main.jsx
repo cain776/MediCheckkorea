@@ -9,6 +9,7 @@ import { HospitalDetail } from "./hospital/HospitalDetail.jsx";
 import { AboutCertification } from "./certification/AboutCertification.jsx";
 import { PatientJourney } from "./journey/PatientJourney.jsx";
 import { OnlineConsultation } from "./consultation/OnlineConsultation.jsx";
+import { CheckThePrice } from "./price/CheckThePrice.jsx";
 import { Content } from "./content/Content.jsx";
 import { SendAnInquiry } from "./inquiry/SendAnInquiry.jsx";
 
@@ -41,6 +42,9 @@ function Screen() {
   }
   if (pathname === "/online-consultation") {
     return <OnlineConsultation />;
+  }
+  if (pathname === "/check-the-price") {
+    return <CheckThePrice />;
   }
   if (pathname === "/send-an-inquiry") {
     return <SendAnInquiry />;

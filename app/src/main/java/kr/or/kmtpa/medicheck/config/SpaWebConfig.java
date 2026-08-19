@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *   Content               /content                 content        /api/content
  *   Patient journey       /patient-journey         journey        /api/journey
  *   Online consultation   /online-consultation     consultation   /api/consultations
+ *   Check the price       /check-the-price         price          /api/prices
  *   Send an inquiry       /send-an-inquiry         inquiry        /api/inquiries
  * </pre>
  *
@@ -41,6 +42,7 @@ public class SpaWebConfig implements WebMvcConfigurer {
             "/content",
             "/patient-journey",
             "/online-consultation",
+            "/check-the-price",
             "/send-an-inquiry",
         }) {
             registry.addViewController(path).setViewName("forward:/index.html");

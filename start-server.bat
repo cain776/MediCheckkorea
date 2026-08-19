@@ -11,6 +11,7 @@ rem   start-server.bat find            Find a hospital
 rem   start-server.bat certification   About certification
 rem   start-server.bat journey         Patient journey
 rem   start-server.bat consultation    Online consultation
+rem   start-server.bat price           Check the price
 rem   start-server.bat inquiry         Send an inquiry
 rem   start-server.bat --no-browser    start without opening a browser
 rem   start-server.bat --no-build      skip the frontend bundle step
@@ -41,6 +42,7 @@ if /i "%~1"=="find" set "OPEN_URL=http://%HOST%:%PORT%/find-a-hospital"
 if /i "%~1"=="certification" set "OPEN_URL=http://%HOST%:%PORT%/about-certification"
 if /i "%~1"=="journey" set "OPEN_URL=http://%HOST%:%PORT%/patient-journey"
 if /i "%~1"=="consultation" set "OPEN_URL=http://%HOST%:%PORT%/online-consultation"
+if /i "%~1"=="price" set "OPEN_URL=http://%HOST%:%PORT%/check-the-price"
 if /i "%~1"=="inquiry" set "OPEN_URL=http://%HOST%:%PORT%/send-an-inquiry"
 
 set "OPEN_BROWSER=1"
@@ -111,6 +113,7 @@ echo   Find:          http://%HOST%:%PORT%/find-a-hospital
 echo   Certification: http://%HOST%:%PORT%/about-certification
 echo   Journey:       http://%HOST%:%PORT%/patient-journey
 echo   Consultation:  http://%HOST%:%PORT%/online-consultation
+echo   Price:         http://%HOST%:%PORT%/check-the-price
 echo   Inquiry:       http://%HOST%:%PORT%/send-an-inquiry
 echo   Stop:          Ctrl+C
 echo ========================================
