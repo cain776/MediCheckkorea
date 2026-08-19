@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>메디체크 코리아 — 데이터와 운영</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="stylesheet" href="assets/doc.css" />
+</head>
+<body>
+
+<nav>
+  <div class="brand">메디체크 코리아</div>
+  <div class="brand-sub">MediCheck Korea · 기획서 2/5</div>
+  <a href="#s6">6. 데이터 — 있는 것과 없는 것</a>
+  <a href="#s7">7. 누가 최신으로 유지하나</a>
+  <a href="#s8">8. 협회 시스템과의 관계</a>
+  <a href="#s9">9. 미결과 위험</a>
+  <div class="sep">앞 문서</div>
+  <a href="01-기획서.html">← 1~5. 무엇을 왜 만드는가</a>
+  <div class="sep">이어서</div>
+  <a href="03-단계와-수익.html">10~14. 단계와 수익 →</a>
+  <a href="04-화면과-디자인.html">15~20. 화면과 디자인 →</a>
+  <a href="07-화면-설계.html">27~32 · 36~37. 화면 설계와 문안 →</a>
+  <div class="sep">검토 중</div>
+  <a href="05-등급제-검토안.html">21~26 · 33~35. 등급제 <b>검토안</b> →</a>
+  <div class="sep">만든 것</div>
+  <a href="../start-server.bat">start-server.bat</a>
+  <a href="../app/README.md">앱 문서 (app/)</a>
+  <div class="sep">함께 보기</div>
+  <a href="06-mhtc-레퍼런스.html">MHTC 레퍼런스</a>
+  <div class="sep">협회 정보 시스템</div>
+  <a href="../../협회/docs/plan/08-service-plan.html">기획서</a>
+  <a href="../../협회/docs/plan/10-ia.html">정보 구조</a>
+  <a href="../../협회/docs/plan/14-erd.html">데이터 모델</a>
+  <a href="../../협회/docs/06-domain-map.md">도메인 지도</a>
+</nav>
+
+<main>
+<div class="content">
+
+  <div class="topbar">
+    <div class="title">메디체크 코리아 <span style="font-weight:600;color:var(--muted-2)">MediCheck Korea</span> — 데이터와 운영</div>
+    <div class="sub">데이터 · 갱신 주체 · 협회 시스템과의 관계 · 미결과 위험 · 초안 · 2026-08-18</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" id="s6">
+    <div class="card-head"><div class="chip">6</div><h2>데이터 — 있는 것과 없는 것</h2></div>
+
+    <h3>절반 이상이 이미 있다</h3>
+    <p>법인 회원 정보(<code>member_corp</code>)에 기관 페이지의 뼈대가 거의 다 들어 있다.</p>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>칸</th><th class="wrap">쓰임</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td><code>org_name</code> · <code>org_name_en</code></td>
+              <td class="wrap">목록과 상세의 기관명. <b>영문명 칸이 이미 있다</b></td>
+              <td><span class="tag t-auto">있음</span></td></tr>
+          <tr><td><code>promotion_reg_no</code></td>
+              <td class="wrap"><b>1층 배지의 근거.</b> 이 칸이 비면 등재되지 않는다</td>
+              <td><span class="tag t-auto">있음</span></td></tr>
+          <tr><td><code>specialties</code></td><td class="wrap">진료과목 거르기</td>
+              <td><span class="tag t-auto">있음</span></td></tr>
+          <tr><td><code>address</code> · <code>website</code></td><td class="wrap">지역 거르기 · 상세</td>
+              <td><span class="tag t-auto">있음</span></td></tr>
+          <tr><td><code>org_type</code></td><td class="wrap">의료기관과 유치업체를 가른다</td>
+              <td><span class="tag t-auto">있음</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>없는 것 — 새 표 하나면 된다</h3>
+    <div class="erd">
+      <div class="ent">
+        <div class="h">member_corp <span class="tag t-auto">있음</span></div>
+        <ul>
+          <li><span class="k">PK</span>member_id</li>
+          <li>org_name / org_name_en</li>
+          <li>promotion_reg_no</li>
+          <li>specialties / address</li>
+        </ul>
+      </div>
+      <div class="ent plan">
+        <div class="h">medicheck_listing <span class="tag t-plan">설계</span></div>
+        <ul>
+          <li><span class="f">FK</span>member_id</li>
+          <li>listed — 등재 여부</li>
+          <li>source / source_url</li>
+          <li>region</li>
+          <li>verified_at / verified_by</li>
+          <li>reg_expires_at — 등록 만료일</li>
+          <li>languages — 지원 언어</li>
+          <li>intro_ko / intro_en</li>
+          <li>photo</li>
+          <li>updated_at — 마지막 갱신</li>
+        </ul>
+      </div>
+    </div>
+    <p><b>회원 정보에 칸을 더하지 않고 표를 따로 둔다.</b> 등재는 회원 자격과 별개이고
+       (<a href="01-기획서.html#s3">3장</a>), 한 표에 섞으면 그 구분이 코드 안에서 흐려진다.
+       <code>listed</code> 를 별도 표의 칸으로 두면 <b>회원이지만 등재되지 않은 상태</b>가
+       자연스럽게 표현된다.</p>
+
+    <div class="note warn">
+      <div class="h">실제 자료가 들어오자 두 곳이 깨졌다 <span class="tag t-user">2026-08-18</span></div>
+      <p><b>지역을 주소에서 잘라 쓰던 것.</b> 이 장은 지역 거르기를 <code>address</code> 로
+         한다고 정했고, 코드는 'Gangnam-gu, Seoul' 처럼 쉼표가 있다는 전제로 뒤쪽을 잘랐다.
+         서울시 자료는 <b>'서울특별시 강남구 도산대로 119'</b> 라 쉼표가 없다 —
+         주소 전체가 지역이 되어 지역 상자에 <b>100개의 서로 다른 '지역'</b>이 들어찼다.
+         넣는 쪽이 지역을 정하도록 <code>region</code> 칸을 뺐다.</p>
+      <p><b>영문명.</b> 서울시 목록에 영문명이 없다. 협회가 로마자로 옮겨 적으면
+         <b>기관이 쓰지 않는 이름을 협회가 지어낸 것</b>이 된다 — 7장이 "기관이 직접 고친다"고
+         한 이유가 이것이다. <code>org_name_en</code> 의 NOT NULL 을 풀고, 없는 것은 없는 채로 뒀다.
+         화면은 국문명을 그대로 보여 준다.</p>
+    </div>
+
+    <div class="note">
+      <div class="h">확인한 사람과 날짜를 남긴다</div>
+      <p><code>verified_at</code> · <code>verified_by</code> 가 배지 옆에 그대로 표시된다.
+         누가 언제 확인했는지 없는 인증은 인증이 아니다. 협회 시스템의 다른 곳에서도
+         같은 문제가 반복되고 있다 — <b>승인·확인 기록을 남기는 칸</b>을
+         전체적으로 한 번에 정리하는 편이 낫다.</p>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" id="s7">
+    <div class="card-head"><div class="chip">7</div><h2>누가 최신으로 유지하나</h2></div>
+
+    <div class="note bad">
+      <div class="h">이런 사이트가 죽는 이유는 늘 같다</div>
+      <p><b>정보가 낡는다.</b> 기관 수십 곳을 사무국이 손으로 유지하면 반년 뒤 다 낡고,
+         낡은 순간 신뢰가 사라진다. <b>전화번호 하나가 틀리면 그 기관만 죽는 것이 아니라
+         사이트가 죽는다</b> — 해외 환자는 한 번 헛걸음하면 다시 오지 않는다.</p>
+    </div>
+
+    <h3>기관이 직접 고치게 한다</h3>
+    <p>협회에 회원 포털 계획이 이미 있다. 거기에 <b>"우리 기관 페이지"</b> 를 붙이면
+       기관이 스스로 최신 상태를 유지한다. 사무국이 대신 타이핑하는 구조로는 유지되지 않는다.</p>
+
+    <h3>고칠 수 있는 것과 없는 것을 가른다</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>칸</th><th>기관</th><th>협회</th><th class="wrap">왜</th></tr></thead>
+        <tbody>
+          <tr><td>소개문 · 사진 · 지원 언어</td>
+              <td><span class="tag t-auto">고칠 수 있다</span></td><td><span class="tag t-plan">확인만</span></td>
+              <td class="wrap">자기 정보이고, 자주 바뀐다</td></tr>
+          <tr><td>진료과목 · 주소 · 연락처</td>
+              <td><span class="tag t-auto">고칠 수 있다</span></td><td><span class="tag t-plan">확인만</span></td>
+              <td class="wrap">같은 이유</td></tr>
+          <tr><td>등록번호 · 확인 날짜 · 등재 여부</td>
+              <td><span class="tag t-warn">못 고친다</span></td><td><span class="tag t-auto">협회만</span></td>
+              <td class="wrap"><b>기관이 자기 인증을 고칠 수 있으면 인증이 아니다</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>마지막 갱신일을 숨기지 않는다</h3>
+    <p>목록과 상세에 <b>마지막 갱신일을 그대로 보여 준다.</b> 불편해 보이지만 반대다 —
+       날짜가 없으면 <b>3년 된 정보와 어제 고친 정보가 똑같아 보인다.</b>
+       날짜가 보이면 환자는 스스로 판단할 수 있고, 기관은 오래된 날짜가 부끄러워서 고친다.</p>
+
+    <div class="note">
+      <div class="h">오래 방치된 기관은 어떻게 하나</div>
+      <p>일정 기간 갱신이 없으면 <b>기관에 알림을 보내고, 그래도 없으면 목록에서 내린다.</b>
+         내리는 것이 가혹해 보이지만, 낡은 정보를 남겨 두는 쪽이 사이트 전체에 더 해롭다.
+         기간은 미결 — 1년이 무난해 보인다.</p>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card" id="s8">
+    <div class="card-head"><div class="chip">8</div><h2>협회 시스템과의 관계</h2></div>
+
+    <h3>별도 사이트로 만든다</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>이유</th><th class="wrap">내용</th></tr></thead>
+        <tbody>
+          <tr><td>대상이 다르다</td><td class="wrap">협회 홈페이지는 국내 회원·종사자용,
+              메디체크는 해외 환자용이다. 한 화면에 섞으면 양쪽 다 흐려진다</td></tr>
+          <tr><td>언어가 다르다</td><td class="wrap">협회 홈페이지는 한국어가 기준이고,
+              메디체크는 <b>영어가 기준</b>이다. 기본 언어가 다른 사이트를 하나로 묶으면 계속 어긋난다</td></tr>
+          <tr><td>읽히는 방식이 다르다</td><td class="wrap">협회 소개가 옆에 붙어 있으면
+              인증이 <b>협회 홍보물</b>로 읽힌다. <a href="01-기획서.html#s3">3장</a>에서 지키려는 것과 정면으로 부딪친다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>다만 데이터는 하나다</h3>
+    <div class="flow">
+      <span class="step">협회 홈페이지</span>
+      <span class="step on">메디체크</span>
+      <span class="arw">→ 같은 서버 · 같은 DB ←</span>
+      <span class="step">사무국 화면</span>
+    </div>
+    <p>기관 정보를 두 벌 관리하지 않는다. 사무국이 회원 화면에서 고친 것이
+       메디체크에 그대로 나오고, 기관이 포털에서 고친 것도 같은 곳에 들어간다.
+       <b>사이트가 둘이라는 것은 화면이 둘이라는 뜻이지 시스템이 둘이라는 뜻이 아니다.</b></p>
+
+    <div class="note warn">
+      <div class="h">배포 방식은 아직 정하지 않는다</div>
+      <p>협회 홈페이지는 별도 저장소로 GitHub Pages 에 나간다
+         (<a href="../../협회/docs/06-domain-map.md">도메인 지도</a>).
+         메디체크를 같은 방식으로 할지, Java 가 직접 서빙할지는 미결이다.
+         <b>다만 어느 쪽이든 API 는 같은 서버를 본다</b> — 허용 출처 목록에
+         메디체크 도메인을 더해야 하고, 그 계약은 기존 테스트가 지킨다.</p>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card" id="s9">
+    <div class="card-head"><div class="chip">9</div><h2>미결과 위험</h2></div>
+
+    <h3>먼저 정해야 하는 것</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>항목</th><th class="wrap">왜 먼저인가</th><th>정할 사람</th></tr></thead>
+        <tbody>
+          <tr><td>도메인 · 상표</td>
+              <td class="wrap">이름은 <b>메디체크 코리아로 확정됐다</b>(<a href="01-기획서.html#s1">1장</a>). 남은 것은 확보다 —
+                  도메인과 상표를 조회하고, 막히면 후보를 다시 본다.
+                  <b>이름을 화면과 인쇄물에 쓰기 시작하기 전에 끝나야 한다</b></td>
+              <td>협회</td></tr>
+          <tr><td>미회신 기한과 조치</td>
+              <td class="wrap">회신 주체는 <b>기관 직접으로 정해졌다</b>(<a href="01-기획서.html#s5">5장</a>).
+                  남은 것은 <b>며칠까지 안 오면 사무국이 개입하는가</b>와,
+                  반복 미회신을 어디까지 제재하는가다. <b>3영업일을 제안한다</b></td>
+              <td>협회</td></tr>
+          <tr><td>건당 수수료의 법적 가부</td>
+              <td class="wrap">수익 모델은 <b>인증 심사비로 정해졌다</b>(<a href="03-단계와-수익.html#s12">12장</a>).
+                  다만 3단계에서 예약을 연결하며 <b>건당 대가</b>를 받게 되면
+                  외국인환자 유치업 등록 문제가 붙는다. <b>3단계 설계 전에 법률 검토가 끝나야 한다</b></td>
+              <td>법률 검토</td></tr>
+          <tr><td>2층 심사 기준</td>
+              <td class="wrap">1층으로 시작하되, 2층을 언제 어떤 기준으로 열지는 정해 둬야
+                  기관들이 준비할 수 있다</td>
+              <td>협회</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">탈락한 후보 — 버리지 않고 남겨 둔다</div>
+      <p>도메인이나 상표가 막히면 여기서 다시 고른다. 셋 다 <b>우열·효과 암시어를 피하고
+         Medical Korea 와 겹치지 않는다</b>는 조건은 이미 통과한 이름들이다.</p>
+      <table>
+        <thead><tr><th>한글</th><th>영문</th><th class="wrap">성격</th></tr></thead>
+        <tbody>
+          <tr><td>케어 인 코리아</td><td>Care in Korea</td>
+              <td class="wrap">뜻이 즉시 읽히고 발음이 가장 쉽다. <b>다만 인증이 안 드러난다</b> — 그래서 밀렸다</td></tr>
+          <tr><td>케어패스 코리아</td><td>CarePath Korea</td>
+              <td class="wrap">환자 여정을 이름이 말한다. <a href="04-화면과-디자인.html#s15">15장</a>을 앞세우는 전략이면 이쪽이 맞다</td></tr>
+          <tr><td>코리아 케어 얼라이언스</td><td>Korea Care Alliance</td>
+              <td class="wrap">주체가 협회임을 드러낸다. KMTPA 의 Association 과 결이 같고 Council 보다 과장이 덜하다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>위험</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>위험</th><th class="wrap">어떻게 나타나나</th><th class="wrap">막는 법</th></tr></thead>
+        <tbody>
+          <tr><td>인증 신뢰 붕괴</td>
+              <td class="wrap">"돈 낸 곳만 올라간다"는 말이 한 번 퍼지면 회복이 안 된다</td>
+              <td class="wrap"><a href="01-기획서.html#s4">4장</a>의 다섯 규칙. 특히 <b>탈락 사례를 감추지 않는 것</b></td></tr>
+          <tr><td>정보 노후</td>
+              <td class="wrap">반년이면 낡는다. 조용히 진행되어 아무도 눈치채지 못한다</td>
+              <td class="wrap">기관 자율 갱신 + 갱신일 노출 + 방치 시 자동 하차 (7장)</td></tr>
+          <tr><td>빈 사이트</td>
+              <td class="wrap">등재 기관이 열 곳뿐이면 검색할 값어치가 없다</td>
+              <td class="wrap">공개 전에 <b>최소 등재 수</b>를 정하고 그때까지 열지 않는다</td></tr>
+          <tr><td>문의가 새는 것</td>
+              <td class="wrap">해외에서 문의가 왔는데 아무도 답하지 않는다. 한 건이면 충분히 치명적이다</td>
+              <td class="wrap">회신은 기관이 하되(<a href="01-기획서.html#s5">5장</a>)
+                  <b>전달 시각과 회신 시각을 남겨</b> 사무국이 미회신만 본다.
+                  <b>기관에 넘겼다는 것으로 협회 책임이 끝나지 않는다</b></td></tr>
+          <tr><td>의료광고 규제</td>
+              <td class="wrap">기관 소개문의 표현이 규제에 걸릴 수 있다</td>
+              <td class="wrap">소개문은 기관이 쓰되 <b>협회 확인 후 게시</b>. 확인 항목을 목록으로 만들어 둔다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">다음 문서</div>
+      <p>단계 · SaaS · 수익 · 언어는 <a href="03-단계와-수익.html">10~14장</a>이 이어받았고,
+         <b>경첩이던 회신 주체가 풀렸다</b> — 기관이 직접 받는다(<a href="01-기획서.html#s5">5장</a>).
+         그래서 막혀 있던 문의 화면을 그릴 수 있게 됐고,
+         <a href="07-화면-설계.html">27~32장</a>이 그것을 포함한 <b>화면 문안</b>을 맡는다.</p>
+      <p><b>남은 갈래는 인증 운영 규정</b>이다 — 등재 신청 · 확인 · 만료 · 하차의 절차와 서식.
+         <a href="01-기획서.html#s4">4장</a>의 다섯 규칙은 <b>무엇을 지킬지</b>만 말하고
+         <b>어떻게 지킬지</b>는 아직 아무 데도 없다. 그 문서가 다음이다.</p>
+    </div>
+  </div>
+
+</div>
+</main>
+
+</body>
+</html>

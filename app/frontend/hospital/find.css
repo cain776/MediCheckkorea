@@ -1,0 +1,181 @@
+/*
+ * 기관 찾기 — 거르기 상자와 기관 카드
+ *
+ * app.css 에서 갈라져 나왔다 (규칙 2 — 나누는 선은 화면 단위).
+ * app.css 맨 위의 @import 차례가 원본의 차례다. 순서를 바꾸면 같은 급 규칙의
+ * 승패가 뒤집히므로, 이 파일을 옮길 때는 그 차례도 함께 본다.
+ */
+
+/* ── 거르기 ───────────────────────────────────────────────────── */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md) 0;
+  border-bottom: var(--rule-soft);
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 12px;
+  border: var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-2);
+}
+/* 브라우저는 셀렉트 안을 제 마음대로 그린다. line-height 를 줘도 무시하고(재 봤다 —
+   값이 하나도 안 움직인다) 제 상자 17px 를 40px 칸 가운데 맞춘다. 라벨·오른쪽 텍스트는
+   20.8px 짜리 줄 상자를 가운데 맞추는데, 줄 상자 가운데와 글자 가운데는 같지 않다.
+   그래서 값 글자만 1.1px 내려앉았다. appearance 를 끄면 보통 상자가 되어 라벨과 같은
+   줄 상자를 쓰고, 그때 비로소 두 글자가 같은 baseline 에 선다.
+   화살표는 그래서 우리가 그린다. 셀렉트 안쪽 배경이라 화살표를 눌러도 목록이 열린다.
+   %23333d4b 은 브라우저가 그리던 화살표에서 그대로 뽑은 색이다 — --color-ink-2, 곧 이 칸의
+   color 값. data URI 안에서는 변수를 못 쓰니 토큰이 바뀌면 여기도 같이 고친다. */
+.field select {
+  appearance: none;
+  height: auto;
+  line-height: inherit;
+  border: 0;
+  padding: 0 20px 0 0; /* 20px — 브라우저가 화살표에 쓰던 폭과 같다. 칸 너비가 안 바뀐다 */
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7'%3E%3Cpath d='M1 1.7 5 5.6 9 1.7' fill='none' stroke='%23333d4b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center / 10px 7px;
+  font: inherit;
+  color: inherit;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.field label {
+  color: var(--color-muted-2);
+  font-weight: var(--weight-bold);
+  white-space: nowrap;
+}
+
+/* 거르기 줄의 검색칸. .field 안에 인라인 스타일로 밀어 넣지 않는다 */
+.field--search {
+  flex: 1 1 240px;
+  min-width: 200px;
+  max-width: 320px;
+}
+.field--search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: var(--weight-normal);
+  color: var(--color-ink);
+}
+.field--search input::placeholder {
+  color: var(--color-muted-3);
+  font-weight: var(--weight-normal);
+}
+
+.filters__meta {
+  margin-left: auto;
+  font-size: var(--text-sm);
+  color: var(--color-muted-2);
+  white-space: nowrap;
+}
+/* ── 기관 카드 ────────────────────────────────────────────────── */
+
+/* 카드는 전부 똑같이 생겨야 한다. 사진 크기·배지 위치·글자 크기가 기관마다
+   다르면 그 차이가 곧 등급으로 읽힌다 (19장) */
+.cards {
+  margin-top: var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 268px), 1fr));
+  gap: var(--space-md);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+  overflow: hidden;
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+.card:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+/* 사진이 없는 기관에도 같은 크기의 회색 면을 둔다 — 작게 만들거나 뒤로 밀지 않는다 */
+.card__figure {
+  position: relative;
+  flex-shrink: 0;
+}
+.card__photo {
+  height: 108px;
+  background: var(--color-surface-2) center / cover no-repeat;
+}
+
+/* 사진 아래쪽을 살짝 어둡게 해 메달이 밝은 사진 위에서도 떠 보이게 한다.
+   메달 자리(오른쪽 위)만 덮는다 — 사진 전체를 덮으면 기관마다 사진이 달라 보인다 */
+.card__figure::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 56px;
+  background: linear-gradient(to bottom, rgba(16, 24, 40, 0.28), rgba(16, 24, 40, 0));
+  pointer-events: none;
+}
+
+/* 사진 위 오른쪽 위. `.medal` 의 생김새(알약 + 점)를 그대로 쓰고 자리만 옮긴다 —
+   인증 화면의 메달과 다르게 생기면 같은 것으로 읽히지 않는다 (25장) */
+.medal--card {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  padding: 5px 10px;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.18),
+    0 6px 16px rgba(16, 24, 40, 0.16);
+}
+
+.card__body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.card__name {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+.card__meta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.card__badge {
+  margin-top: 2px;
+}
+.card__stamp {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  font-size: var(--text-xs);
+  color: var(--color-muted-2);
+  line-height: var(--leading-snug);
+}
+/* ── 좁은 화면 ────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .filters__meta {
+    margin-left: 0;
+    width: 100%;
+  }
+}

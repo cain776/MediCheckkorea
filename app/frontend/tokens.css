@@ -1,0 +1,134 @@
+/* Hallmark · macrostructure: Bento Grid · nav: N1b canonical three-section · footer: Ft1 minimal statement
+ * theme: studied-DNA (source: BNVIIT 와이어프레임 (1).html — 사용자 소유 .dc.html 번들)
+ * paper #FFFFFF · neutral ramp #191F28…#B0B8C1 · surfaces #F2F4F6/#F7F8FA/#F9FAFB · line #E5E8EB
+ * display + body: Pretendard Variable (한 벌을 굵기로 나눠 쓰는 소스의 방식 그대로)
+ * radius 10px 지배 · shadow 0 4px 12px rgba(15,23,42,.06) · container 1200px · GNB 76px
+ * 글자 크기는 소스의 열 단을 일곱 단으로 줄였다 — 12·14·16·18·22·28·40.
+ * studied: yes · DNA-source: local file (user-owned)
+ * tone: 가볍게, 중립적으로 (기획서 16장) · audience: 해외 환자 · use: 문의 보내기
+ *
+ * 소스에서 바꾼 것 — 액센트 하나.
+ * 소스는 #3182F6 을 버튼·로고·배너에 두루 쓴다(flood). 기획서 17장은 파랑을
+ * 인증에만 쓰기로 했다. 화면의 주인공이 병원 카드가 아니라 인증 배지이기 때문이다.
+ * 그래서 --color-verified 는 배지·확인 표시·인증 링크에만 나타나고,
+ * 버튼은 전부 --color-action(잉크)이다.
+ *
+ * 색은 hex 로 둔다. OKLCH 로 옮기면 기획서 17장에 적힌 값과 대조가 안 된다 —
+ * 이 팔레트는 만들어 낸 것이 아니라 문서가 이미 정해 둔 것이라 원문과 같은 표기를 지킨다.
+ */
+
+:root {
+  /* 종이와 면 — 소스 그대로 */
+  --color-paper: #ffffff;
+  --color-surface: #f7f8fa;
+  --color-surface-2: #f2f4f6;
+  --color-surface-3: #f9fafb;
+  --color-line: #e5e8eb;
+  --color-line-soft: #f2f4f6;
+
+  /* 글자 — 소스의 여섯 단 회색 램프 */
+  --color-ink: #191f28;
+  --color-ink-2: #333d4b;
+  --color-ink-3: #4e5968;
+  --color-muted: #6b7684;
+  --color-muted-2: #8b95a1;
+  --color-muted-3: #b0b8c1;
+
+  /* 인증 — 여기에만 쓴다 (17장) */
+  --color-verified: #2563eb;
+  --color-verified-ink: #1d4ed8;
+  --color-verified-soft: #eff6ff;
+
+  /* 행동 — 버튼과 헤드라인 (17장) */
+  --color-action: #14171c;
+  --color-action-hover: #333d4b;
+  --color-action-active: #000000;
+
+  /* 파란 면 위에 얹히는 것들. 인증 카드 하나에만 쓰인다 */
+  --color-on-verified: #ffffff;
+  --color-verified-line: #dbe6fd;
+  --veil-nav: rgba(255, 255, 255, 0.94);
+  --veil-chip: rgba(255, 255, 255, 0.2);
+  --veil-button: rgba(255, 255, 255, 0.16);
+  --veil-button-hover: rgba(255, 255, 255, 0.26);
+  --veil-text: rgba(255, 255, 255, 0.88);
+
+  /* 오류 — 문의가 안 나갔을 때만 */
+  --color-error: #b91c1c;
+  --color-error-soft: #fef2f2;
+
+  /* 진료과목 아이콘 배경. 분류일 뿐 우열이 아니다 — 기관에는 붙이지 않는다 (17장) */
+  --tint-1: #e8effd;
+  --tint-2: #e4f5f6;
+  --tint-3: #eeeafb;
+  --tint-4: #e7f6ec;
+  --tint-5: #fdf0e2;
+  --tint-6: #fdeaea;
+  --tint-7: #eaf0f6;
+  --tint-8: #f2f3f5;
+  /* 타일 안쪽 표시. 배경만 있으면 색칠한 빈 칸으로 보인다 */
+  --tint-1-mark: #93b4f5;
+  --tint-2-mark: #8fd0d6;
+  --tint-3-mark: #b3a4ea;
+  --tint-4-mark: #91cfa6;
+  --tint-5-mark: #efc189;
+  --tint-6-mark: #f0a3a3;
+  --tint-7-mark: #a5b8cc;
+  --tint-8-mark: #b8bec7;
+
+  --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, "Segoe UI", Roboto, sans-serif;
+
+  /* 4pt 눈금 */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 72px;
+  --space-4xl: 120px;
+
+  /* 크기 — 일곱 단. 단마다 눈에 띄게 다르다(약 1.25배씩).
+     전에는 12·13·14·15 가 따로 있었는데, 그 넷은 나란히 놓으면 구별되지 않으면서
+     "어느 것을 쓸까"만 네 번 묻게 했다. 역할 하나에 단 하나를 둔다. */
+  --text-xs: 12px;      /* 잔글씨 — 날짜 · 출처 · 캡션 */
+  --text-sm: 14px;      /* 보조 — 라벨 · 메타 · 표 머리 */
+  --text-body: 16px;    /* 본문 */
+  --text-lg: 18px;      /* 소제목 · 카드 이름 · 브랜드 */
+  --text-xl: 22px;      /* 절 제목 (h2) */
+  --text-2xl: 28px;     /* 화면 제목 (h1) */
+  --text-display: 40px; /* 첫 화면 한 줄 */
+
+  /* 굵기 둘. 500·600·800 을 두면 같은 자리에 셋 다 쓰이고, 화면마다 무게가 갈린다 */
+  --weight-normal: 400;
+  --weight-bold: 700;
+
+  /* 줄간격 셋. 제목은 붙이고, 본문은 벌리고, 그 사이가 UI 다 */
+  --leading-tight: 1.25;
+  --leading-snug: 1.5;
+  --leading-body: 1.75;
+
+  /* 모양 — 소스에서 10px 이 123회로 지배적 */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* 그림자는 거의 안 쓴다. 떠 있는 면이 많을수록 화면이 무거워진다 (19장) */
+  --shadow-soft: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-search: 0 4px 16px rgba(15, 23, 42, 0.06);
+
+  --rule: 1px solid var(--color-line);
+  --rule-soft: 1px solid var(--color-line-soft);
+
+  --container: 1200px;
+  --nav-height: 76px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+}

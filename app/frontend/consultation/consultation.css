@@ -1,0 +1,190 @@
+/* ── 온라인 상담 게시판 ───────────────────────────────────────── */
+
+/* 게시판은 표처럼 보이되 표가 아니다. 줄 하나가 눌리는 것(펴짐)이라 button 이고,
+   그래서 <table> 대신 grid 로 세운다 — 셀 안에 button 을 넣으면 줄 전체가 아니라
+   글자만 눌리게 된다. */
+
+.board__bar {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+.board__count {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+.board__count span {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-normal);
+  color: var(--color-muted);
+}
+.board__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.board__search {
+  width: 240px;
+  padding: 9px 14px;
+  border: var(--rule);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  color: var(--color-ink);
+}
+.board__search:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 1px;
+}
+
+/* 거르기용 알약. 눌린 것은 잉크로 채운다 — 파랑은 배지 몫이다 (17장) */
+.chip--button {
+  cursor: pointer;
+  font-family: inherit;
+}
+.chip--button.is-on {
+  background: var(--color-action);
+  border-color: var(--color-action);
+  color: var(--color-on-verified);
+}
+
+.board {
+  margin-top: var(--space-md);
+  border-top: 2px solid var(--color-ink);
+}
+.board__head,
+.board__line {
+  display: grid;
+  grid-template-columns: 64px 96px minmax(0, 1fr) 132px 96px 104px;
+  gap: var(--space-sm);
+  align-items: center;
+  text-align: left;
+}
+.board__head {
+  padding: 12px 8px;
+  border-bottom: var(--rule);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-muted-2);
+}
+.board__row {
+  border-bottom: var(--rule-soft);
+}
+.board__line {
+  width: 100%;
+  padding: 14px 8px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  cursor: pointer;
+}
+.board__line:hover {
+  background: var(--color-surface-3);
+}
+.board__no,
+.board__date,
+.board__author {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+/* 언어가 이 게시판의 축이다. 알약으로 세워 한눈에 갈리게 한다 */
+.board__lang {
+  justify-self: start;
+  padding: 3px 10px;
+  border: var(--rule);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  white-space: nowrap;
+}
+.board__title {
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.board__state {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+/* 답이 달린 것만 잉크로. 대기중을 빨갛게 칠하지 않는다 —
+   늦었다는 판단은 협회가 스스로에게 붙이는 딱지가 된다 */
+.board__state.is-done {
+  color: var(--color-ink);
+  font-weight: var(--weight-bold);
+}
+
+/* 펴면 물음과 답이 같은 언어로 나란히 선다 */
+.thread {
+  padding: 0 8px var(--space-lg);
+  display: grid;
+  gap: var(--space-sm);
+}
+.thread__turn {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-3);
+}
+.thread__turn--answer {
+  background: var(--color-surface-2);
+  border-left: 3px solid var(--color-ink);
+}
+.thread__turn--waiting {
+  border: 1px dashed var(--color-line);
+  background: transparent;
+}
+.thread__who {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-muted-2);
+}
+.thread__turn p {
+  margin-top: 6px;
+  font-size: var(--text-body);
+  color: var(--color-ink-2);
+  line-height: var(--leading-body);
+  /* 물음이 온 언어 그대로 선다. 언어마다 줄바꿈 규칙이 다르므로 낱말 단위로 끊는다 */
+  overflow-wrap: anywhere;
+}
+.thread__meta {
+  display: block;
+  margin-top: 8px;
+  font-size: var(--text-xs);
+  color: var(--color-muted-2);
+}
+
+/* 좁아지면 작성자와 번호를 접는다 — 남기는 것은 언어 · 제목 · 답변여부다 */
+@media (max-width: 760px) {
+  .board__head {
+    display: none;
+  }
+  .board__line {
+    grid-template-columns: 84px minmax(0, 1fr) 84px;
+    row-gap: 4px;
+  }
+  .board__no,
+  .board__author {
+    display: none;
+  }
+  .board__title {
+    white-space: normal;
+  }
+  .board__date {
+    grid-column: 2 / -1;
+  }
+  .board__search {
+    width: 100%;
+  }
+}

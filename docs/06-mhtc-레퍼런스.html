@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>레퍼런스 — Malaysia Healthcare Travel Council</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="stylesheet" href="assets/doc.css" />
+<style>
+  /* 여정 단계 — 표로 늘어놓으면 '흐름'이라는 요점이 사라진다. */
+  .journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); gap: 10px; margin: 12px 0 8px; }
+  .jstep { border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; background: #fff; }
+  .jstep .n { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; color: var(--accent-ink); }
+  .jstep .t { margin: 5px 0 4px; font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .jstep .d { font-size: 11.5px; line-height: 1.6; color: var(--muted); }
+  .jstep.new { border-color: #c7d9ff; background: #f7faff; }
+  .jstep.new .n { color: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">MHTC 레퍼런스</div>
+  <div class="brand-sub">메디체크 코리아 · 참고 자료</div>
+  <a href="#r1">1. 무엇을 보는가</a>
+  <a href="#r2">2. 사이트 골격</a>
+  <a href="#r3">3. 환자 여정 여섯 단계</a>
+  <a href="#r4">4. 한국으로 옮길 때</a>
+  <a href="#r5">5. 가져올 것 · 안 가져올 것</a>
+  <a href="#r6">6. 실제로 받아들인 것</a>
+  <div class="sep">메디체크 기획서</div>
+  <a href="01-기획서.html">1~5. 무엇을 왜 만드는가</a>
+  <a href="02-데이터와-운영.html">6~9. 데이터와 운영</a>
+  <a href="03-단계와-수익.html">10~14. 단계와 수익</a>
+  <a href="04-화면과-디자인.html">15~20. 화면과 디자인</a>
+  <a href="07-화면-설계.html">27~32 · 36~37. 화면 설계와 문안</a>
+  <a href="05-등급제-검토안.html">21~26 · 33~35. 등급제 <b>검토안</b></a>
+  <div class="sep">만든 것</div>
+  <a href="../start-server.bat">start-server.bat</a>
+  <a href="../app/README.md">앱 문서 (app/)</a>
+  <div class="sep">함께 보기</div>
+  <a href="../../협회/docs/reference/02-existing-frontend-audit.md">기존 프런트 점검</a>
+  <a href="../../협회/docs/README.md">문서 목록</a>
+</nav>
+
+<main>
+<div class="content">
+
+  <div class="topbar">
+    <div class="title">레퍼런스 — Malaysia Healthcare Travel Council</div>
+    <div class="sub">malaysiahealthcare.org · 메디체크 코리아의 주 본보기 · 갱신 2026-08-18</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="card" id="r1">
+    <div class="card-head"><div class="chip">1</div><h2>무엇을 보는가</h2></div>
+
+    <h3>한 줄</h3>
+    <p><b>국가 기관이 자국 병원을 인증해 해외 환자에게 알리는 사이트</b>다.
+       메디체크가 하려는 것과 구조가 거의 같아, Zocdoc 보다 훨씬 가까운 본보기다.</p>
+
+    <table>
+      <thead><tr><th>항목</th><th class="wrap">내용</th></tr></thead>
+      <tbody>
+        <tr><td>주소</td><td class="wrap"><code>malaysiahealthcare.org/patient-journey</code></td></tr>
+        <tr><td>운영 주체</td><td class="wrap">Malaysia Healthcare Travel Council — <b>정부 산하 기관</b></td></tr>
+        <tr><td>대상</td><td class="wrap">말레이시아를 찾는 해외 환자</td></tr>
+        <tr><td>우리와 같은 점</td><td class="wrap">인증 · 기관 목록 · 환자 여정 · 다국어</td></tr>
+        <tr><td>우리와 다른 점</td><td class="wrap"><b>정부 기관이라 권위가 기본으로 주어진다.</b>
+            협회는 그것을 따로 만들어야 한다 — 4절이 그 이야기다</td></tr>
+      </tbody>
+    </table>
+
+    <h3>배울 점 넷</h3>
+    <ul>
+      <li><b>환자 여정을 내러티브로 설계한다.</b> 정보를 나열하지 않고
+          "당신이 겪게 될 단계"로 푼다</li>
+      <li><b>단계마다 불안을 먼저 없앤다.</b> 물어보기 전에 답해 둔다</li>
+      <li><b>거버넌스 문서를 링크로 걸어 신뢰를 만든다.</b> 규정을 숨기지 않는다</li>
+      <li><b>깔끔한 타이포와 문화 모티프</b>(국화 Bunga Raya)로 친숙함과 권위를 함께 세운다</li>
+    </ul>
+  </div>
+
+  <!-- 2 -->
+  <div class="card" id="r2">
+    <div class="card-head"><div class="chip">2</div><h2>사이트 골격</h2></div>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>메뉴</th><th class="wrap">담는 것</th><th class="wrap">메디체크의 대응</th></tr></thead>
+        <tbody>
+          <tr><td>Patient resources</td>
+              <td class="wrap">Journey · Special Lane · Pre-Treatment ·
+                  Recovery &amp; Aftercare · Concierge</td>
+              <td class="wrap"><b>환자 여정</b> 한 화면으로 압축
+                  (<a href="04-화면과-디자인.html#s15">15장</a>)</td></tr>
+          <tr><td>Hospital locator</td><td class="wrap">인증 병원 찾기</td>
+              <td class="wrap"><b>기관 찾기 · 기관 상세</b>. 우리는 여기에
+                  <b>인증 배지를 앞세운다</b>(<a href="01-기획서.html#s3">3장</a>)</td></tr>
+          <tr><td>Explore MHTC</td><td class="wrap">조직 소개 · 산업 정보</td>
+              <td class="wrap"><b>안 넣는다.</b> 협회 소개가 섞이면 인증이 홍보물로 읽힌다
+                  (<a href="02-데이터와-운영.html#s8">8장</a>)</td></tr>
+          <tr><td>Support resources</td><td class="wrap">거버넌스 정책 문서</td>
+              <td class="wrap"><b>인증 기준 · 등급 분포 · 탈락 건수 공개</b>
+                  (<a href="01-기획서.html#s4">4장</a>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>FAQ 주제 — 그대로 쓸 만하다</h3>
+    <p>여정 흐름 안에 FAQ 를 녹여 둔 방식이 좋다. 주제도 한국에서 거의 그대로 통한다.</p>
+    <ul>
+      <li>출국 전 준비물</li>
+      <li>다국어 소통 — <b>무슨 언어로 응대받나</b></li>
+      <li>동반자 숙박</li>
+      <li>체류 기간</li>
+      <li>퇴원 후 케어 연속성 — <b>가장 많이 묻는 것</b></li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="card" id="r3">
+    <div class="card-head"><div class="chip">3</div><h2>환자 여정 여섯 단계</h2></div>
+
+    <h3>MHTC 의 여섯 단계</h3>
+    <div class="journey">
+      <div class="jstep"><div class="n">STEP 1</div><div class="t">Preparation</div>
+        <div class="d">서류 제출 · 비자 안내</div></div>
+      <div class="jstep"><div class="n">STEP 2</div><div class="t">Arrival</div>
+        <div class="d">미팅 · 입국 · 이민 지원</div></div>
+      <div class="jstep"><div class="n">STEP 3</div><div class="t">Consultation</div>
+        <div class="d">진단 · 상담</div></div>
+      <div class="jstep"><div class="n">STEP 4</div><div class="t">Treatment</div>
+        <div class="d">치료 계획 · 동의 절차</div></div>
+      <div class="jstep"><div class="n">STEP 5</div><div class="t">Recovery</div>
+        <div class="d">모니터링 · 후속 조치</div></div>
+      <div class="jstep"><div class="n">STEP 6</div><div class="t">Departure</div>
+        <div class="d">퇴원 · 귀국 절차</div></div>
+    </div>
+
+    <h3>메디체크판 — 여섯 단계 재정의안</h3>
+    <p>명칭과 순서를 그대로 베끼지 않는다. <b>구조적으로 한 곳이 다르기 때문이다</b> —
+       MHTC 는 병원 목록이 여정과 별개인데, <b>우리는 병원을 고르는 것이 여정의 시작</b>이다.
+       사이트의 목적 자체가 거기 있다.</p>
+    <div class="journey">
+      <div class="jstep new"><div class="n">STEP 1</div><div class="t">Before you come</div>
+        <div class="d"><b>병원 고르기</b> · 문의 보내기 · 견적 받기 · 의료비자 확인.
+          MHTC 의 1단계에 <b>기관 선택이 더해진다</b></div></div>
+      <div class="jstep new"><div class="n">STEP 2</div><div class="t">Getting here</div>
+        <div class="d">입국 · 공항에서 병원까지 · <b>통역·코디네이터 배정</b></div></div>
+      <div class="jstep new"><div class="n">STEP 3</div><div class="t">First visit</div>
+        <div class="d">검진 · 상담 · <b>치료 계획과 비용 확정</b>. 여기서 처음 금액이 확정된다</div></div>
+      <div class="jstep new"><div class="n">STEP 4</div><div class="t">Treatment</div>
+        <div class="d">시술 · 입원 · <b>환자 언어로 이뤄지는 동의 절차</b></div></div>
+      <div class="jstep new"><div class="n">STEP 5</div><div class="t">Recovery here</div>
+        <div class="d">회복 기간 체류 · 경과 확인 · 귀국 가능 시점 판단</div></div>
+      <div class="jstep new"><div class="n">STEP 6</div><div class="t">After you go home</div>
+        <div class="d"><b>진료 기록을 본국 의료진에게 전달</b> · 원격 경과 확인 ·
+          문제 생겼을 때 연락처</div></div>
+    </div>
+
+    <div class="note">
+      <div class="h">6단계가 가장 중요하다</div>
+      <p>MHTC 의 Departure 는 <b>공항까지</b>지만, 해외 환자가 실제로 두려워하는 것은
+         <b>돌아간 다음</b>이다. 그래서 마지막 단계를 "출국"이 아니라
+         <b>"귀국 후"</b>로 잡았다.
+         이 항목은 <a href="05-등급제-검토안.html#s24">등급제 검토안의 3축(사후관리)</a>과
+         같은 것을 본다 — <b>여정 화면에서 약속한 것을 심사에서 확인하는 구조</b>가 된다.</p>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card" id="r4">
+    <div class="card-head"><div class="chip">4</div><h2>한국으로 옮길 때</h2></div>
+
+    <h3>제도 앵커를 갈아 끼운다</h3>
+    <p>MHTC 화면의 신뢰는 <b>자국 제도에 걸려 있다</b>. 제도 이름을 그대로 옮기면
+       한국 환자에게는 아무 뜻이 없으므로, <b>같은 역할을 하는 한국 제도</b>로 바꿔 끼운다.</p>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>Malaysia</th><th class="wrap">한국 대체</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td>Special Lane<br><span class="tag t-plan">입국 우대</span></td>
+              <td class="wrap">의료비자 — C-3-3(단기일반) · G-1-10(의료관광)</td>
+              <td><span class="tag t-user">안내 문안 미정</span></td></tr>
+          <tr><td>MHTC<br><span class="tag t-plan">정부 산하 기관</span></td>
+              <td class="wrap"><b>협회 자체 포지션.</b> KHIDI · 메디컬코리아와 겹치지 않게 선다.
+                  근거는 <b>정부 유치기관 등록번호</b>를 빌려 온다</td>
+              <td><span class="tag t-auto">결정됨</span> <a href="01-기획서.html#s3">3장</a></td></tr>
+          <tr><td>Concierge<br><span class="tag t-plan">동행 서비스</span></td>
+              <td class="wrap">통역 · 의료코디네이터 제도</td>
+              <td><span class="tag t-user">3단계</span> <a href="03-단계와-수익.html#s11">11장</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note bad">
+      <div class="h">⚠️ 권위 톤을 그대로 가져오면 안 된다</div>
+      <p>MHTC 는 <b>정부 산하 기관</b>이라 "국가가 보증한다"는 톤이 사실에 부합한다.
+         협회는 정부가 아니다. 같은 톤을 쓰면 <b>실제 위상보다 크게 말하는 것</b>이 되고,
+         한 번 지적당하면 인증 전체가 흔들린다.</p>
+      <p>대신 <b>사실을 정확히 말하는 쪽</b>으로 간다 —
+         "협회가 보증합니다"가 아니라 <b>"정부에 등록된 기관이며, 협회가 8월 2일에 확인했습니다"</b>.
+         <a href="04-화면과-디자인.html#s18">18장의 말투 규칙</a>이 여기서 나왔다.</p>
+    </div>
+
+    <h3>디자인 톤 — 이 항목은 폐기됐다</h3>
+    <div class="note warn">
+      <div class="h">지난 검토와 달라진 것</div>
+      <p>처음에는 <b>Bunga Raya 같은 국화 모티프에 대응해 한국적 시각 언어</b>를 찾자고 적었다
+         (무궁화 직접 차용은 진부하니 단청·전통 패턴의 현대적 재해석 등).</p>
+      <p><b>이 방향은 채택하지 않았다.</b>
+         <a href="04-화면과-디자인.html#s16">15~20장</a>이
+         <b>흰 바탕 · 넓은 여백 · 파랑 하나</b>의 가벼운 톤으로 정해졌기 때문이다.
+         전통 모티프는 <b>장식이 늘어나는 방향</b>이라 "장식보다 사실" 원칙과 부딪친다.
+         국적은 무늬가 아니라 <b>이름(Korea)과 인증 근거</b>가 말한다.</p>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card" id="r5">
+    <div class="card-head"><div class="chip">5</div><h2>가져올 것 · 안 가져올 것</h2></div>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">가져올 것</th><th class="wrap">왜</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">환자 여정을 내러티브로 설계</td>
+              <td class="wrap">불안한 사람에게는 <b>목록보다 순서</b>가 잘 읽힌다</td></tr>
+          <tr><td class="wrap">단계별 불안 해소 구조</td>
+              <td class="wrap">묻기 전에 답해 두면 문의 품질이 올라간다</td></tr>
+          <tr><td class="wrap">FAQ 를 여정 흐름에 통합</td>
+              <td class="wrap">FAQ 페이지를 따로 두면 아무도 안 본다</td></tr>
+          <tr><td class="wrap">거버넌스 문서로 신뢰 확보</td>
+              <td class="wrap">우리에게는 <b>인증 기준 공개</b>가 그 자리다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">그대로 베끼지 말 것</th><th class="wrap">왜</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">6단계 명칭과 순서</td>
+              <td class="wrap">한국 실무에 맞게 다시 짰다 — 3절의 재정의안</td></tr>
+          <tr><td class="wrap">시각 디자인</td>
+              <td class="wrap">문화 코드가 다르고, 우리는 <b>가벼운 톤</b>으로 갔다</td></tr>
+          <tr><td class="wrap">"Special Lane" 같은 자국 제도명</td>
+              <td class="wrap">한국에 없는 제도다. 의료비자로 바꿔 끼운다</td></tr>
+          <tr><td class="wrap"><b>정부 기관의 권위 톤</b></td>
+              <td class="wrap">협회의 실제 위상과 맞지 않는다 — 4절</td></tr>
+          <tr><td class="wrap"><b>넓은 다국어</b></td>
+              <td class="wrap">응대할 사람이 없는 언어는 안 하느니만 못하다.
+                  <b>한국어·영어 둘</b>로 못 박았다
+                  (<a href="03-단계와-수익.html#s14">14장</a>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" id="r6">
+    <div class="card-head"><div class="chip">6</div><h2>실제로 받아들인 것</h2></div>
+
+    <p>기획서가 다섯 편으로 자라는 동안 이 레퍼런스가 어디에 어떻게 반영됐는지 정리한다.
+       <b>같은 이야기를 두 번 하지 않기 위한 색인</b>이기도 하다.</p>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">MHTC 의 것</th><th class="wrap">메디체크 결정</th><th>어디</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">환자 여정 내러티브</td>
+              <td class="wrap"><span class="tag t-auto">채택</span> 다섯 화면 중 하나로.
+                  단계는 3절대로 재정의</td>
+              <td><a href="04-화면과-디자인.html#s15">15장</a></td></tr>
+          <tr><td class="wrap">Hospital locator</td>
+              <td class="wrap"><span class="tag t-auto">채택 + 강화</span>
+                  목록에 <b>인증 배지와 두 날짜</b>를 상시 노출</td>
+              <td><a href="04-화면과-디자인.html#s19">19장</a></td></tr>
+          <tr><td class="wrap">거버넌스 문서 공개</td>
+              <td class="wrap"><span class="tag t-auto">채택</span>
+                  인증 기준 · 등급 분포 · 탈락 건수까지</td>
+              <td><a href="01-기획서.html#s4">4장</a></td></tr>
+          <tr><td class="wrap">Concierge</td>
+              <td class="wrap"><span class="tag t-user">3단계로 미룸</span>
+                  통역·코디네이터 배정은 SaaS 위에서만 성립한다</td>
+              <td><a href="03-단계와-수익.html#s10">10장</a></td></tr>
+          <tr><td class="wrap">조직 소개 메뉴</td>
+              <td class="wrap"><span class="tag t-warn">제외</span>
+                  협회 소개가 붙으면 인증이 홍보물로 읽힌다</td>
+              <td><a href="02-데이터와-운영.html#s8">8장</a></td></tr>
+          <tr><td class="wrap">정부 기관의 권위 톤</td>
+              <td class="wrap"><span class="tag t-warn">제외</span>
+                  보증하지 않고 <b>확인한 사실만</b> 말한다</td>
+              <td><a href="04-화면과-디자인.html#s18">18장</a></td></tr>
+          <tr><td class="wrap">문화 모티프 시각 언어</td>
+              <td class="wrap"><span class="tag t-warn">폐기</span>
+                  가벼운 톤과 부딪친다. 4절 참조</td>
+              <td><a href="04-화면과-디자인.html#s16">16장</a></td></tr>
+          <tr><td class="wrap">넓은 다국어</td>
+              <td class="wrap"><span class="tag t-warn">축소</span> 한국어·영어 둘</td>
+              <td><a href="03-단계와-수익.html#s14">14장</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">MHTC 에 없어서 우리가 더 만든 것</div>
+      <ul>
+        <li><b>인증 배지의 두 층 구조</b> — 정부 등록(1층)과 협회 심사(2층)를 나눈다.
+            MHTC 는 정부 기관이라 이 구분이 필요 없었다
+            (<a href="01-기획서.html#s3">3장</a>)</li>
+        <li><b>기관이 직접 고치는 페이지</b> — 정보 노후를 막는 유일한 방법
+            (<a href="02-데이터와-운영.html#s7">7장</a>)</li>
+        <li><b>기관용 SaaS</b> — 문의를 받을 창구가 없으면 예약이 성립하지 않는다
+            (<a href="03-단계와-수익.html#s11">11장</a>)</li>
+      </ul>
+    </div>
+
+    <div class="note warn">
+      <div class="h">다시 볼 시점</div>
+      <p>이 레퍼런스는 <b>1단계 화면을 그릴 때</b> 한 번 더 본다.
+         특히 환자 여정 화면의 문안을 쓸 때 MHTC 의 실제 문장을 다시 읽어
+         <b>어떤 불안에 어떤 순서로 답하는지</b>를 확인하는 것이 좋다.
+         본문 문장까지 옮겨 적어 두지는 않았다 — 필요할 때 원문을 본다.</p>
+    </div>
+  </div>
+
+</div>
+</main>
+
+</body>
+</html>

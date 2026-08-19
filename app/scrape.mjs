@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+const id = process.argv[2] || "2303";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1280, height: 1200 } });
+await p.goto(`https://medical.visitseoul.net/organization/hospital/hospitalDetail/${id}`, { waitUntil: "networkidle", timeout: 60000 });
+const text = await p.evaluate(() => document.body.innerText);
+console.log("=== TEXT ===\n" + text.slice(0, 4000));
+const imgs = await p.evaluate(() => [...document.querySelectorAll("img")].map(i => i.src).filter(s => !s.startsWith("data:")).slice(0, 20));
+console.log("=== IMG ===\n" + imgs.join("\n"));
+await b.close();

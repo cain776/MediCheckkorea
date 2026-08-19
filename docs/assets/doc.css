@@ -1,0 +1,118 @@
+/* =========================================================================
+   기획 문서 공용 스타일
+   docs/ 의 HTML 문서들이 함께 쓴다. 문서마다 <style> 를 복사해 두면
+   한 곳을 고칠 때 나머지가 따라오지 않아 문서끼리 생김새가 갈린다.
+
+   원본은 docs/sms.html 의 인라인 스타일이며, 액센트만 이 저장소 색으로 맞췄다.
+   ========================================================================= */
+
+:root {
+  --bg: #f6f6f7; --card: #ffffff; --border: #ececec; --line: #eaeaec;
+  --ink: #1f2328; --muted: #5b6470; --muted-2: #8a909a;
+  --accent: #2f6bff; --accent-soft: #e8efff; --accent-ink: #1d4ed8;
+  --radius: 16px;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased; line-height: 1.7; display: flex; }
+
+nav { width: 240px; flex-shrink: 0; padding: 26px 14px; border-right: 1px solid var(--border); background: var(--bg); overflow-y: auto; position: sticky; top: 0; height: 100vh; }
+nav .brand { font-size: 13px; font-weight: 800; color: var(--muted-2); padding: 0 12px 6px; letter-spacing: .02em; }
+nav .brand-sub { font-size: 11.5px; font-weight: 500; color: var(--muted-2); padding: 0 12px 14px; }
+nav a { display: block; padding: 8px 12px; border-radius: 9px; color: var(--muted); text-decoration: none; font-size: 13.5px; font-weight: 500; }
+nav a:hover { background: #efeff1; color: var(--ink); }
+nav .sep { margin: 14px 12px 8px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11px; font-weight: 700; color: var(--muted-2); }
+
+main { flex: 1; min-width: 0; overflow-y: auto; display: flex; justify-content: center; padding: 26px 40px 96px; }
+.content { width: 100%; max-width: 1240px; }
+.topbar { padding: 6px 4px 22px; }
+.topbar .title { font-size: 23px; font-weight: 800; letter-spacing: -0.02em; }
+.topbar .sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 34px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(16,18,29,.04); scroll-margin-top: 18px; }
+.card-head { display: flex; align-items: center; gap: 11px; margin-bottom: 18px; }
+.chip { width: 28px; height: 28px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-ink);
+  display: grid; place-items: center; flex-shrink: 0; font-size: 13px; font-weight: 800; }
+.card-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
+h3 { margin: 22px 0 8px; font-size: 14px; font-weight: 700; }
+h3:first-child { margin-top: 0; }
+p { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
+ul, ol { margin: 0 0 10px; padding-left: 18px; font-size: 14px; color: var(--muted); }
+li { margin-bottom: 4px; }
+b { color: var(--ink); font-weight: 700; }
+code { background: #f1f1f3; border-radius: 5px; padding: 1px 5px; font-size: 12.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #3b4048; }
+a { color: var(--accent-ink); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 6px 0 12px; }
+th { text-align: left; font-weight: 700; font-size: 12px; color: var(--muted-2); padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 8px 10px 8px 0; border-bottom: 1px solid #f4f4f5; color: var(--muted); vertical-align: top; }
+td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+td.wrap, th.wrap { white-space: normal; }
+
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 6px; white-space: nowrap; }
+.t-key  { background: #eef2ff; color: #4338ca; }
+.t-auto { background: #ecfdf5; color: #047857; }
+.t-user { background: #fff7ed; color: #c2410c; }
+.t-api  { background: #f5f3ff; color: #6d28d9; }
+.t-warn { background: #fef2f2; color: #b91c1c; }
+.t-plan { background: #f3f4f6; color: #4b5563; }
+
+.note { border-left: 3px solid var(--accent); background: #f7faff; padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; }
+.note.warn { border-left-color: #f59e0b; background: #fffbeb; }
+.note.bad  { border-left-color: #ef4444; background: #fef2f2; }
+.note p:last-child { margin-bottom: 0; }
+.note .h { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+
+/* 화면·구조 목업 — 스크린샷 대신 HTML 로 그린다. 라벨을 고치면 바로 따라온다. */
+.shot { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 14px 0 8px; background: #fff; }
+.shot-cap { font-size: 12px; color: var(--muted-2); margin: 0 0 18px; }
+.shot-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 9px 11px; border-bottom: 1px solid var(--line); background: #fbfbfc; font-size: 11.5px; }
+.ui { border: 1px solid #d8dbe0; border-radius: 6px; background: #fff; padding: 4px 9px; font-size: 11.5px; color: #35404f; white-space: nowrap; }
+.ui.dark { background: #1f2328; border-color: #1f2328; color: #fff; }
+.ui.blue { background: #2563eb; border-color: #2563eb; color: #fff; }
+.ui.green { background: #10b981; border-color: #10b981; color: #fff; }
+.seg { display: flex; border: 1px solid #d8dbe0; border-radius: 6px; overflow: hidden; }
+.seg > span { padding: 4px 9px; font-size: 11.5px; color: #35404f; border-left: 1px solid #e6e8ec; white-space: nowrap; }
+.seg > span:first-child { border-left: 0; }
+.seg > span.on { background: #1f2328; color: #fff; }
+.shot table { font-size: 11.5px; }
+.shot th { background: #f5f6f8; color: #4b5563; font-weight: 700; padding: 7px 9px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.shot td { padding: 7px 9px; border-bottom: 1px solid #f4f4f5; white-space: nowrap; color: var(--ink); }
+.shot td:first-child { font-weight: 400; }
+.shot .ph { color: #9aa2ad; }
+.shot .grow { flex: 1; }
+
+.pill { display: inline-block; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+.p-nav   { background: #eff6ff; color: #1d4ed8; }
+.p-bing  { background: #eff6ff; color: #0369a1; }
+.p-press { background: #f5f3ff; color: #6b21a8; }
+.p-pub   { background: #f1f5f9; color: #334155; }
+.p-ok    { background: #ecfdf5; color: #047857; }
+.p-wait  { background: #f3f4f6; color: #4b5563; }
+.scroll-x { overflow-x: auto; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0 14px; font-size: 13px; }
+.flow span.step { background: #f4f4f6; border: 1px solid var(--line); border-radius: 8px; padding: 5px 11px; font-weight: 600; color: var(--ink); }
+.flow span.arw { color: var(--muted-2); }
+.flow span.step.on  { background: var(--accent-soft); border-color: #c7d9ff; color: var(--accent-ink); }
+.flow span.step.off { background: #fff; border-style: dashed; color: var(--muted-2); }
+
+/* 색 견본 — 디자인 가이드용.
+   td 에 직접 붙이므로 display 를 바꾸지 않는다. inline-flex 를 주면 셀이
+   table-cell 이 아니게 되어 열 정렬이 무너진다. */
+.sw { white-space: nowrap; }
+.sw i { width: 15px; height: 15px; border-radius: 4px; border: 1px solid rgba(0,0,0,.08);
+  display: inline-block; vertical-align: -3px; margin-right: 6px; }
+
+/* 관계도 — ERD 용. 표 대신 박스로 그려 관계가 눈에 들어오게 한다. */
+.erd { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 6px; }
+.ent { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; min-width: 176px; background: #fff; }
+.ent > .h { background: #f5f6f8; padding: 6px 10px; font-size: 12px; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--line); }
+.ent > ul { margin: 0; padding: 7px 10px; list-style: none; font-size: 11.5px; }
+.ent > ul > li { margin: 0 0 2px; color: var(--muted); }
+.ent .k { color: #4338ca; font-weight: 700; margin-right: 5px; }
+.ent .f { color: #b45309; margin-right: 5px; }
+.ent.plan { border-style: dashed; background: #fbfbfc; }

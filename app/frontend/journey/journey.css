@@ -1,0 +1,62 @@
+/*
+ * 환자 여정 — 단계 목록
+ *
+ * app.css 에서 갈라져 나왔다 (규칙 2 — 나누는 선은 화면 단위).
+ * app.css 맨 위의 @import 차례가 원본의 차례다. 순서를 바꾸면 같은 급 규칙의
+ * 승패가 뒤집히므로, 이 파일을 옮길 때는 그 차례도 함께 본다.
+ */
+
+/* ── 환자 여정 ────────────────────────────────────────────────── */
+
+.journey {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-md);
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  border: var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+.step__no {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  color: var(--color-muted-2);
+}
+.step h2 {
+  margin-top: 6px;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+.step__lead {
+  margin-top: var(--space-xs);
+  font-size: var(--text-body);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-2);
+  line-height: var(--leading-snug);
+}
+.step__body {
+  margin-top: 6px;
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  line-height: var(--leading-body);
+}
+.step__ask {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px dashed var(--color-line);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: var(--leading-snug);
+}
+.step__ask b {
+  display: block;
+  color: var(--color-ink-2);
+  font-weight: var(--weight-bold);
+  margin-bottom: 2px;
+}

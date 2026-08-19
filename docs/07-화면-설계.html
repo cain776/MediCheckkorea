@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>메디체크 코리아 — 화면 설계와 문안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="stylesheet" href="assets/doc.css" />
+<style>
+  /* 문안은 설명하면 흐려진다. 실제로 화면에 나갈 모양 그대로 보여 준다. */
+  .copy { border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 10px;
+    background: #fff; padding: 14px 16px; margin: 10px 0 12px; }
+  .copy .lbl { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; color: var(--muted-2); margin-bottom: 8px; }
+  .copy .en { font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.55; }
+  .copy .en em { display: block; margin-top: 6px; font-style: normal; font-weight: 400; font-size: 13.5px; color: var(--muted); }
+  .copy .ko { margin-top: 10px; padding-top: 9px; border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--muted-2); line-height: 1.6; }
+  .copy.bad { border-left-color: #dc2626; }
+  .copy.bad .en { color: #7f1d1d; }
+  .mail { border: 1px solid var(--line); border-radius: 10px; background: #fbfbfc; margin: 10px 0 12px; overflow: hidden; }
+  .mail .hd { padding: 10px 14px; border-bottom: 1px solid var(--line); background: #fff; font-size: 12px; color: var(--muted-2); }
+  .mail .hd b { color: var(--ink); }
+  .mail .bd { padding: 13px 14px; font-size: 13px; color: var(--muted); line-height: 1.7; white-space: pre-line; }
+  .journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin: 12px 0 8px; }
+  .jstep { border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; background: #fff; }
+  .jstep .n { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; color: var(--accent-ink); }
+  .jstep .t { margin: 5px 0 5px; font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .jstep .d { font-size: 11.5px; line-height: 1.6; color: var(--muted); }
+  .jstep .ask { margin-top: 8px; padding-top: 7px; border-top: 1px dashed var(--line);
+    font-size: 11px; color: var(--muted-2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">메디체크 코리아</div>
+  <div class="brand-sub">MediCheck Korea · 기획서 5/5</div>
+  <a href="#s27">27. 문의 화면</a>
+  <a href="#s28">28. 인증 설명 페이지</a>
+  <a href="#s29">29. 환자 여정 문안</a>
+  <a href="#s30">30. 첫 화면 문안</a>
+  <a href="#s31">31. 빈 화면과 가장자리</a>
+  <a href="#s32">32. 문안 대장</a>
+  <a href="#s36">36. 기관 상세 — 두 층</a>
+  <a href="#s37">37. 온라인 상담</a>
+  <div class="sep">앞 문서</div>
+  <a href="01-기획서.html">← 1~5. 무엇을 왜 만드는가</a>
+  <a href="02-데이터와-운영.html">← 6~9. 데이터와 운영</a>
+  <a href="03-단계와-수익.html">← 10~14. 단계와 수익</a>
+  <a href="04-화면과-디자인.html">← 15~20. 화면과 디자인</a>
+  <div class="sep">검토 중</div>
+  <a href="05-등급제-검토안.html">21~26 · 33~35. 등급제 <b>검토안</b></a>
+  <div class="sep">만든 것</div>
+  <a href="../start-server.bat">start-server.bat</a>
+  <a href="../app/README.md">앱 문서 (app/)</a>
+  <div class="sep">함께 보기</div>
+  <a href="06-mhtc-레퍼런스.html">MHTC 레퍼런스</a>
+  <div class="sep">협회 정보 시스템</div>
+  <a href="../../협회/docs/plan/12-design-guide.html">협회 디자인 가이드</a>
+  <a href="../../협회/docs/plan/14-erd.html">데이터 모델</a>
+</nav>
+
+<main>
+<div class="content">
+
+  <div class="topbar">
+    <div class="title">메디체크 코리아 <span style="font-weight:600;color:var(--muted-2)">MediCheck Korea</span> — 화면 설계와 문안</div>
+    <div class="sub">문의 · 인증 설명 · 환자 여정 · 첫 화면 · 빈 화면 · 쓰는 말과 안 쓰는 말 · 초안 · 2026-08-18</div>
+  </div>
+
+  <div class="card">
+    <div class="note">
+      <div class="h">04 와 겹치지 않는 선</div>
+      <p><a href="04-화면과-디자인.html">15~20장</a>은 <b>어떻게 생겨야 하는가</b>를 정했다 —
+         색 · 여백 · 배치 · 가져오지 않을 것. 이 문서는 <b>거기 뭐라고 적혀 있는가</b>다.
+         영어가 원본이므로(<a href="03-단계와-수익.html#s14">14장</a>)
+         <b>영문을 먼저 쓰고 한국어를 옮긴다.</b> 이 문서의 문안 상자는 위가 영문, 아래가 한국어다.</p>
+    </div>
+    <div class="note warn">
+      <div class="h">화면이 다섯이 아니라 여섯이다</div>
+      <p><a href="04-화면과-디자인.html#s15">15장</a>은 다섯 화면으로 시작한다고 했다.
+         그런데 <a href="04-화면과-디자인.html#s19">19장</a>이 기관 상세에
+         <b>"What does this mean?"</b> 링크를 이미 만들어 두었다 — 그 링크가 갈 곳이 없다.
+         <b>인증 설명 페이지가 여섯 번째다.</b> 늘어난 것이 아니라 빠져 있던 것이고,
+         이 사이트가 파는 것이 인증인 이상(<a href="01-기획서.html#s3">3장</a>)
+         <b>사실은 이것이 가장 중요한 한 장</b>이다.</p>
+    </div>
+  </div>
+
+  <!-- 27 -->
+  <div class="card" id="s27">
+    <div class="card-head"><div class="chip">27</div><h2>문의 화면</h2></div>
+
+    <h3>한 문장</h3>
+    <p>문의 화면이 하는 일은 문의를 <b>많이</b> 받는 것이 아니라
+       <b>기관이 답할 수 있는 문의</b>를 받는 것이다.</p>
+    <p>회신은 기관이 한다(<a href="01-기획서.html#s5">5장</a>). 그러면 화면의 목표가 바뀐다 —
+       협회가 받아 정리해 넘기는 구조에서는 부실한 문의도 사람이 메꿔 줄 수 있었다.
+       이제는 <b>들어온 그대로 기관에게 간다.</b>
+       "How much?" 한 줄짜리 문의는 <b>답을 못 받고 그대로 죽고</b>,
+       그것은 환자에게도 기관에게도 이 사이트가 일하지 않았다는 뜻이 된다.</p>
+
+    <h3>묻는 것</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>칸</th><th>필수</th><th class="wrap">왜 묻나</th></tr></thead>
+        <tbody>
+          <tr><td>Your name</td><td><span class="tag t-key">필수</span></td>
+              <td class="wrap">기관이 사람을 부를 수 있어야 한다. 성과 이름을 나누지 않는다 —
+                  나누는 순간 나라마다 어긋난다</td></tr>
+          <tr><td>Email</td><td><span class="tag t-key">필수</span></td>
+              <td class="wrap"><b>유일한 회신 경로다.</b> 전화는 시차 때문에 회신 수단이 못 된다</td></tr>
+          <tr><td>Hospital</td><td><span class="tag t-auto">자동</span></td>
+              <td class="wrap">기관 상세에서 눌러 왔으므로 이미 채워져 있다.
+                  바꿀 수는 있게 두되 <b>비울 수는 없다</b> — 받을 곳 없는 문의가 생긴다</td></tr>
+          <tr><td>What do you need</td><td><span class="tag t-key">필수</span></td>
+              <td class="wrap">자유 기술. 위에 진료과목 고르기를 함께 둬서
+                  <b>빈칸 앞에서 막히지 않게</b> 한다</td></tr>
+          <tr><td>Country you're coming from</td><td><span class="tag t-plan">선택</span></td>
+              <td class="wrap">비자와 언어를 짐작하는 데 쓴다. 통계로도 쓰인다</td></tr>
+          <tr><td>Roughly when</td><td><span class="tag t-plan">선택</span></td>
+              <td class="wrap"><b>달 단위로만 받는다.</b> 이유는 아래</td></tr>
+          <tr><td>Answer me in</td><td><span class="tag t-plan">선택</span></td>
+              <td class="wrap">기본값 English. 한국어를 고를 수 있다.
+                  <b>그 외 언어는 목록에 없다</b>(<a href="03-단계와-수익.html#s14">14장</a>)</td></tr>
+          <tr><td>Do you have medical records?</td><td><span class="tag t-plan">선택</span></td>
+              <td class="wrap">예 / 아니오만. 기관이 <b>첫 회신에서 무엇을 요청할지</b> 정하는 데 쓴다.
+                  기록 자체는 여기서 안 받는다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">날짜를 묻지 않고 달을 묻는다</div>
+      <p><a href="01-기획서.html#s1">1장</a>에서 해외 환자는 시각을 못 고른다고 했다.
+         그러면 <b>달력 위젯을 두는 것 자체가 거짓말</b>이다 — 고른 날짜를 아무도 지켜 줄 수 없고,
+         고르게 하는 순간 화면이 예약처럼 읽힌다.
+         <b>"2026년 9월쯤 · 2주 정도"</b> 로 받는다. 그것이 환자가 실제로 아는 만큼이다.</p>
+    </div>
+
+    <h3>묻지 않는 것 — 이쪽이 더 중요하다</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">안 묻는 것</th><th class="wrap">왜</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">진단명 · 병력 · 검사 결과 · 환부 사진<br><span class="tag t-warn">금지</span></td>
+              <td class="wrap"><b>민감정보다.</b> 협회 상담 표에 담기는 순간 협회가 보관 책임을 진다.
+                  이건 기관과 직접 주고받을 것이고, 문의 화면은 <b>그 대화를 시작시키는 데까지</b>다</td></tr>
+          <tr><td class="wrap">여권번호 · 생년월일 · 식별번호<br><span class="tag t-warn">금지</span></td>
+              <td class="wrap">문의 단계에서 쓸 데가 없다. 받아 두면 <b>지킬 것만 늘어난다</b></td></tr>
+          <tr><td class="wrap">전화번호 필수화<br><span class="tag t-plan">선택으로</span></td>
+              <td class="wrap">시차 때문에 실제로 안 쓰이면서 이탈만 만든다. 칸은 두되 필수가 아니다</td></tr>
+          <tr><td class="wrap">예산 · 지불 방식<br><span class="tag t-warn">금지</span></td>
+              <td class="wrap"><b>물으면 답에 값이 매겨진다.</b> 같은 시술에 다른 견적이 나가는 구조를
+                  이 사이트가 만들어 주는 꼴이 된다</td></tr>
+          <tr><td class="wrap">회원가입<br><span class="tag t-warn">안 만든다</span></td>
+              <td class="wrap">한 번 문의하려고 계정을 만들지 않는다. 1단계에 로그인은 <b>기관 쪽에만</b> 있다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>보낸 다음 화면</h3>
+    <div class="copy">
+      <div class="lbl">CONFIRMATION</div>
+      <div class="en">Your inquiry is on its way to OO Medical Center.
+        <em>The hospital replies to you directly — we do not answer on their behalf.
+        You should hear back within 3 business days.
+        Nothing after that? Tell us and we will chase it: inquiry@medicheck.kr</em></div>
+      <div class="ko">문의가 OO 병원으로 갔어요.<br>
+        답장은 병원이 직접 보내요 — 협회가 대신 답하지 않아요.<br>
+        3영업일 안에 회신을 받게 돼요.<br>
+        그때까지 답이 없으면 알려 주세요. 저희가 확인할게요.</div>
+    </div>
+    <p><b>세 가지가 이 안에 다 들어 있다</b> — 어디로 갔는지, 누가 답하는지, 안 오면 어떻게 하는지.
+       <a href="04-화면과-디자인.html#s18">18장</a>의 "다음에 무슨 일이 일어나는지 말해 준다"가
+       이 화면에서 가장 크게 일한다. <b>"문의가 접수되었습니다"로 끝내면 여기서 사람을 잃는다.</b></p>
+
+    <h3>나가는 메일 둘</h3>
+    <div class="mail">
+      <div class="hd"><b>To 환자</b> · Subject: Your inquiry to OO Medical Center</div>
+      <div class="bd">We passed your inquiry to OO Medical Center on 18 Aug 2026.
+
+They answer you directly, usually within 3 business days.
+This hospital is on Korea's official register for treating patients from abroad — we checked that register on 2 Aug 2026.
+
+If no one has written to you by 21 Aug, reply to this email and we will follow up.
+
+— MediCheck Korea</div>
+    </div>
+    <div class="mail">
+      <div class="hd"><b>To 기관</b> · 제목: [메디체크] 해외 환자 문의 1건 — 3영업일 안에 회신해 주세요</div>
+      <div class="bd">메디체크 코리아를 통해 귀 기관에 문의가 들어왔습니다.
+
+· 이름 / 국가 / 희망 시기 / 응대 언어
+· 문의 내용 (환자가 쓴 그대로)
+
+이 메일에 그대로 답장하면 환자에게 갑니다.
+회신하신 뒤 아래를 눌러 주세요 — 협회는 회신 내용을 보지 않고 회신 여부만 확인합니다.
+
+[ 회신했습니다 ]
+
+3영업일이 지나면 사무국이 다시 알려 드립니다.</div>
+    </div>
+
+    <div class="note">
+      <div class="h">협회는 답을 보지 않는다 — 못 보는 것이 아니라 안 본다</div>
+      <p>기관 전달 메일의 회신 주소를 <b>환자 메일로 두면</b> 기관은 답장 버튼만 누르면 된다.
+         그러면 협회에게는 회신 내용이 남지 않는다. <b>그게 맞다.</b></p>
+      <p>협회가 알아야 하는 것은 <b>답이 갔는가</b>지 <b>뭐라고 답했는가</b>가 아니다.
+         내용을 보게 만들면 그 순간 협회가 응답 품질의 책임을 지게 되고,
+         <a href="01-기획서.html#s5">5장</a>에서 기관 직접 회신으로 정한 이유가 통째로 되돌아간다.
+         <b>협회가 보는 것은 시각 두 개뿐이다</b> — 전달한 때와 회신한 때.</p>
+    </div>
+
+    <h3>답이 안 나갈 때</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>시점</th><th class="wrap">무슨 일이 일어나나</th><th class="wrap">환자 쪽</th></tr></thead>
+        <tbody>
+          <tr><td>접수 즉시</td><td class="wrap">기관에 전달 · 전달 시각 기록</td>
+              <td class="wrap">접수 확인 화면 + 메일</td></tr>
+          <tr><td>3영업일</td><td class="wrap">기관에 재알림. 사무국 화면에 <b>미회신</b>으로 뜬다</td>
+              <td class="wrap">아무것도 안 보낸다 — 아직 늦은 것이 아니다</td></tr>
+          <tr><td>5영업일</td><td class="wrap">사무국이 기관에 직접 연락</td>
+              <td class="wrap"><b>"확인하고 있어요"</b> 를 보낸다. 침묵이 제일 나쁘다</td></tr>
+          <tr><td>반복</td><td class="wrap">갱신 심사의 사후관리 항목에 남는다
+                  (<a href="03-단계와-수익.html#s11">11장</a> ·
+                   <a href="05-등급제-검토안.html#s24">24장 1축</a>)</td>
+              <td class="wrap">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <div class="h">기한 숫자는 미결이다</div>
+      <p>3영업일 · 5영업일은 <b>제안</b>이고 협회가 정할 몫이다
+         (<a href="02-데이터와-운영.html#s9">9장</a>).
+         다만 <b>화면에 적은 기한과 실제 관리 기한이 같아야 한다</b> —
+         "3일 안에 받게 돼요"라고 써 놓고 사무국이 7일에 움직이면, 그 나흘 동안
+         이 사이트는 거짓말을 하고 있는 것이다.</p>
+    </div>
+
+    <h3>개인정보 한 줄</h3>
+    <p>문의 내용은 협회 상담 표에 남는다. 그러면 <b>얼마나 두는지</b>와
+       <b>지워 달라면 지울 수 있는지</b>를 화면에 적어야 한다.
+       동의는 체크박스 하나로 받되, <b>"동의합니다"가 아니라 무엇에 동의하는지</b>를 쓴다.</p>
+    <div class="copy">
+      <div class="lbl">CONSENT</div>
+      <div class="en">We send what you write here to the hospital you picked, and keep a copy for 2 years so we can check that they replied.
+        <em>Nothing else. You can ask us to delete it at any time.</em></div>
+      <div class="ko">여기 쓰신 내용은 고르신 병원으로 보내고, 회신 여부를 확인하려고 2년간 보관해요.<br>
+        그 밖의 용도는 없어요. 언제든 지워 달라고 하실 수 있어요.</div>
+    </div>
+  </div>
+
+  <!-- 28 -->
+  <div class="card" id="s28">
+    <div class="card-head"><div class="chip">28</div><h2>인증 설명 페이지</h2></div>
+
+    <p>배지를 보여 주기만 하고 뜻을 설명하지 않으면 해외 환자에게는 <b>모르는 도장</b>이다.
+       이 페이지는 <a href="04-화면과-디자인.html#s19">19장</a>의
+       "What does this mean?" 링크가 도착하는 곳이고,
+       <a href="01-기획서.html#s4">4장</a>의 <b>"기준을 공개한다"</b>가
+       실제로 지켜지는 유일한 자리다.</p>
+
+    <h3>답해야 할 네 질문</h3>
+    <table>
+      <thead><tr><th>질문</th><th class="wrap">답</th></tr></thead>
+      <tbody>
+        <tr><td>이게 무슨 뜻인가</td><td class="wrap">보건복지부 외국인환자 유치기관 등록부에 올라 있다</td></tr>
+        <tr><td>누가 언제 확인했나</td><td class="wrap">협회가 등록부를 직접 조회했다 · 날짜를 적는다</td></tr>
+        <tr><td><b>무엇을 확인하지 않았나</b></td><td class="wrap">아래 표 — <b>이 페이지의 심장</b></td></tr>
+        <tr><td>어떻게 없어지나</td><td class="wrap">등록이 끝나거나 취소되면 자동으로 내려가고, 내려간 기록이 남는다</td></tr>
+      </tbody>
+    </table>
+
+    <h3>확인한 것과 확인하지 않은 것</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">협회가 확인한 것</th><th class="wrap">확인하지 않은 것</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">보건복지부 등록이 <b>지금</b> 유효한가</td>
+              <td class="wrap">치료가 성공하는가</td></tr>
+          <tr><td class="wrap">그 등록번호가 <b>이 기관의 것</b>인가</td>
+              <td class="wrap">의료진 개인의 실력</td></tr>
+          <tr><td class="wrap">등록 만료일이 언제인가</td>
+              <td class="wrap">가격이 적정한가</td></tr>
+          <tr><td class="wrap">기관이 올린 정보를 언제 고쳤는가</td>
+              <td class="wrap"><b>다른 기관보다 나은가</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>오른쪽 열을 숨기고 싶은 유혹이 크지만 <b>반대다.</b>
+       확인하지 않은 것을 먼저 밝혀 두면 나중에 사고가 났을 때
+       <b>이 사이트가 무엇을 약속했는지가 문서로 남아 있다.</b>
+       그리고 이 표가 있어야 <a href="04-화면과-디자인.html#s18">18장</a>의
+       "확인한 것과 보증하는 것은 다르다"가 말이 아니라 화면이 된다.</p>
+
+    <div class="copy">
+      <div class="lbl">CERTIFICATION PAGE · HEAD</div>
+      <div class="en">What "Registered with MOHW" means
+        <em>Korea's Ministry of Health and Welfare keeps a register of institutions allowed to treat patients from abroad. This hospital is on it. We looked the hospital up on that register ourselves, and the date next to the badge is the day we looked.</em></div>
+      <div class="ko">'보건복지부 등록'이 무슨 뜻인가요<br>
+        한국 보건복지부는 해외 환자를 진료할 수 있는 기관의 등록부를 관리해요.
+        이 병원은 거기에 올라 있어요. 협회가 그 등록부를 직접 조회했고,
+        배지 옆 날짜가 조회한 날이에요.</div>
+    </div>
+    <div class="copy">
+      <div class="lbl">CERTIFICATION PAGE · LIMITS</div>
+      <div class="en">What it does not mean
+        <em>It is not a rating, and it is not a promise about your result. We did not judge prices, doctors, or whether this hospital suits you better than another one. Those are questions to ask the hospital — and the inquiry form is there for that.</em></div>
+      <div class="ko">이건 무슨 뜻이 아닌가요<br>
+        등급이 아니고, 결과에 대한 약속도 아니에요. 가격이나 의료진, 어느 병원이
+        당신에게 더 맞는지를 협회가 판단하지 않았어요. 그건 병원에 물어볼 질문이고,
+        문의 화면이 그러라고 있는 거예요.</div>
+    </div>
+    <div class="copy">
+      <div class="lbl">CERTIFICATION PAGE · HOW IT ENDS</div>
+      <div class="en">How a hospital comes off this list
+        <em>If the registration lapses or is cancelled, the hospital drops off automatically — nobody has to decide. We keep the record of every removal, with the date and the reason.</em></div>
+      <div class="ko">병원이 목록에서 내려가는 경우<br>
+        등록이 만료되거나 취소되면 자동으로 내려가요 — 누가 판단하지 않아요.
+        내려간 기록은 날짜와 사유를 붙여 전부 남겨 둬요.</div>
+    </div>
+
+    <div class="note warn">
+      <div class="h">근거가 둘이면 '확인한 것'도 둘이다 <span class="tag t-user">2026-08-18 개정</span></div>
+      <p>위 표는 보건복지부 등록을 전제로 쓰여 있다. 서울시 목록을 근거로 올라온 기관에
+         그 문장을 그대로 붙이면 <b>화면이 확인하지 않은 것을 확인했다고 말하게 된다</b>.
+         그래서 '확인한 것'은 근거별로 갈라 두고, 배지가 어느 쪽인지 이름으로 밝힌다
+         (<a href="01-기획서.html#s3">3장</a>).</p>
+      <p><b>'확인하지 않은 것' 넷은 근거와 무관하게 그대로다.</b> 치료 결과도, 의료진 실력도,
+         가격도, 어느 기관이 나은지도 협회는 어느 근거로든 보지 않는다.
+         근거가 늘어도 이 열은 늘지 않는다 — <b>그게 이 열의 요점이다.</b></p>
+    </div>
+
+    <div class="note">
+      <div class="h">지도는 배지가 말하는 범위 밖이다</div>
+      <p>기관 상세 오른쪽에 구글 지도를 넣었다. 표만 두면 넓은 화면에서 오른쪽 절반이 비고,
+         해외 환자에게 <b>주소 한 줄보다 지도 한 장이 훨씬 빨리 읽힌다.</b></p>
+      <p>다만 지도 밑에 한 줄을 붙였다 —
+         <b>"지도는 위 주소로 그린 거예요. 협회가 현장에서 위치를 확인한 것은 아니에요."</b>
+         협회가 확인한 것은 <b>공개 기록에 그 주소가 적혀 있다</b>는 사실이지
+         거기 실제로 병원이 있다는 사실이 아니다. 28장의 '확인하지 않은 것'이
+         화면에서도 그때그때 붙어야 한다.</p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">인증 화면이 탭 둘로 갈렸다 <span class="tag t-user">2026-08-18</span></div>
+      <p>이 장은 인증 설명 페이지가 답할 네 질문을 정했다. 그 답이 <b>근거마다 다르다는 것</b>이
+         드러나면서(위 개정), 그리고 <a href="05-등급제-검토안.html">협회가 직접 심사하는 등급</a>이
+         화면으로 나오면서 한 페이지에 둘이 들어가지 않게 됐다.</p>
+      <table>
+        <thead><tr><th>탭</th><th class="wrap">무엇</th><th class="wrap">왜 그 순서</th></tr></thead>
+        <tbody>
+          <tr><td>메디체크 인증</td>
+              <td class="wrap">협회가 심사해서 주는 등급. 21~26장</td>
+              <td class="wrap"><b>협회가 직접 하는 일</b>이고, 이 사이트가 결국 세우려는 것이다</td></tr>
+          <tr><td>추가 인증</td>
+              <td class="wrap">지금 배지의 근거. 이 장의 원래 내용 + 하차 기록</td>
+              <td class="wrap">남이 확인한 것을 옮겨 적는 일이다. 필요하지만 뒤에 온다</td></tr>
+        </tbody>
+      </table>
+      <p><b>탭은 주소에 남긴다</b>(<code>?tab=</code>). 남에게 보낼 수 있어야 하고,
+         뒤로 가기가 탭을 되돌려야 한다. 첫 화면의 하차 기록 링크도 그 주소를 가리킨다.</p>
+    </div>
+
+    <h3>같이 있어야 하는 것 — 하차 기록</h3>
+    <p><a href="01-기획서.html#s4">4장</a>은 <b>"탈락이 한 번도 없는 인증은 아무도 믿지 않는다"</b>고 했다.
+       그 규칙이 지켜지는지 밖에서 볼 방법은 하나뿐이다 — <b>내려간 목록을 공개하는 것.</b></p>
+    <table>
+      <thead><tr><th>열</th><th class="wrap">내용</th></tr></thead>
+      <tbody>
+        <tr><td>기관명</td><td class="wrap">등재 당시 이름 그대로</td></tr>
+        <tr><td>등재 기간</td><td class="wrap">올라간 날 ~ 내려간 날</td></tr>
+        <tr><td>사유</td><td class="wrap"><b>한 낱말만.</b> 등록 만료 / 등록 취소 / 갱신 방치 / 기관 요청</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <div class="h">비어 있을 때가 더 어렵다 <span class="tag t-user">2026-08-18</span></div>
+      <p>실제 자료를 넣으면서 지어낸 하차 기록 넷을 지웠다. 그러면 이 표가 빈다.
+         <b>빈 표를 그냥 두면 "아직 아무도 안 내려갔다"가 아니라 "이 기능이 안 만들어졌다"로 읽힌다.</b></p>
+      <p>그래서 빈 상태에 문장을 둔다 — <b>"아직 목록에서 내려간 곳이 없어요.
+         내려가면 날짜와 사유와 함께 여기에 나와요 — 조용히 지우지 않아요."</b>
+         이건 약속을 적는 자리이지 실적을 적는 자리가 아니다.</p>
+      <p>같은 이유로 인증 설명 화면은 <b>근거마다 몇 곳이 그 위에 서 있는지</b>를 적는다.
+         보건복지부 등록은 지금 <b>0곳</b>이다 — 근거를 설명해 놓고 실제로는 아무도
+         그 위에 없다면, 그 사실이 설명만큼 중요하다.</p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">사유는 사실만, 낱말 하나로</div>
+      <p>설명을 붙이면 <b>협회가 그 기관을 평가하는 문장</b>이 되고, 그건 다툼이 된다.
+         <b>"등록 만료"까지가 사실이고 그 뒤는 해석이다.</b>
+         네 낱말 밖의 사유가 생기면 그때 낱말을 하나 더 만들되,
+         <b>문장으로 쓰지 않는다</b>는 선은 지킨다.</p>
+    </div>
+  </div>
+
+  <!-- 29 -->
+  <div class="card" id="s29">
+    <div class="card-head"><div class="chip">29</div><h2>환자 여정 문안</h2></div>
+
+    <p><a href="06-mhtc-레퍼런스.html#r3">MHTC 레퍼런스 3절</a>에서 여섯 단계를 이미 재정의했다.
+       여기서는 그 여섯을 <b>화면에 나갈 문장</b>으로 만든다. 단계마다 두 덩어리다 —
+       <b>무슨 일이 일어나나</b>, 그리고 <b>병원에 물어볼 것</b>.</p>
+
+    <div class="journey">
+      <div class="jstep"><div class="n">STEP 1</div><div class="t">Before you come</div>
+        <div class="d"><b>Choosing a hospital is step one, not step zero.</b>
+          Pick a few, send inquiries, compare what comes back. Ask about the medical visa early —
+          which one you need depends on what you are having done.</div>
+        <div class="ask">물어볼 것 — 이 시술을 해 본 적이 있나요? 전부 며칠쯤 걸리나요?</div></div>
+      <div class="jstep"><div class="n">STEP 2</div><div class="t">Getting here</div>
+        <div class="d">Arrival, and the trip from the airport to the hospital.
+          Ask who meets you and in what language —
+          <b>this is arranged by the hospital, not by us.</b></div>
+        <div class="ask">물어볼 것 — 공항에서 누가 맞아 주나요? 통역이 붙나요?</div></div>
+      <div class="jstep"><div class="n">STEP 3</div><div class="t">First visit</div>
+        <div class="d"><b>This is where the price becomes real.</b>
+          Examination, consultation, then a treatment plan with a cost attached.
+          Anything quoted before this is an estimate.</div>
+        <div class="ask">물어볼 것 — 이 금액에 안 들어간 것은 무엇인가요?</div></div>
+      <div class="jstep"><div class="n">STEP 4</div><div class="t">Treatment</div>
+        <div class="d">The procedure and any hospital stay.
+          <b>Consent should happen in a language you actually read.</b>
+          If you are handed a Korean form and no translation, stop and ask.</div>
+        <div class="ask">물어볼 것 — 동의서를 제 언어로 볼 수 있나요?</div></div>
+      <div class="jstep"><div class="n">STEP 5</div><div class="t">Recovery here</div>
+        <div class="d">You usually stay in Korea for a while after treatment.
+          How long is a medical decision, not a travel one —
+          ask before you book the flight home.</div>
+        <div class="ask">물어볼 것 — 언제부터 비행기를 타도 되나요?</div></div>
+      <div class="jstep"><div class="n">STEP 6</div><div class="t">After you go home</div>
+        <div class="d"><b>The part people worry about most.</b>
+          Who do you contact if something goes wrong six time zones away?
+          And will your own doctor be able to read your records?</div>
+        <div class="ask">물어볼 것 — 진료 기록을 제 나라 의사에게 보내 주나요?</div></div>
+    </div>
+
+    <div class="note">
+      <div class="h">이 화면은 약속하지 않는다</div>
+      <p>여기 적힌 것은 <b>대체로 이렇다</b>는 뜻이지 어느 기관이 반드시 그렇게 한다는 뜻이 아니다.
+         협회는 기관의 응대를 보증할 수 없다(<a href="01-기획서.html#s4">4장</a>).
+         그래서 단계마다 <b>"물어볼 것"</b> 을 붙였다 —
+         우리가 대신 답하지 않고 <b>무엇을 물어야 하는지를 알려 주는 것</b>이
+         이 화면이 할 수 있는 가장 정직한 일이다.</p>
+      <p>그리고 이 여섯 줄의 질문은 그대로
+         <a href="05-등급제-검토안.html#s24">24장의 네 축</a>이 보는 것과 짝이 된다.
+         <b>여정 화면에서 환자에게 물어보라고 한 것을 심사에서 협회가 확인한다</b> —
+         2층을 열 때 기준을 새로 만들 필요가 없다.</p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">여정 화면에서 예약으로 이어지지 않는다</div>
+      <p>1단계에서 이 화면의 모든 출구는 <b>기관 찾기</b>와 <b>문의</b>다
+         (<a href="03-단계와-수익.html#s10">10장</a>).
+         "Book now" 비슷한 것을 두지 않는다. 3단계에 예약이 생기면
+         <b>STEP 1 과 STEP 2 사이에 그 버튼이 들어갈 자리</b>가 이미 비어 있다.</p>
+    </div>
+  </div>
+
+  <!-- 30 -->
+  <div class="card" id="s30">
+    <div class="card-head"><div class="chip">30</div><h2>첫 화면 문안</h2></div>
+
+    <h3>헤드라인 — 셋을 놓고 골랐다</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">후보</th><th class="wrap">평가</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap"><b>Which hospitals are actually verified?</b><br><span class="tag t-key">채택</span></td>
+              <td class="wrap"><b>actually 가 일한다.</b> 방문자가 이미 품고 있는 의심을 그대로 옮겨 적은 것이고,
+                  <a href="04-화면과-디자인.html#s16">16장</a>의 "질문으로 연다"에 맞는다</td></tr>
+          <tr><td class="wrap">Find a hospital in Korea you can trust</td>
+              <td class="wrap"><b>trust 가 보증형이다.</b> 우리가 믿으라고 말하는 순간
+                  <a href="04-화면과-디자인.html#s18">18장</a>의 선을 넘는다</td></tr>
+          <tr><td class="wrap">Government-registered hospitals for international patients</td>
+              <td class="wrap">정확하지만 <b>질문이 아니라 설명</b>이다. 그리고 읽는 데 힘이 든다 —
+                  첫 화면에서 힘을 쓰게 하면 안 된다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="copy">
+      <div class="lbl">HERO</div>
+      <div class="en">Which hospitals are actually verified?
+        <em>Every hospital listed here is on Korea's official register for treating patients from abroad. We check that register ourselves — and we show you the date we checked.</em></div>
+      <div class="ko">어느 병원이 정말 확인된 곳인가요?<br>
+        여기 실린 병원은 모두 한국 정부의 해외 환자 진료기관 등록부에 올라 있어요.
+        협회가 그 등록부를 직접 확인하고, 확인한 날짜를 같이 보여 드려요.</div>
+    </div>
+
+    <div class="note">
+      <div class="h">건강검진 오해는 해명하지 않고 없앤다</div>
+      <p><a href="01-기획서.html#s1">1장</a>이 이름의 감수 사항으로 <b>건강검진 사이트 오해</b>를 적고
+         "첫 화면 문구로 해소한다"고 했다. 그 해소는 <b>해명 문장이 아니다</b> —
+         서브라인에 <b>hospitals</b> 가 들어가 있고 아래에 진료과목 아이콘이 깔려 있으면
+         그 오해는 3초 안에 사라진다.</p>
+      <p><b>"저희는 건강검진 사이트가 아닙니다" 같은 줄은 절대 쓰지 않는다.</b>
+         해명은 없던 오해를 만들어 심는다.</p>
+    </div>
+
+    <div class="note">
+      <div class="h">첫 화면은 접히지 않는다 <span class="tag t-user">2026-08-18</span></div>
+      <p>질문 · 검색 · 분류 · 인증 카드까지가 <b>한 화면에 들어온다</b>(1920×1080 기준 문서 높이 1126px,
+         푸터만 접힌다). 방문자가 "여기서 무엇을 하는가"를 스크롤한 뒤에야 알면 늦다.</p>
+      <p>줄인 것은 <b>뜻이 없는 여백</b>이다 — 세로로 쌓여 있던 푸터 링크를 한 줄로 펴고,
+         인증 카드의 안쪽 여백을 줄이고, 벤토 카드 문구를 짧게 했다.
+         <a href="04-화면과-디자인.html#s16">16장</a>의 넓은 여백은 히어로에 남겨 두었다.</p>
+      <p>진료과목 타일은 <b>열두 개가 한 줄에 다 선다.</b> 잘라 두면 화면이
+         "이게 다인가?"를 답하지 못한다. 좁아지면 자르는 대신 옆으로 구른다.</p>
+    </div>
+
+    <h3>숫자 한 줄</h3>
+    <div class="copy">
+      <div class="lbl">STAT LINE</div>
+      <div class="en">34 hospitals listed · government registration re-checked in August 2026</div>
+      <div class="ko">34곳 등재 · 2026년 8월 정부 등록 재확인</div>
+    </div>
+    <p>이 줄이 하는 일은 둘이다 — <b>규모</b>와 <b>신선도</b>.
+       <a href="04-화면과-디자인.html#s20">20장</a>이 개인 활동 수치를
+       사이트 전체 사실로 바꾸라고 한 자리다.</p>
+    <div class="note warn">
+      <div class="h">숫자가 작으면 숫자를 쓰지 않는다</div>
+      <p>등재가 열 곳일 때 "10 hospitals listed"를 쓰면 <b>빈 사이트라고 광고하는 것</b>이다
+         (<a href="02-데이터와-운영.html#s9">9장</a>의 위험).
+         최소 등재 수를 넘기기 전에는 숫자를 빼고 재확인 날짜만 쓴다.
+         <b>그리고 애초에 그 전에는 사이트를 열지 않는다.</b></p>
+    </div>
+
+    <h3>세 갈래 진입</h3>
+    <table>
+      <thead><tr><th>자리</th><th class="wrap">문구</th><th class="wrap">가는 곳</th></tr></thead>
+      <tbody>
+        <tr><td>검색</td><td class="wrap">Search by specialty, region, or hospital name</td>
+            <td class="wrap">기관 찾기</td></tr>
+        <tr><td>진료과목 아이콘</td><td class="wrap">Plastic surgery · Dermatology · Ophthalmology ·
+            Health screening · Dentistry · Orthopedics · Oncology · See all</td>
+            <td class="wrap">거른 기관 찾기</td></tr>
+        <tr><td>여정</td><td class="wrap">First time coming to Korea for treatment?</td>
+            <td class="wrap">환자 여정</td></tr>
+      </tbody>
+    </table>
+    <p>배너 자리는 <b>인증 설명 카드</b>가 가져간다
+       (<a href="04-화면과-디자인.html#s20">20장</a>). 문구는 한 줄이면 된다 —
+       <b>"What does 'verified' mean here?"</b></p>
+  </div>
+
+  <!-- 31 -->
+  <div class="card" id="s31">
+    <div class="card-head"><div class="chip">31</div><h2>빈 화면과 가장자리</h2></div>
+
+    <p>이런 사이트에서 신뢰가 깨지는 곳은 잘 만든 화면이 아니라 <b>아무도 안 그린 화면</b>이다.
+       결과가 없을 때 · 기관이 내려갔을 때 · 사진이 없을 때 무엇이 보이는지가 인상을 결정한다.</p>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">상황</th><th class="wrap">화면</th><th class="wrap">왜 이렇게</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">검색 결과 0건</td>
+              <td class="wrap"><b>"No hospital matches all three filters."</b>
+                  + 가장 좁은 조건 하나를 짚어 풀어 준다 + 전체 목록으로 가는 링크</td>
+              <td class="wrap"><b>"결과가 없습니다"로 끝내면 사람이 나간다.</b>
+                  어느 조건이 문제인지 우리는 알고 있으므로 알려 준다</td></tr>
+          <tr><td class="wrap">하차한 기관 주소로 들어옴</td>
+              <td class="wrap"><b>404 를 내지 않는다.</b>
+                  "This hospital is no longer listed. Its registration expired on 2026-05-31."
+                  + 하차 기록 링크</td>
+              <td class="wrap"><a href="01-기획서.html#s4">4장</a>의
+                  <b>"내려간 기록을 남긴다"</b>가 화면에서 지켜지는 자리다.
+                  조용히 404 로 만들면 그 규칙은 문서에만 있는 것이 된다</td></tr>
+          <tr><td class="wrap">사진이 없는 기관</td>
+              <td class="wrap">같은 크기의 회색 면. 카드 크기와 위치 그대로</td>
+              <td class="wrap"><a href="04-화면과-디자인.html#s19">19장</a> —
+                  작게 만들거나 뒤로 밀면 <b>그 차이가 등급이 된다</b></td></tr>
+          <tr><td class="wrap">1년 넘게 갱신 안 된 기관</td>
+              <td class="wrap">날짜를 그대로 보여 준다. <b>경고 딱지를 붙이지 않는다</b></td>
+              <td class="wrap">딱지는 협회의 평가가 되고 곧 등급으로 읽힌다.
+                  <b>날짜는 사실이고 딱지는 판단이다</b>
+                  (<a href="02-데이터와-운영.html#s7">7장</a>)</td></tr>
+          <tr><td class="wrap">소개문이 비어 있는 기관</td>
+              <td class="wrap">빈 채로 둔다. 사무국이 대신 쓰지 않는다</td>
+              <td class="wrap">협회가 쓰면 그 문장의 책임을 협회가 진다.
+                  빈 소개문은 <b>기관이 관리를 안 한다는 사실</b> 자체이고, 그것도 정보다</td></tr>
+          <tr><td class="wrap">문의 전송 실패</td>
+              <td class="wrap">에러 문구와 함께 <b>기관 메일 주소를 화면에 그대로 노출</b></td>
+              <td class="wrap">우리 시스템이 죽었다고 환자의 문의까지 죽을 이유가 없다</td></tr>
+          <tr><td class="wrap">등재 기관이 최소 수 미만</td>
+              <td class="wrap"><b>사이트를 열지 않는다</b></td>
+              <td class="wrap"><a href="02-데이터와-운영.html#s9">9장</a> —
+                  빈 목록은 한 번 보이면 다시 안 온다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">하차 화면이 이 사이트에서 제일 이상한 화면이다</div>
+      <p>보통 사이트는 없어진 항목을 지우거나 404 로 보낸다. 우리는 <b>일부러 남긴다.</b>
+         내려간 기관 페이지가 <b>내려갔다는 사실을 말하는 페이지로 살아 있는 것</b>,
+         그것이 <a href="01-기획서.html#s3">3장</a>의 "협회가 확인했다"를
+         가장 세게 증명한다 — <b>확인이 실제로 작동하면 떨어지는 곳이 생긴다.</b></p>
+    </div>
+  </div>
+
+  <!-- 32 -->
+  <div class="card" id="s32">
+    <div class="card-head"><div class="chip">32</div><h2>문안 대장</h2></div>
+
+    <h3>쓰지 않는 말</h3>
+    <p>의료광고 규제와 <a href="01-기획서.html#s4">4장</a> ·
+       <a href="04-화면과-디자인.html#s18">18장</a>이 같은 곳을 가리킨다.
+       아래 낱말은 <b>영문에도 국문에도 쓰지 않는다.</b></p>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>안 쓰는 말</th><th>국문</th><th class="wrap">왜</th></tr></thead>
+        <tbody>
+          <tr><td>best · top · leading · No.1</td><td>최고 · 1등 · 대표</td>
+              <td class="wrap">우열 암시. 이름을 고를 때부터 피한 것이다(<a href="01-기획서.html#s1">1장</a>)</td></tr>
+          <tr><td>guarantee · ensure · promise</td><td>보장 · 책임집니다</td>
+              <td class="wrap"><b>확인과 보증은 다르다.</b> 이 차이가 사업의 안전선이다</td></tr>
+          <tr><td>safe · risk-free · worry-free</td><td>안전한 · 걱정 없는</td>
+              <td class="wrap">효과와 안전을 암시한다. 결과를 우리가 말할 수 없다</td></tr>
+          <tr><td>world-class · premium · elite</td><td>세계적 수준 · 프리미엄</td>
+              <td class="wrap">근거가 없다. 근거 없는 말은 배지의 근거까지 의심하게 만든다</td></tr>
+          <tr><td>trusted · reliable</td><td>믿을 수 있는</td>
+              <td class="wrap">판단을 우리가 대신하는 말이다. <b>판단은 읽는 사람이 한다</b></td></tr>
+          <tr><td>government-approved · accredited</td><td>정부 승인 · 정부 인증</td>
+              <td class="wrap"><b>사실이 아니다.</b> 등록이지 승인이 아니다.
+                  <a href="06-mhtc-레퍼런스.html#r4">MHTC 의 권위 톤을 안 가져온 이유</a>가 이것이다</td></tr>
+          <tr><td>certified by KMTPA <span class="tag t-warn">1층에</span></td><td>협회 인증</td>
+              <td class="wrap">1층은 협회가 인증한 것이 아니라 <b>확인한 것</b>이다.
+                  '인증'은 2층이 열린 뒤에만 쓴다(<a href="01-기획서.html#s3">3장</a>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="copy bad">
+      <div class="lbl">이렇게 쓰면 안 된다</div>
+      <div class="en">Certified by KMTPA · Trusted hospitals for safe medical travel in Korea</div>
+      <div class="ko">한 줄에 위반이 셋이다 — <b>Certified</b>(1층에 못 쓴다) ·
+        <b>Trusted</b>(판단 대행) · <b>safe</b>(안전 암시).</div>
+    </div>
+    <div class="copy">
+      <div class="lbl">이렇게 쓴다</div>
+      <div class="en">Registered with MOHW · verified by KMTPA on 2 Aug 2026</div>
+      <div class="ko">보건복지부 등록 · 협회가 2026년 8월 2일에 확인</div>
+    </div>
+
+    <h3>쓰는 말</h3>
+    <table>
+      <thead><tr><th>영문</th><th>국문</th><th class="wrap">쓰는 자리</th></tr></thead>
+      <tbody>
+        <tr><td>registered · on the register</td><td>등록된</td>
+            <td class="wrap">정부 등록 사실. 1층 배지</td></tr>
+        <tr><td>verified on &lt;date&gt;</td><td>확인했어요 · 확인일</td>
+            <td class="wrap">협회가 조회한 날. <b>날짜 없이 쓰지 않는다</b></td></tr>
+        <tr><td>listed</td><td>등재된</td><td class="wrap">이 사이트에 실려 있다는 사실</td></tr>
+        <tr><td>listed by &lt;누가&gt;</td><td>&lt;누가&gt; 목록에 올린</td>
+            <td class="wrap"><b>등록이 아닌 근거.</b> 서울시 협력기관처럼 등록번호가 없는 목록</td></tr>
+        <tr><td>checked on &lt;date&gt;</td><td>확인한 날</td>
+            <td class="wrap">등록부가 아니라 <b>목록</b>을 읽었을 때. verified 와 섞어 쓰지 않는다</td></tr>
+        <tr><td>no longer listed</td><td>내려간</td><td class="wrap">하차. '삭제'나 '제외'가 아니다</td></tr>
+        <tr><td>updated &lt;date&gt;</td><td>마지막 갱신</td><td class="wrap">기관이 정보를 고친 날</td></tr>
+      </tbody>
+    </table>
+
+    <h3>핵심 문구 한·영 대장</h3>
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th class="wrap">자리</th><th class="wrap">영문 (원본)</th><th class="wrap">국문</th></tr></thead>
+        <tbody>
+          <tr><td class="wrap">1층 배지 · MOHW</td><td class="wrap">Registered with MOHW</td>
+              <td class="wrap">보건복지부 등록</td></tr>
+          <tr><td class="wrap">1층 배지 · 서울시</td><td class="wrap">Listed by Seoul Medical Tourism</td>
+              <td class="wrap">서울시 의료관광 협력기관</td></tr>
+          <tr><td class="wrap">서울시 근거의 확인일</td><td class="wrap">Checked by KMTPA on 2 Aug 2026</td>
+              <td class="wrap">협회가 2026년 8월 2일에 확인</td></tr>
+          <tr><td class="wrap">근거 보기 링크</td><td class="wrap">See the source ↗</td>
+              <td class="wrap">원문 보기 ↗</td></tr>
+          <tr><td class="wrap">배지 아래 줄</td>
+              <td class="wrap">Reg. no. 00-000-0000 · verified by KMTPA on 2 Aug 2026</td>
+              <td class="wrap">등록번호 00-000-0000 · 협회가 2026년 8월 2일에 확인</td></tr>
+          <tr><td class="wrap">배지 설명 링크</td><td class="wrap">What does this mean?</td>
+              <td class="wrap">이게 무슨 뜻인가요?</td></tr>
+          <tr><td class="wrap">문의 버튼</td><td class="wrap">Send an inquiry</td>
+              <td class="wrap">문의 보내기</td></tr>
+          <tr><td class="wrap">목록 정렬</td><td class="wrap">Sorted by name</td>
+              <td class="wrap">기관명 순</td></tr>
+          <tr><td class="wrap">갱신일</td><td class="wrap">Updated 11 Aug 2026</td>
+              <td class="wrap">2026년 8월 11일 갱신</td></tr>
+          <tr><td class="wrap">접수 확인</td><td class="wrap">The hospital replies to you directly.</td>
+              <td class="wrap">답장은 병원이 직접 보내요.</td></tr>
+          <tr><td class="wrap">하차 안내</td><td class="wrap">This hospital is no longer listed.</td>
+              <td class="wrap">이 병원은 목록에서 내려갔어요.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <div class="h">거르기 값도 문안이다 <span class="tag t-user">2026-08-18</span></div>
+      <p>실제 자료를 넣고 나서야 보였다. 진료과목과 응대 언어는 자료에 <b>영어로만</b>,
+         지역은 <b>한글로만</b> 들어 있었다. 화면이 그대로 쓰니 어느 쪽 언어에서도 섞였다 —
+         한국어 화면에 <b>'Plastic surgery · 강남구'</b>, 영어 화면에도 <b>'Plastic surgery · 강남구'</b>.
+         <b>둘 다 반쪽만 맞다.</b></p>
+      <p>이 대장에 넣지 않고 <code>label</code> 표에 뒀다.
+         <a href="02-데이터와-운영.html#s6">journey_step · certification_scope</a> 와 같은 이유다 —
+         자료에 새 과목이 생겼을 때 <b>화면을 다시 빌드하지 않고 자료만 넣으면 되게.</b>
+         이름을 아직 안 단 값은 <b>자료가 쓰는 말을 그대로 보여 준다</b>. 빈칸보다 낫다.</p>
+      <p>거르기 상자는 <b>보이는 글자만 바꾸고 보내는 값은 자료의 말 그대로</b> 둔다.
+         보이는 글자를 보내면 언어를 바꾸는 순간 거르기가 0건이 된다.</p>
+    </div>
+
+    <div class="note">
+      <div class="h">국문은 번역이 아니라 대응이다</div>
+      <p>영어가 원본이지만(<a href="03-단계와-수익.html#s14">14장</a>)
+         국문을 <b>직역하면 어색해지고 말투 규칙이 깨진다.</b>
+         위 대장에서 국문은 <b>같은 뜻을 한국어 말투로 다시 쓴 것</b>이다.
+         새 문구가 생기면 이 대장에 두 줄로 함께 넣는다 —
+         <b>한쪽만 고치면 반드시 갈린다.</b></p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">남은 것</div>
+      <p>이 문서로 <b>화면에 들어갈 말</b>은 정해졌다. 실제로 그리려면 아직 둘이 남는다.</p>
+      <ul>
+        <li><b>로고 · 아이콘 세트 · 사진 규격</b> —
+            <a href="02-데이터와-운영.html#s9">도메인·상표 확보</a>가 먼저다.
+            이름이 막히면 전부 다시 해야 한다</li>
+        <li><b>인증 운영 규정</b> — 등재 신청 · 확인 · 만료 · 하차의 절차와 서식.
+            <a href="01-기획서.html#s4">4장</a>은 <b>무엇을 지킬지</b>만 말하고
+            <b>누가 어떤 순서로 지킬지</b>는 아직 어디에도 없다.
+            28장의 하차 기록도 그 규정이 있어야 실제로 채워진다</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- 36 -->
+  <div class="card" id="s36">
+    <div class="card-head"><div class="chip">36</div><h2>기관 상세 — 두 층</h2></div>
+
+    <p>기관을 눌러 들어간 사람이 다음에 하려는 일은 정해져 있다. <b>연락</b>이다.
+       그런데 화면에는 협회가 확인한 것(배지와 그 옆 두 줄)밖에 없었고, 진료 시간도
+       전화번호도 없었다. 그래서 사람들은 이 화면을 거쳐 <b>서울시 페이지로 되돌아갔다.</b></p>
+
+    <p>정보를 채우면 새 문제가 생긴다. <b>협회가 확인하지 않은 값이 확인한 값 옆에 서면
+       구별이 사라진다.</b> 병상 수와 진료 시간까지 협회가 확인해 준 것처럼 읽히는 순간
+       <a href="#s28">28장</a>이 무너진다. 그래서 화면을 <b>두 층</b>으로 나눴다.</p>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th>층</th><th class="wrap">무엇이 있나</th><th class="wrap">어떻게 다르게 보이나</th></tr></thead>
+        <tbody>
+          <tr><td><b>위층</b><br>협회가 확인한 것</td>
+              <td class="wrap">사진 · 기관명 · 진료과목 · 배지와 그 옆 두 줄(누가 언제 확인했는지) ·
+                  <b>원문 링크</b> · 소개문 · 문의 버튼</td>
+              <td class="wrap">화면 맨 위. 파랑은 여기에만 쓴다
+                  (<a href="04-화면과-디자인.html#s17">17장</a>)</td></tr>
+          <tr><td><b>아래층</b><br>기관이 제출한 것</td>
+              <td class="wrap">응대 언어 · 특화진료 · 시설(의료진 수 · 병상 수) · 운영시간 ·
+                  홈페이지 · 이메일 · 연락처 · 찾아오는 길</td>
+              <td class="wrap">표 위에 <b>출처 쪽지</b>가 먼저 붙는다 —
+                  "서울시 목록에서 옮겨 적음 · 협회가 확인하지는 않았다 · 읽은 날"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">출처 쪽지는 표 위에 있어야 일한다</div>
+      <p>같은 문장을 표 <b>아래</b>에 두면 다 읽은 뒤에 알게 된다. 그때는 이미 그 값들을
+         협회가 확인한 것으로 읽은 뒤다. 밝히는 문장은 <b>읽기 전에</b> 나와야 한다.</p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">27장의 결정을 뒤집었다 — 연락처를 받아 둔다</div>
+      <p><a href="02-데이터와-운영.html#s6">6장</a>의 자료를 처음 받을 때
+         이메일과 전화번호를 <b>일부러 두고 왔다</b>: "화면이 쓰지 않는 데다,
+         받아 두면 지킬 것만 늘어난다." 이제 화면이 쓴다.</p>
+      <p>대신 지킬 것이 늘었다는 사실도 그대로 남는다 — 이 값들은 <b>공개된 자료를 옮겨 적은
+         것</b>이고 협회가 관리하는 값이 아니다. 기관이 자기 정보를 직접 고치는 길
+         (<a href="02-데이터와-운영.html#s7">7장</a>)이 열리면 이 칸들은 기관의 것이 되고,
+         지금 값은 그때까지의 초기값이다.</p>
+    </div>
+
+    <div class="note bad">
+      <div class="h">⚠️ 공개 전에 정해야 할 것</div>
+      <ul>
+        <li>연락처 중에 <b>개인 휴대전화 번호</b>로 보이는 것이 있다. 공개된 목록에 실려 있어도,
+            협회 사이트가 다시 싣는 것은 별개의 판단이다</li>
+        <li>운영시간·병상 수는 <b>기관이 서울시에 제출한 시점의 값</b>이다. 우리가 읽은 날은
+            적지만, 기관이 제출한 날은 우리도 모른다 — 그 사실을 쪽지에 적을지 정해야 한다</li>
+        <li>영문 화면에서도 소개문·운영시간·특화진료가 <b>한국어 그대로</b> 나온다.
+            원문에 영문이 없고, 협회가 옮겨 적으면 그 번역의 책임을 협회가 진다
+            (<a href="02-데이터와-운영.html#s7">7장</a>의 영문명과 같은 문제)</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- 37 -->
+  <div class="card" id="s37">
+    <div class="card-head"><div class="chip">37</div><h2>온라인 상담</h2></div>
+
+    <p><a href="01-기획서.html#s5">5장</a>의 문의는 <b>기관을 고른 사람</b>의 것이다.
+       기관을 고르기 전에 묻고 싶은 것 — "여기 병원들은 누가 확인한 건가요",
+       "몽골어로 응대되는 곳이 있나요", "비자는요" — 은 갈 자리가 없었다.
+       협회 사이트에는 이미 그 자리(1:1 상담 게시판)가 있고, 이 화면은 그것을
+       <b>해외 환자 쪽으로 옮겨 온 것</b>이다.</p>
+
+    <div class="scroll-x">
+      <table>
+        <thead><tr><th></th><th class="wrap">문의 (Send an inquiry)</th><th class="wrap">온라인 상담 (여기)</th></tr></thead>
+        <tbody>
+          <tr><td>받는 사람</td>
+              <td class="wrap"><b>기관 한 곳</b></td>
+              <td class="wrap"><b>협회 사무국</b></td></tr>
+          <tr><td>답하는 사람</td>
+              <td class="wrap">기관. <b>협회는 회신 내용을 보지 않는다</b>
+                  (<a href="01-기획서.html#s5">5장</a>)</td>
+              <td class="wrap">협회. 답이 <b>공개로 남는다</b></td></tr>
+          <tr><td>남는 것</td>
+              <td class="wrap">보낸 시각과 회신 시각 둘뿐
+                  (<a href="02-데이터와-운영.html#s6">6장</a>의 <code>consultation</code>)</td>
+              <td class="wrap">물음과 답 본문. 다음 사람이 읽는다
+                  (<code>consultation_post</code>)</td></tr>
+          <tr><td>답할 수 없는 것</td>
+              <td class="wrap">—</td>
+              <td class="wrap">가격 · 대기 기간 · 그 치료가 본인에게 맞는지.
+                  <b>기관이 정하는 것이므로 문의로 넘긴다</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="h">언어가 이 화면의 축이다</div>
+      <p><b>물음이 온 언어로 답한다.</b> 한국어로 써 놓고 자동 번역을 붙이지 않는다 —
+         번역이 틀리면 그 문장의 책임은 협회가 진다
+         (<a href="02-데이터와-운영.html#s7">7장</a>의 영문명과 같은 문제).
+         목록은 언어로 거를 수 있고, 글을 펴면 물음과 답이 같은 언어로 나란히 선다.</p>
+      <p>언어 이름은 <code>medicheck_label</code> 의 LANGUAGE 코드를 그대로 쓴다.
+         기관 목록의 언어 거르기와 <b>같은 사전</b>이라 화면마다 이름이 갈리지 않는다.</p>
+    </div>
+
+    <div class="note">
+      <div class="h">답이 없는 글도 목록에 남긴다</div>
+      <p>답변완료만 보여 주면 게시판이 실제보다 부지런해 보인다. 대기중을 그대로 두고
+         건수도 위에 적는다 — <a href="01-기획서.html#s4">4장</a>이
+         "탈락이 한 번도 없는 인증은 아무도 믿지 않는다"고 한 것과 같은 이유다.
+         대신 <b>대기중에 빨간 딱지를 붙이지 않는다.</b> 늦었다는 판단은 협회가
+         스스로에게 붙이는 평가가 되고, 그러면 답을 서둘러 짧게 쓰게 된다.</p>
+    </div>
+
+    <div class="note warn">
+      <div class="h">운영을 시작하기 전에 정해야 할 것</div>
+      <ul>
+        <li><b>누가 답하나.</b> 지금 화면은 답변자를 '협회 사무국'으로 적는다.
+            사람 이름을 적을지, 부서로 둘지</li>
+        <li><b>며칠 안에 답하나.</b> 적어 두면 지켜야 하고, 안 적으면 대기중이 쌓여도
+            아무도 책임지지 않는다</li>
+        <li><b>비공개 글을 받을지.</b> 협회 게시판은 자물쇠(비공개)가 기본인데,
+            비공개면 <b>다음 사람이 읽지 못한다</b> — 이 화면의 값어치 절반이 거기서 나온다</li>
+        <li><b>작성자 표시.</b> 지금은 마스킹(<code>A*******н</code>)이다.
+            글쓰기를 열 때 무엇을 받고 무엇을 안 받을지는
+            <a href="01-기획서.html#s5">5장</a>의 최소 수집 원칙을 따른다</li>
+        <li><b>글쓰기 화면.</b> 지금은 <b>읽기만</b> 있다. 쓰기를 열면 스팸과
+            의료 상담(진단 요구)이 들어오고, 그 둘을 어떻게 거를지가 곧 운영 부담이 된다</li>
+      </ul>
+    </div>
+
+    <div class="note bad">
+      <div class="h">⚠️ 지금 실려 있는 12건은 샘플이다</div>
+      <p>여러 언어에서 어떻게 보이는지 확인하려고 지어 넣은 글이고 실제 상담이 아니다.
+         <code>consultation_post.is_sample = 1</code> 로 표시해 두었으므로
+         <b>지우는 것은 한 줄</b>이다 — <code>DELETE FROM consultation_post WHERE is_sample = 1;</code>
+         <a href="../app/README.md">app/README.md</a> 의 <b>「공개 전에 되돌릴 것」</b>
+         목록에도 같은 줄이 있다.</p>
+    </div>
+  </div>
+
+</div>
+</main>
+
+</body>
+</html>

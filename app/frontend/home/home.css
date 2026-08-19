@@ -1,0 +1,468 @@
+/*
+ * 첫 화면 — 도입 영상 · 히어로 · 벤토
+ *
+ * app.css 에서 갈라져 나왔다 (규칙 2 — 나누는 선은 화면 단위).
+ * app.css 맨 위의 @import 차례가 원본의 차례다. 순서를 바꾸면 같은 급 규칙의
+ * 승패가 뒤집히므로, 이 파일을 옮길 때는 그 차례도 함께 본다.
+ */
+
+/* ── 영상 위에 얹힌 막대 (첫 화면 도입부) ──────────────────────────
+   영상이 막대 뒤까지 올라와 있는 동안만 붙는다. 붙이고 떼는 판단은 Nav() 가 하고,
+   여기서는 그때의 생김새만 정한다. 영상이 지나가면 위의 흰 막대로 돌아온다.
+   파랑은 여기 한 톨도 없다 — 배지 몫이다 (17장).
+   ──────────────────────────────────────────────────────────── */
+.nav--over {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+.nav--over .nav__word,
+.nav--over .nav__link {
+  color: var(--color-on-verified);
+  /* 영상은 프레임마다 밝기가 달라진다. 흰 장면에서 흰 글자가 사라지지 않게 붙든다. */
+  text-shadow: 0 1px 16px rgba(20, 23, 28, 0.6);
+}
+/* 잉크 네모는 어두운 장면에서 통째로 사라진다. 영상 위에서만 뒤집어 흰 네모로 세운다. */
+.nav--over .nav__mark {
+  background: var(--color-on-verified);
+  color: var(--color-action);
+}
+.nav--over .nav__link:hover {
+  background: var(--veil-button-hover);
+}
+.nav--over .nav__link[aria-current="page"] {
+  background: var(--veil-button);
+  color: var(--color-on-verified);
+}
+.nav--over .lang {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: var(--veil-button);
+  backdrop-filter: blur(6px);
+}
+.nav--over .lang button {
+  color: var(--veil-text);
+}
+.nav--over .lang button:hover {
+  background: var(--veil-button-hover);
+}
+.nav--over .lang button[aria-pressed="true"] {
+  background: var(--color-on-verified);
+  color: var(--color-ink);
+}
+
+/* ── 도입 영상 (외주 전달용 샘플) ─────────────────────────────── */
+
+/* 이 절만 컨테이너 밖에 있다. 폭을 가두면 "한 판" 느낌이 안 난다. */
+.intro {
+  /* 막대가 이 절 위에 얹히므로 영상은 첫 화면을 통째로 덮는다. 내비는 sticky 라
+     흐름에서 자리를 먹는데, 그 자리만큼 끌어올려 영상이 막대 뒤까지 올라가게 한다. */
+  --intro-h: 100svh;
+  /* 유튜브 제목 막대와 아래 조작 막대를 화면 밖으로 밀어내려고 실제 크기보다 키워 잡는다.
+     transform 으로 늘이지 않는 이유는, 처음부터 큰 크기로 그려야 흐릿해지지 않아서다. */
+  --intro-zoom: 1.45;
+  position: relative;
+  /* -1px 은 막대의 아래 실선 몫이다. --nav-height 는 안쪽 높이만 세므로 이걸 빼지 않으면
+     영상 맨 위에 1px 짜리 흰 줄이 남는다 — 전면 영상에서는 그 한 줄이 눈에 띈다. */
+  margin-top: calc(-1 * var(--nav-height) - 1px);
+  height: var(--intro-h);
+  min-height: 420px;
+  max-height: 900px;
+  margin-bottom: var(--space-xl);
+  overflow: hidden;
+  background: var(--color-ink);
+  isolation: isolate;
+}
+
+/* 유튜브는 16:9 로만 준다. 뷰포트가 그보다 좁거나 넓으면 검은 띠가 생기므로
+   두 축 중 모자란 쪽에 맞춰 키우고, 넘치는 만큼은 잘라 낸다.
+   포인터를 끄는 이유는 영상 위 클릭을 아래 버튼이 받아야 하기 때문이다 —
+   유튜브 안쪽으로 클릭이 들어가면 유튜브로 떠난다. */
+.intro__frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.intro__frame iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--intro-h) * 16 / 9 * var(--intro-zoom));
+  height: calc(var(--intro-h) * var(--intro-zoom));
+  min-width: calc(100vw * var(--intro-zoom));
+  min-height: calc(100vw * 9 / 16 * var(--intro-zoom));
+  border: 0;
+}
+
+/* 글자가 영상 위에서 읽혀야 한다. 아래로 갈수록 짙게 깔아 다음 절과도 이어 준다. */
+.intro__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 23, 28, 0.34) 0%,
+    rgba(20, 23, 28, 0.1) 30%,
+    rgba(20, 23, 28, 0.55) 66%,
+    rgba(20, 23, 28, 0.86) 100%
+  );
+}
+
+.intro__body {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl) var(--space-md) var(--space-2xl);
+  text-align: center;
+  color: var(--color-on-verified);
+}
+
+.intro__line {
+  max-width: 22ch;
+  font-size: clamp(var(--text-2xl), 4.4vw, var(--text-display));
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  text-wrap: balance;
+  /* 영상은 프레임마다 밝기가 달라진다. 그늘만 믿으면 흰 장면에서 글자가 사라진다. */
+  text-shadow: 0 1px 24px rgba(20, 23, 28, 0.55);
+}
+
+/* 배지가 아니므로 파랑을 쓰지 않는다 (17장). 영상 위라 흰 테두리로만 세운다. */
+.intro__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 44px;
+  padding: 0 var(--space-lg);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius-pill);
+  background: rgba(20, 23, 28, 0.28);
+  backdrop-filter: blur(6px);
+  color: var(--color-on-verified);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.intro__cue:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(20, 23, 28, 0.45);
+}
+.intro__cue svg {
+  animation: intro-bob 1.9s var(--ease-in-out) infinite;
+}
+@keyframes intro-bob {
+  0%, 100% { transform: translateY(-1px); }
+  50% { transform: translateY(2px); }
+}
+
+.intro__source {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* 움직임을 줄여 달라고 한 사람에게는 흔들지 않는다. 자동 재생은 Home.jsx 가 끈다. */
+@media (prefers-reduced-motion: reduce) {
+  .intro__cue svg {
+    animation: none;
+  }
+  .intro__frame {
+    pointer-events: auto;
+  }
+}
+/* ── 첫 화면 ──────────────────────────────────────────────────── */
+
+.page {
+  padding: var(--space-2xl) 0 var(--space-4xl);
+}
+
+/* 첫 화면은 한 눈에 들어와야 한다. 질문 · 검색 · 분류까지가 접히면
+   방문자는 "여기서 무엇을 하는가"를 스크롤한 뒤에야 안다. */
+.page--home {
+  /* 도입 영상이 화면 맨 위에서 시작해야 한다. 여백을 남기면 영상 위에 흰 띠가 생긴다. */
+  padding-top: 0;
+  padding-bottom: var(--space-lg);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-md) 0 var(--space-lg);
+}
+
+/* 첫 문장은 한 줄이다. 16ch 로 묶어 두면 넓은 화면에서도 세 줄로 접힌다 —
+   좁아졌을 때만 balance 로 나눠 준다. */
+.hero__title {
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  text-align: center;
+  line-height: var(--leading-tight);
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+.hero__lead {
+  margin-top: var(--space-sm);
+  text-align: center;
+  font-size: var(--text-body);
+  color: var(--color-ink-3);
+  line-height: var(--leading-body);
+}
+
+.search {
+  margin-top: var(--space-md);
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: 64px;
+  padding: 0 8px 0 20px;
+  border: var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-search);
+}
+.search:focus-within {
+  border-color: var(--color-muted-3);
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+.search input::placeholder {
+  color: var(--color-muted-2);
+}
+.search .btn {
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.stat-line {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-muted-2);
+  text-align: center;
+}
+
+/* 한 줄에 다 선다. 좁아질 때만 옆으로 구르고, 자를 바에는 구르는 편이 낫다 —
+   잘라 두면 화면이 "이게 다인가?" 를 답하지 못한다. */
+.tiles {
+  margin-top: var(--space-md);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.tiles::-webkit-scrollbar {
+  display: none;
+}
+
+.tile {
+  flex: 0 0 auto;
+  width: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) 2px;
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-sm);
+}
+.tile i {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  display: grid;
+  place-items: center;
+  transition: border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+.tile i svg {
+  width: 28px;
+  height: 28px;
+}
+.tile:hover i {
+  border-color: var(--color-muted-3);
+  background: var(--color-surface-3);
+}
+.tile--all i {
+  background: var(--color-action);
+  border-color: var(--color-action);
+  color: var(--color-on-verified);
+}
+.tile--all:hover i {
+  background: var(--color-action-hover);
+  border-color: var(--color-action-hover);
+}
+.tile__all {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+}
+/* 라벨만 고른다. .tile span 으로 두면 원 안의 ALL 글자까지 잡아
+   검은 원에 검은 글자가 된다. */
+.tile > span {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-2);
+  text-align: center;
+  line-height: var(--leading-tight);
+  word-break: keep-all;
+}
+/* ── 벤토 ─────────────────────────────────────────────────────── */
+
+.bento {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.bento__feature {
+  grid-row: 1 / 3;
+  /* 벤토가 화면 하나를 통째로 먹으면 위의 질문이 밀려 접힌다 */
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  /* 화면에서 파랑이 넓게 깔리는 유일한 면. 그 면이 말하는 것이 인증이라 규칙과 어긋나지 않는다 */
+  background: var(--color-verified);
+  color: var(--color-on-verified);
+  min-height: 296px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl);
+}
+.bento__feature::before,
+.bento__feature::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-on-verified);
+  pointer-events: none;
+}
+.bento__feature::before {
+  right: -60px;
+  top: 48px;
+  width: 340px;
+  height: 340px;
+  opacity: 0.12;
+}
+.bento__feature::after {
+  right: 72px;
+  bottom: -120px;
+  width: 240px;
+  height: 240px;
+  opacity: 0.08;
+}
+.bento__feature > * {
+  position: relative;
+}
+
+.bento__chip {
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--veil-chip);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.bento__feature h2 {
+  margin-top: var(--space-sm);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  max-width: 18ch;
+}
+
+.bento__feature p {
+  margin-top: var(--space-sm);
+  font-size: var(--text-body);
+  line-height: var(--leading-snug);
+  color: var(--veil-text);
+}
+
+.bento__actions {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.bento__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  text-align: left;
+  min-height: 160px;
+  transition: border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.bento__card:hover {
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-soft);
+}
+.bento__card h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+.bento__card p {
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  line-height: var(--leading-snug);
+}
+.bento__more {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-2);
+}
+/* ── 좁은 화면 ────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+  .bento__feature {
+    grid-row: auto;
+    min-height: 0;
+    padding: var(--space-xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .search {
+    height: 56px;
+    padding-left: var(--space-md);
+  }
+  .search .btn {
+    height: 42px;
+    padding: 0 14px;
+  }
+}

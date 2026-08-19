@@ -1,0 +1,209 @@
+/*
+ * 문의 — 입력칸과 보낸 뒤 화면
+ *
+ * app.css 에서 갈라져 나왔다 (규칙 2 — 나누는 선은 화면 단위).
+ * app.css 맨 위의 @import 차례가 원본의 차례다. 순서를 바꾸면 같은 급 규칙의
+ * 승패가 뒤집히므로, 이 파일을 옮길 때는 그 차례도 함께 본다.
+ */
+
+/* ── 문의 ─────────────────────────────────────────────────────── */
+
+.form {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.input > span {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-2);
+}
+.input > span em {
+  font-style: normal;
+  font-weight: var(--weight-bold);
+  color: var(--color-muted-2);
+}
+.input input,
+.input select,
+.input textarea {
+  width: 100%;
+  border: var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  padding: 11px 14px;
+  font: inherit;
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  outline: 0;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+/* 브라우저가 그리는 화살표는 OS 마다 다르게 생겼고, 옆에 선 글상자들과 따로 논다.
+   거르기 줄에서 쓴 것과 같은 화살표를 같은 색·같은 크기로 그린다.
+   %23333d4b 은 --color-ink-2 다 — data URI 안에서는 변수를 못 쓰니 토큰이 바뀌면 같이 고친다. */
+.input select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7'%3E%3Cpath d='M1 1.7 5 5.6 9 1.7' fill='none' stroke='%23333d4b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 10px 7px;
+}
+
+/* 아직 안 고른 상태는 값이 아니라 안내문이다. 고른 값과 같은 색이면 이미 고른 것처럼 읽힌다.
+   같은 화면의 글상자 안내문(::placeholder)과 같은 색을 쓴다. */
+.input select:has(option[value=""]:checked) {
+  color: var(--color-muted-3);
+}
+/* 목록을 펼쳤을 때까지 흐려지면 안 된다 — 흐린 것은 고르기 전의 그 한 줄뿐이다. */
+.input select option {
+  color: var(--color-ink);
+}
+
+.input textarea {
+  min-height: 132px;
+  resize: vertical;
+  line-height: var(--leading-body);
+}
+.input input:focus,
+.input select:focus,
+.input textarea:focus {
+  border-color: var(--color-muted-3);
+}
+.input input::placeholder,
+.input textarea::placeholder {
+  color: var(--color-muted-3);
+}
+.input small {
+  font-size: var(--text-xs);
+  color: var(--color-muted-2);
+  line-height: var(--leading-snug);
+}
+
+.input-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-md);
+}
+
+.consent {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-3);
+}
+.consent input {
+  margin-top: 3px;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  accent-color: var(--color-action);
+}
+.consent span {
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  line-height: var(--leading-body);
+}
+
+.aside {
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-md));
+}
+.aside h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+}
+.aside ul {
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.aside li {
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  line-height: var(--leading-snug);
+  padding-left: 16px;
+  position: relative;
+}
+.aside li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
+  color: var(--color-muted-3);
+}
+.aside p {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: var(--leading-body);
+}
+
+.notice {
+  margin-top: var(--space-md);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--color-error-soft);
+  color: var(--color-error);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.sent {
+  margin: var(--space-2xl) auto 0;
+  max-width: 760px;
+  padding: var(--space-2xl);
+  border: var(--rule);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+.sent h1 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+.sent p {
+  margin-top: var(--space-sm);
+  font-size: var(--text-body);
+  color: var(--color-ink-3);
+  line-height: var(--leading-body);
+}
+.sent__actions {
+  margin-top: var(--space-lg);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+/* ── 좁은 화면 ────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+  .aside {
+    position: static;
+  }
+}
