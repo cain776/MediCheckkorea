@@ -31,9 +31,9 @@ const SCREENS = (id) => [
   { name: "hospital-detail", path: `/find-a-hospital/${id}` },
   { name: "about-certification", path: "/about-certification" },
   { name: "content", path: "/content" },
+  { name: "check-the-price", path: "/check-the-price" },
   { name: "patient-journey", path: "/patient-journey" },
   { name: "online-consultation", path: "/online-consultation" },
-  { name: "check-the-price", path: "/check-the-price" },
   { name: "send-an-inquiry", path: "/send-an-inquiry" },
 ];
 

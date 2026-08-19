@@ -19,10 +19,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *   Find a hospital       /find-a-hospital         hospital       /api/hospitals
  *                         /find-a-hospital/{id}                   /api/hospitals/{id}
  *   About certification   /about-certification     certification  /api/certification
+ *   Check the price       /check-the-price         price          /api/prices
  *   Content               /content                 content        /api/content
  *   Patient journey       /patient-journey         journey        /api/journey
  *   Online consultation   /online-consultation     consultation   /api/consultations
- *   Check the price       /check-the-price         price          /api/prices
  *   Send an inquiry       /send-an-inquiry         inquiry        /api/inquiries
  * </pre>
  *
@@ -39,10 +39,10 @@ public class SpaWebConfig implements WebMvcConfigurer {
             "/find-a-hospital",
             "/find-a-hospital/{id}",
             "/about-certification",
+            "/check-the-price",
             "/content",
             "/patient-journey",
             "/online-consultation",
-            "/check-the-price",
             "/send-an-inquiry",
         }) {
             registry.addViewController(path).setViewName("forward:/index.html");

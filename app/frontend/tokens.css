@@ -123,7 +123,11 @@
   --rule: 1px solid var(--color-line);
   --rule-soft: 1px solid var(--color-line-soft);
 
-  --container: 1200px;
+  /* 표·카드·지도는 이 폭을 다 쓰고, 글이 서는 블록만 따로 상한을 둔다 —
+     넓힌 폭을 글줄이 그대로 먹으면 한 줄이 200자를 넘는다 (18장) */
+  --container: 1440px;
+  /* 글 한 줄의 상한. 45~90자가 읽기 편한 범위라 그 위쪽에 맞춘다 */
+  --measure: 75ch;
   --nav-height: 76px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

@@ -84,9 +84,10 @@ Playwright 는 **1.62.1 로 고정**한다. 이 버전이 chromium 1234 를 쓴�
 | Find a hospital | `/find-a-hospital` | `medicheck.hospital` | `GET /api/hospitals` |
 | ↳ 기관 상세 | `/find-a-hospital/{id}` | 〃 | `GET /api/hospitals/{id}` |
 | About certification | `/about-certification` | `medicheck.certification` | `GET /api/certification` |
+| Check the price | `/check-the-price` | `medicheck.price` | `GET /api/prices` |
+| Content | `/content` | `medicheck.content` | `GET /api/content` |
 | Patient journey | `/patient-journey` | `medicheck.journey` | `GET /api/journey` |
 | Online consultation | `/online-consultation` | `medicheck.consultation` | `GET /api/consultations` |
-| Check the price | `/check-the-price` | `medicheck.price` | `GET /api/prices` |
 | Send an inquiry | `/send-an-inquiry` | `medicheck.inquiry` | `POST /api/inquiries` |
 
 이 표는 세 곳에 같은 순서로 있다 — [`SpaWebConfig`](src/main/java/kr/or/kmtpa/medicheck/config/SpaWebConfig.java),

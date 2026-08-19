@@ -186,6 +186,10 @@
     line-height: 1.36;
     letter-spacing: -0.015em;
     margin: 16px 0 0;
+    /* 영문 제목은 고정 줄바꿈을 두지 않는다 — 열 폭보다 긴 자리에 박아 두면
+       한 줄이 넘쳐 세 줄이 된다. 줄 수는 폭이 정하고, 나누는 자리는 여기서
+       고르게 잡는다. 한국어는 쉼표 자리에 손으로 끊은 것이 더 잘 읽혀 그대로 둔다. */
+    text-wrap: balance;
   }
   .lead {
     font-size: 18px;
@@ -264,8 +268,13 @@
 
   /* ── 좁은 화면 ───────────────────────────────────────────────────
      원 디자인은 1040px 두 단이다. 좁은 화면에서 300px 단을 그대로 두면
-     본문이 손가락 두 개 폭이 된다. 한 단으로 세우고 사진은 작게 올린다. */
-  @media (max-width: 860px) {
+     본문이 손가락 두 개 폭이 된다. 한 단으로 세우고 사진은 작게 올린다.
+
+     기준이 1000px 인 이유: 900px 쯤에서 두 단을 유지하면 본문 열이 490px 로
+     좁아져 제목이 세 줄로 접힌다. 사이드바를 조금 더 일찍 내려 보내는 편이
+     제목 크기를 그 구간에서만 줄이는 것보다 낫다 — 글자 크기가 폭에 따라
+     들쭉날쭉하면 같은 글이 화면마다 다른 무게로 읽힌다. */
+  @media (max-width: 1000px) {
     body { padding: 24px 20px 64px; }
     .paper { grid-template-columns: 1fr; }
     .aside { position: static; padding: 30px 0 0; }
@@ -333,7 +342,7 @@
 
       <h2>
         <span lang="ko">117만 명이라는 숫자가,<br />당신의 선택에 관해 말해 주지 않는 것</span>
-        <span lang="en">What &ldquo;1.17 Million&rdquo; Doesn&rsquo;t Tell You<br />About Your Choice</span>
+        <span lang="en">What &ldquo;1.17 Million&rdquo; Doesn&rsquo;t Tell You About Your Choice</span>
       </h2>
 
       <p class="lead">
