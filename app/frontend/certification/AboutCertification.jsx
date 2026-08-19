@@ -82,6 +82,8 @@ const VALIDATION = [
 const COMPARE = [
   ["cmp13485", "cmp13485Looks", "cmp13485Who", "cmp13485Means"],
   ["cmp9001", "cmp9001Looks", "cmp9001Who", "cmp9001Means"],
+  // 국가 인증. 2026년 11월 기본 인증 시행 뒤에는 이 줄이 표에서 가장 먼저 읽힌다 (38장)
+  ["cmpKoiha", "cmpKoihaLooks", "cmpKoihaWho", "cmpKoihaMeans"],
   ["cmpMohw", "cmpMohwLooks", "cmpMohwWho", "cmpMohwMeans"],
   ["cmpUs", "cmpUsLooks", "cmpUsWho", "cmpUsMeans"],
 ];
@@ -252,6 +254,12 @@ function MediCheck({ data }) {
               ))}
             </tbody>
           </table>
+        </div>
+        {/* 이름이 국가 인증과 겹친다는 사실을 표 바로 밑에서 말한다 — 뒤로 미루면
+            환자는 이미 둘을 같은 것으로 읽은 뒤다 (38장) */}
+        <div className="callout callout--warn">
+          <b>{t("cmpNameTitle")}</b>
+          <p>{t("cmpNameBody")}</p>
         </div>
         <div className="callout">
           <b>{t("compareNote")}</b>

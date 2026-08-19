@@ -217,6 +217,18 @@ export const CERTIFICATION_COPY = {
     en: "That the organisation documents and controls its own processes. A print shop and a clinic can hold the same certificate.",
     ko: "그 조직이 자기 절차를 문서화하고 관리한다는 뜻입니다. 인쇄소와 의원이 같은 인증서를 가질 수 있습니다.",
   },
+  // 국가 인증제도. 2026년 11월에 기본 인증이 시행되면 중소병원에도 인증마크가 붙기
+  // 시작한다 — 그 옆에서 "메디체크 인증"이 무엇인지 이 표가 먼저 말해야 한다 (38장).
+  cmpKoiha: { en: "Healthcare accreditation (KOIHA)", ko: "의료기관 인증 (인증원)" },
+  cmpKoihaLooks: {
+    en: "Patient safety and the quality of care inside a hospital. The acute-care programme runs to more than 500 items; a lighter one for small and medium hospitals, 156 items, starts in November 2026.",
+    ko: "병원 안의 환자안전과 의료 질을 봅니다. 급성기병원 인증은 항목이 500개가 넘고, 중소병원을 위한 기본 인증(156개 항목)이 2026년 11월에 시행됩니다.",
+  },
+  cmpKoihaWho: { en: "The state, through KOIHA", ko: "보건복지부 · 의료기관평가인증원" },
+  cmpKoihaMeans: {
+    en: "That the hospital met the national bar for safety and quality. Note who can apply: hospitals, not clinics. Most institutions on this site are clinics, so for them this mark is not available at all — it is not something they chose to skip.",
+    ko: "그 병원이 국가가 정한 환자안전·의료 질 기준을 넘었다는 뜻입니다. 다만 신청할 수 있는 곳이 정해져 있어요 — 병원급이고, 의원은 대상이 아닙니다. 이 사이트에 실린 기관은 대부분 의원이라 이 마크를 받을 수 없어요. 안 받은 것이 아니라 받을 자리가 아닙니다.",
+  },
   cmpMohw: { en: "MOHW registration · Seoul listing", ko: "보건복지부 등록 · 서울시 목록" },
   cmpMohwLooks: {
     en: "Eligibility to treat patients from abroad — the requirement, met or not met.",
@@ -236,6 +248,14 @@ export const CERTIFICATION_COPY = {
   cmpUsMeans: {
     en: "That the thing patients are actually afraid of was looked at, against a bar published before the first award. No institution holds it yet.",
     ko: "환자가 실제로 두려워하는 것을, 첫 수여보다 먼저 공개한 기준에 대고 확인했다는 뜻입니다. 아직 어느 기관도 받지 않았습니다.",
+  },
+  cmpNameTitle: {
+    en: "\u2018Certification\u2019 is a word we share with the state",
+    ko: "‘인증’은 국가와 나눠 쓰는 낱말입니다",
+  },
+  cmpNameBody: {
+    en: "From November 2026 a national accreditation mark starts appearing on small and medium hospitals. Ours is a different thing, issued by a different body, looking at different work — so we put the two side by side rather than leave a patient to guess. What the association can never say is that its assessment is approved by, or equal to, the state's.",
+    ko: "2026년 11월부터 국가 인증마크가 중소병원에도 붙기 시작해요. 협회 인증은 그것과 다른 기관이 다른 것을 보고 주는 것이라, 환자가 짐작하게 두는 대신 둘을 나란히 놓았어요. 협회가 절대 말할 수 없는 것은 이 심사가 국가의 승인을 받았다거나 국가 인증과 같은 것이라는 말이에요.",
   },
   compareNote: {
     en: "Why borrow this much structure from somewhere else",
