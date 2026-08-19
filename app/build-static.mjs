@@ -87,6 +87,9 @@ await build({
 await cp("src/main/resources/static/index.html", `${out}/index.html`);
 // 사진은 gitignore 로 서버 폴더에서 빠져 있지만, 정적 판은 이 폴더째로 올라간다.
 await cp("src/main/resources/static/photos", `${out}/photos`, { recursive: true });
+// 뉴스레터 호. 서버와 정적 판이 **같은 파일**을 같은 주소(/newsletter/volN.html)로 준다 —
+// 두 벌로 두면 한쪽만 고쳐지고, 그때 어느 쪽이 진짜인지 알 수 없게 된다.
+await cp("src/main/resources/static/newsletter", `${out}/newsletter`, { recursive: true });
 
 console.log(`\n${out}/ 에 만들었다 — 기관 ${hospitals.total}곳 · 상담 ${consultations.total}건.`);
 console.log("서버 없이 확인: npx serve ../web  (또는 그냥 Vercel 에 밀기)");

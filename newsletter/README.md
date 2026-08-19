@@ -1,19 +1,29 @@
 # 뉴스레터
 
-메일로 보내는 편지의 **틀**만 여기 있다. 본문은 호마다 따로 쓴다.
+**틀**만 여기 있다. 쓴 호는 서버가 주는 폴더에 둔다.
 
-- [email-frame.html](email-frame.html) — 이메일 프레임. 채울 자리가 `[대괄호]` 로 표시돼 있다
+| 어디 | 무엇 |
+| --- | --- |
+| `newsletter/email-frame.html` | 이메일 틀. 채울 자리가 `[대괄호]` 로 표시돼 있다. **서비스되지 않는다** |
+| `app/src/main/resources/static/newsletter/` | 쓴 호. 서버와 정적 판이 **같은 파일**을 `/newsletter/volN.html` 로 준다 |
 
-## 한 호 만들기
+파일 이름은 호수로 짓는다(`vol1.html`). `newsletter_issue.vol` 이 UNIQUE 키이고 아래 SQL 도 그걸로 찾기 때문이다 — 발행월로 지으면 이름과 키가 갈린다.
 
-1. `email-frame.html` 을 복사해서 `2026-08.html` 처럼 발행월 이름으로 둔다
-2. `[대괄호]` 자리를 채운다. 본문 문단은 `<p>` 를, 소제목 묶음은 `<tr>` 을 복사해서 늘린다
+## 한 호 쓰기
+
+1. `email-frame.html` 을 복사해 `app/src/main/resources/static/newsletter/volN.html` 로 둔다
+2. `[대괄호]` 자리를 채운다. 문단은 `<p>` 를, 소제목 묶음은 `<tr>` 을 복사해서 늘린다
 3. 안 쓰는 묶음(확인 배지·단추)은 `<tr>` 째로 지운다 — 빈 칸으로 남겨 두지 않는다
-4. 화면의 목록에 세우려면 `newsletter_issue` 에 줄을 더한다:
+4. 다 쓴 뒤에 화면의 목록에 세운다. **그 전까지 카드는 「아직 안 썼어요」로 남는다** —
+   반쯤 쓴 페이지에 링크를 걸어 두지 않는다:
 
 ```sql
-UPDATE newsletter_issue SET body_url = '/newsletter/2026-08.html', is_sample = 0 WHERE vol = 1;
+UPDATE newsletter_issue SET body_url = '/newsletter/vol1.html', is_sample = 0 WHERE vol = 1;
 ```
+
+5. 정적 판에도 실으려면 `cd app && npm run build:static` 을 다시 돌린다
+
+**제 1호(`vol1.html`)는 머리말만 채워 두었다.** 본문 자리는 비어 있다.
 
 지금 표에 있는 두 호는 **샘플이고 본문이 없다.** 화면이 맨 위에 그렇게 적는다. 지우려면:
 
