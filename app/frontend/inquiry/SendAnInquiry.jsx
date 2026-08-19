@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { STATIC } from "../shell/api.js";
 import { Link, useApi, useApp } from "../shell/app-context.jsx";
 import { Loading } from "../shell/chrome.jsx";
 
@@ -55,6 +56,13 @@ export function SendAnInquiry() {
 
   const submit = async (event) => {
     event.preventDefault();
+    // 서버 없이 화면만 올린 판. 보낼 데가 없으므로 보내는 시늉도 하지 않는다 —
+    // 「보냈습니다」를 띄우면 그건 거짓말이고, 이 사이트가 파는 것이 신뢰다(4장).
+    // 아래 안내가 이미 화면에 떠 있고 보내기 단추도 잠겨 있다. 여기는 엔터키 같은
+    // 다른 길로 들어오는 것을 막는 자리라 따로 말을 얹지 않는다.
+    if (STATIC) {
+      return;
+    }
     setSending(true);
     setError(null);
     try {
@@ -196,10 +204,15 @@ export function SendAnInquiry() {
               <span>{t("consent")}</span>
             </label>
 
+            {STATIC ? (
+              <p className="notice">
+                <b>{t("sampleOnlyTitle")}</b> {t("sampleOnlyBody")}
+              </p>
+            ) : null}
             {error ? <p className="notice">{error}</p> : null}
 
             <div>
-              <button type="submit" className="btn btn--ink btn--block" disabled={!ready || sending}>
+              <button type="submit" className="btn btn--ink btn--block" disabled={!ready || sending || STATIC}>
                 {sending ? t("submitting") : t("submit")}
               </button>
             </div>

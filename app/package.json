@@ -7,7 +7,9 @@
   "scripts": {
     "build": "node build-frontend.mjs",
     "watch": "node build-frontend.mjs --watch",
-    "verify": "node verify-screens.mjs"
+    "verify": "node verify-screens.mjs",
+    "build:static": "node build-static.mjs",
+    "verify:static": "node verify-static.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

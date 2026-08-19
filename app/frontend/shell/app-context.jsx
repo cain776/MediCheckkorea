@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { apiGet } from "./api.js";
 import { line } from "./copy.js";
 
 /**
@@ -21,8 +22,7 @@ export function AppProvider({ children }) {
   const [labels, setLabels] = useState(null);
 
   useEffect(() => {
-    fetch("/api/labels")
-      .then((response) => response.json())
+    apiGet("/api/labels")
       .then(setLabels)
       .catch(() => setLabels({}));
   }, []);
@@ -105,13 +105,7 @@ export function useApi(url) {
   useEffect(() => {
     let alive = true;
     setState({ status: "loading", data: null, error: null });
-    fetch(url, { headers: { Accept: "application/json" } })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`${response.status}`);
-        }
-        return response.json();
-      })
+    apiGet(url)
       .then((data) => alive && setState({ status: "ready", data, error: null }))
       .catch((error) => alive && setState({ status: "error", data: null, error }));
     return () => {

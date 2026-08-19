@@ -6,6 +6,18 @@
  * **한쪽만 고치면 반드시 갈린다.** 32장이 금지한 낱말은 여기에도 없어야 한다.
  */
 export const INQUIRY_COPY = {
+  // ── 정적 갈래에서만 보이는 안내 ──
+  // 서버 없이 화면만 올린 판에서는 문의가 나갈 데가 없다. 눌러 본 뒤에 실패하게
+  // 두지 않고 **적기 전에** 말한다 — 27장이 "무엇이 일어나는지 먼저 말한다"고 했다.
+  sampleOnlyTitle: {
+    en: "This copy cannot send inquiries",
+    ko: "이 화면에서는 문의가 보내지지 않아요",
+  },
+  sampleOnlyBody: {
+    en: "This is a sample build with no server behind it, put online to show what the screens look like. The working version passes your inquiry to the hospital and the hospital replies to you directly.",
+    ko: "화면이 어떻게 생겼는지 보여 주려고 서버 없이 올린 샘플이에요. 실제 화면은 문의를 병원으로 넘기고, 병원이 직접 답을 보내요.",
+  },
+
   // ── 문의 (27장) ──
   inquiryTitle: { en: "Send an inquiry", ko: "문의 보내기" },
   inquiryLead: {
