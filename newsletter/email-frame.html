@@ -9,13 +9,15 @@
   메디체크 코리아 — 이메일 뉴스레터 프레임.
 
   **본문은 여기 없다.** 이 파일은 틀이고, 내용은 [대괄호] 자리에 채운다.
-  한 호를 만들 때는 이 파일을 복사해서 `newsletter/2026-08.html` 처럼 쓴다.
+  한 호를 만들 때는 이 파일을 복사해
+  `app/src/main/resources/static/newsletter/volN.html` 로 둔다 (README 참고).
 
   ── 왜 이렇게 생겼나 ──────────────────────────────────────────────
   · 표(table)로 짜고 스타일을 인라인으로 박는다. Outlook 은 flex·grid 를 모르고,
     Gmail 은 <style> 을 통째로 지울 때가 있다. 아래 <style> 은 좁은 화면 보정용이고,
     지워져도 한 칸짜리 세로 배치로 읽히게 인라인이 이미 다 들어 있다.
-  · 폭은 600px. 그보다 넓으면 Outlook 미리보기 창에서 가로로 잘린다.
+  · 폭은 640px. 600px 이 가장 안전한 값이지만 본문이 답답해서 한 단계 넓혔다.
+    이보다 더 넓히면 Outlook 미리보기 창에서 가로로 잘리기 시작한다.
   · 색은 사이트의 토큰을 그대로 옮겼다. 이메일에서는 CSS 변수를 못 쓰므로 값으로 적는다 —
     tokens.css 가 바뀌면 여기도 같이 고쳐야 한다.
         잉크 #191f28 · 본문 #333d4b · 흐린 글 #6b7684 · 선 #e5e8eb · 바탕 #f2f4f6
@@ -29,7 +31,7 @@
 
 <style>
   /* 좁은 화면 보정. 지워져도 본문은 읽힌다 — 인라인 스타일이 이미 세로로 세워 둔다. */
-  @media only screen and (max-width: 620px) {
+  @media only screen and (max-width: 660px) {
     .frame { width: 100% !important; }
     .pad { padding-left: 20px !important; padding-right: 20px !important; }
     .stack { display: block !important; width: 100% !important; }
@@ -53,8 +55,8 @@
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f2f4f6;">
 <tr><td align="center" style="padding:24px 12px;">
 
-  <table role="presentation" class="frame paper" width="600" cellpadding="0" cellspacing="0" border="0"
-         style="width:600px; max-width:600px; background:#ffffff; border:1px solid #e5e8eb; border-radius:12px;">
+  <table role="presentation" class="frame paper" width="640" cellpadding="0" cellspacing="0" border="0"
+         style="width:640px; max-width:640px; background:#ffffff; border:1px solid #e5e8eb; border-radius:12px;">
 
     <!-- ── 머리 — 보내는 곳과 몇 호인지 ──────────────────────────── -->
     <tr><td class="pad" style="padding:22px 32px; border-bottom:1px solid #e5e8eb;">
@@ -76,6 +78,44 @@
       <p style="margin:14px 0 0; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif; font-size:15px; line-height:1.7; color:#4e5968; word-break:keep-all;">
         [두세 줄 요약. 이 호를 왜 읽어야 하는지가 아니라, 무엇이 들어 있는지를 적는다.]
       </p>
+    </td></tr>
+
+    <!-- ── 쓴 사람 ───────────────────────────────────────────────
+         메일 앱은 이미지를 기본으로 막는다. 사진이 안 뜨더라도 이름과 직함이
+         글자로 남아야 하므로, 사진은 옆 칸이고 이름은 별도 칸이다.
+         주소가 절대경로인 이유도 같다 — 메일에는 상대경로가 없다.
+         사진은 app/src/main/resources/static/newsletter/authors/ 에 둔다. -->
+    <tr><td class="pad" style="padding:22px 32px 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+        <td valign="middle" style="padding-right:14px;">
+          <img src="https://medi-checkkorea.vercel.app/newsletter/authors/[파일명].jpg"
+               width="64" height="64" alt="[쓴 사람 이름과 직함]"
+               style="display:block; width:64px; height:64px; border-radius:32px; border:1px solid #e5e8eb; object-fit:cover; background:#f2f4f6;" />
+        </td>
+        <td valign="middle" style="font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:15px; font-weight:700; color:#191f28;">[이름] <span style="font-weight:400; color:#6b7684;">[직함]</span></div>
+          <div style="margin-top:3px; font-size:13px; color:#8b95a1;">[영문 이름] · 한국의료관광진흥협회</div>
+        </td>
+      </tr></table>
+    </td></tr>
+
+    <!-- ── 목차 ──────────────────────────────────────────────────
+         왼쪽 세로줄은 배경색을 깐 3px 짜리 칸이다. border-left 로 그리면
+         Outlook 이 무시할 때가 있어 칸 자체를 세워 두는 편이 안전하다.
+         **항목에 링크를 걸지 않는다** — 메일 클라이언트 상당수가 문서 안 앵커로
+         스크롤해 주지 않아서, 눌리는 것처럼 보이는데 안 눌리는 상태가 된다. -->
+    <tr><td class="pad" style="padding:24px 32px 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+        <td width="3" style="width:3px; background:#191f28; font-size:0; line-height:0;">&nbsp;</td>
+        <td style="padding-left:16px; font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; color:#8b95a1; text-transform:uppercase;">컨텐츠</div>
+          <div style="margin-top:8px; font-size:14px; line-height:1.9; color:#333d4b;">
+            [소제목 그대로 한 줄씩]<br />
+            [소제목]<br />
+            [소제목]
+          </div>
+        </td>
+      </tr></table>
     </td></tr>
 
     <!-- ── 본문 한 마디 — 필요한 만큼 이 <tr> 을 복사해서 쓴다 ────── -->

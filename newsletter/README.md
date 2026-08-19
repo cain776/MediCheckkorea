@@ -23,7 +23,13 @@ UPDATE newsletter_issue SET body_url = '/newsletter/vol1.html', is_sample = 0 WH
 
 5. 정적 판에도 실으려면 `cd app && npm run build:static` 을 다시 돌린다
 
-**제 1호(`vol1.html`)는 머리말만 채워 두었다.** 본문 자리는 비어 있다.
+## 쓴 사람 사진
+
+`app/src/main/resources/static/newsletter/authors/` 에 둔다. 파일 이름은 영문 이름으로
+짓는다(`esther-yoon.jpg`). 64×64 로 그려지므로 **정사각형 128px 이상**이면 넉넉하다.
+
+메일 앱은 이미지를 기본으로 막는다. 그래서 사진이 안 떠도 이름과 직함이 글자로 남게
+되어 있다 — 사진을 안 넣어도 편지는 깨지지 않는다.
 
 지금 표에 있는 두 호는 **샘플이고 본문이 없다.** 화면이 맨 위에 그렇게 적는다. 지우려면:
 
