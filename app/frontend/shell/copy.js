@@ -11,6 +11,7 @@
  */
 import { CERTIFICATION_COPY } from "../certification/copy.js";
 import { CONSULTATION_COPY } from "../consultation/copy.js";
+import { CONTENT_COPY } from "../content/copy.js";
 import { HOME_COPY } from "../home/copy.js";
 import { HOSPITAL_COPY } from "../hospital/copy.js";
 import { INQUIRY_COPY } from "../inquiry/copy.js";
@@ -42,6 +43,7 @@ const SHELL_COPY = {
 
   findAHospital: { en: "Find a hospital", ko: "기관 찾기" },
   aboutCertification: { en: "About certification", ko: "인증 설명" },
+  content: { en: "Content", ko: "컨텐츠" },
   patientJourney: { en: "Patient journey", ko: "환자 여정" },
   onlineConsultation: { en: "Online consultation", ko: "온라인 상담" },
   sendAnInquiry: { en: "Send an inquiry", ko: "문의 보내기" },
@@ -73,6 +75,7 @@ export const COPY = ledger(
   SHELL_COPY,
   CERTIFICATION_COPY,
   CONSULTATION_COPY,
+  CONTENT_COPY,
   HOME_COPY,
   HOSPITAL_COPY,
   INQUIRY_COPY,

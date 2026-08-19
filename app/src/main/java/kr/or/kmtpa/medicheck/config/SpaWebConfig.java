@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *   Find a hospital       /find-a-hospital         hospital       /api/hospitals
  *                         /find-a-hospital/{id}                   /api/hospitals/{id}
  *   About certification   /about-certification     certification  /api/certification
+ *   Content               /content                 content        /api/content
  *   Patient journey       /patient-journey         journey        /api/journey
  *   Online consultation   /online-consultation     consultation   /api/consultations
  *   Send an inquiry       /send-an-inquiry         inquiry        /api/inquiries
@@ -37,6 +38,7 @@ public class SpaWebConfig implements WebMvcConfigurer {
             "/find-a-hospital",
             "/find-a-hospital/{id}",
             "/about-certification",
+            "/content",
             "/patient-journey",
             "/online-consultation",
             "/send-an-inquiry",

@@ -135,6 +135,7 @@ export async function apiGet(url) {
     "/api/certification": "/data/certification.json",
     "/api/journey": "/data/journey.json",
     "/api/consultations": "/data/consultations.json",
+    "/api/content": "/data/content.json",
   };
   if (!files[path]) {
     throw new Error(`정적 갈래에 없는 경로다: ${path}`);

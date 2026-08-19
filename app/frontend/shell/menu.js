@@ -11,6 +11,7 @@
 export const MENU = [
   { key: "findAHospital", path: "/find-a-hospital", api: "/api/hospitals" },
   { key: "aboutCertification", path: "/about-certification", api: "/api/certification" },
+  { key: "content", path: "/content", api: "/api/content" },
   { key: "patientJourney", path: "/patient-journey", api: "/api/journey" },
   { key: "onlineConsultation", path: "/online-consultation", api: "/api/consultations" },
 ];

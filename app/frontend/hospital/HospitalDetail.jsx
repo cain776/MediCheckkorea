@@ -65,8 +65,10 @@ export function HospitalDetail({ id }) {
         {/* ── 협회가 확인한 것 ─────────────────────────────────── */}
         <div className="detail__hero">
           <figure className="detail__photo">
-            {/* 사진 파일은 공개 저장소에 두지 않는다(README). 파일이 없을 때 깨진 아이콘을
-                띄우느니 figure 의 회색 면만 남긴다 — 목록 카드가 이미 그렇게 내려앉는다(19장). */}
+            {/* 사진은 기관(또는 서울시)의 것이고, 공개 전에 기관이 직접 올리거나 협회가
+                게재 허락을 확인해야 한다 — 어느 쪽도 아니면 photo 를 비운다
+                (V8__photos.sql 의 머리말). 그날 파일이 사라져도 깨진 아이콘을 띄우지 않고
+                figure 의 회색 면만 남긴다. 목록 카드는 배경 그림이라 이미 그렇게 내려앉는다(19장). */}
             {data.photo ? (
               <img
                 src={data.photo}

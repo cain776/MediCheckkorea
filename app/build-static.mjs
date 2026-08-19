@@ -47,12 +47,13 @@ await rm(out, { recursive: true, force: true });
 await mkdir(`${out}/data`, { recursive: true });
 
 // 화면이 부르는 여섯 곳. SpaWebConfig 의 표와 같은 줄이다 — 화면이 늘면 여기도 는다.
-const [home, labels, certification, journey, consultations] = await Promise.all([
+const [home, labels, certification, journey, consultations, content] = await Promise.all([
   api("/api/home"),
   api("/api/labels"),
   api("/api/certification"),
   api("/api/journey"),
   api("/api/consultations"),
+  api("/api/content"),
 ]);
 
 // 목록은 정렬 없는 판 하나만 굳힌다. 거르기·정렬은 브라우저가 한다 —
@@ -71,6 +72,7 @@ await save("labels.json", labels);
 await save("certification.json", certification);
 await save("journey.json", journey);
 await save("consultations.json", consultations);
+await save("content.json", content);
 await save("hospitals.json", hospitals);
 await save("hospitals-by-id.json", byId);
 

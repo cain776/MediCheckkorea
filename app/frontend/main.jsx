@@ -9,6 +9,7 @@ import { HospitalDetail } from "./hospital/HospitalDetail.jsx";
 import { AboutCertification } from "./certification/AboutCertification.jsx";
 import { PatientJourney } from "./journey/PatientJourney.jsx";
 import { OnlineConsultation } from "./consultation/OnlineConsultation.jsx";
+import { Content } from "./content/Content.jsx";
 import { SendAnInquiry } from "./inquiry/SendAnInquiry.jsx";
 
 /**
@@ -31,6 +32,9 @@ function Screen() {
   }
   if (pathname === "/about-certification") {
     return <AboutCertification />;
+  }
+  if (pathname === "/content") {
+    return <Content />;
   }
   if (pathname === "/patient-journey") {
     return <PatientJourney />;

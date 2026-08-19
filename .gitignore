@@ -5,3 +5,5 @@ app/build/
 app/src/main/resources/static/assets/
 app/.hallmark/
 app/src/main/resources/static/photos/
+
+.vercel

@@ -52,6 +52,7 @@ const SCREENS = [
   { name: "home", path: "/" },
   { name: "find-a-hospital", path: "/find-a-hospital" },
   { name: "about-certification", path: "/about-certification" },
+  { name: "content", path: "/content" },
   { name: "patient-journey", path: "/patient-journey" },
   { name: "online-consultation", path: "/online-consultation" },
   { name: "send-an-inquiry", path: "/send-an-inquiry" },

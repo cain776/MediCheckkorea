@@ -30,6 +30,7 @@ const SCREENS = (id) => [
   { name: "find-a-hospital", path: "/find-a-hospital" },
   { name: "hospital-detail", path: `/find-a-hospital/${id}` },
   { name: "about-certification", path: "/about-certification" },
+  { name: "content", path: "/content" },
   { name: "patient-journey", path: "/patient-journey" },
   { name: "online-consultation", path: "/online-consultation" },
   { name: "send-an-inquiry", path: "/send-an-inquiry" },
